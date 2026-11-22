@@ -65,14 +65,17 @@ html.modal-page-lock body {
 
 .app-content.container-xxl {
   max-width: 1280px;
+  padding-right: 0;
+  padding-left: 0;
 }
 
 .analytics-grid.row {
   display: flex;
   flex-wrap: wrap;
   gap: 0;
-  margin-right: calc(-1 * var(--bs-gutter-x) / 2);
-  margin-left: calc(-1 * var(--bs-gutter-x) / 2);
+  /* Keep the analytics cards aligned with the metrics and monitor cards. */
+  margin-right: 0;
+  margin-left: 0;
 }
 
 .analytics-grid.row > * {
