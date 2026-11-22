@@ -28,6 +28,16 @@
   position: relative;
   width: 100%;
   height: 100%;
+  --bs-modal-color: var(--white);
+  --bs-body-color: var(--white);
+  color: var(--white);
+}
+
+.drawer-layer.modal .profile-drawer h2,
+.drawer-layer.modal .profile-drawer h3,
+.drawer-layer.modal .profile-drawer .profile-metric,
+.drawer-layer.modal .profile-drawer .profile-session {
+  color: var(--white);
 }
 
 @media (prefers-reduced-motion: reduce) {
