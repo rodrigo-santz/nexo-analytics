@@ -21,4 +21,4 @@
 .scanner-inner{overflow:hidden}
 .scanner-logo-mark{display:block;width:250px;max-width:none;height:auto;flex:none;transform:translateX(-14px);filter:drop-shadow(0 0 8px rgba(170,95,255,.35))}
 .scanner-inner img{pointer-events:none}
-@media(max-width:780px){.scanner-logo-mark{width:210px;transform:translateX(-8px)}}
+@media(max-width:780px){.scanner-logo-mark{width:210px;transform:translateX(-13px)}}
