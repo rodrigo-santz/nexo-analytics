@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#090612" />
+  <meta name="description" content="NEXO Analytics — dados e crescimento coletivo para criadores conectados." />
+  <title>NEXO Analytics | Nexo Synergy</title>
+  <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+  <script src="./app.js" type="module"></script>
+</head>
+<body>
+  <canvas id="constellation" aria-hidden="true"></canvas>
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
+  <header class="site-header">
+    <a href="#inicio" class="brand" aria-label="NEXO Synergy, voltar ao início">
+      <span class="brand-mark">N</span>
+      <span class="brand-name">NEXO <small>SYNERGY</small></span>
+      <span class="brand-divider"></span>
+      <span class="brand-product">ANALYTICS</span>
+    </a>
+    <nav class="top-nav" aria-label="Navegação principal">
+      <a href="#visao-geral" class="nav-link active">Visão geral</a>
+      <a href="#streamers" class="nav-link">Streamers</a>
+      <a href="#historico" class="nav-link">Histórico</a>
+    </nav>
+    <a class="header-action" href="#streamers">Explorar membros <span aria-hidden="true">↗</span></a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false">☰</button>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-ornament hero-orb-a"></div><div class="hero-ornament hero-orb-b"></div>
+      <div class="hero-content">
+        <div class="eyebrow"><span class="pulse-dot"></span> PLATAFORMA DE INTELIGÊNCIA DA COMUNIDADE</div>
+        <img src="./assets/nexo-logo.png" alt="Logotipo Nexo Synergy em roxo e branco" class="hero-logo" />
+        <div class="hero-rule"></div>
+        <h1>CONEXÕES QUE GERAM <span>RESULTADOS.</span></h1>
+        <p>Acompanhe cada transmissão, cada raid e a força da colaboração entre criadores da NEXO.</p>
+        <div class="hero-buttons">
+          <a class="btn btn-primary" href="#visao-geral">Explorar analytics <span>↗</span></a>
+          <a class="btn btn-outline" href="#streamers">Ver criadores <span>→</span></a>
+        </div>
+        <span class="hero-bottom">CRIADORES CONECTADOS <span>✧</span> CRESCIMENTO COLETIVO</span>
+      </div>
+    </section>
+
+    <section class="app-content" id="visao-geral">
+      <div class="section-head head-overview">
+        <div><span class="kicker">/ 01 — VISÃO GERAL</span><h2>Inteligência em <em>tempo real.</em></h2><p>Uma visão clara da atividade e das conexões da comunidade.</p></div>
+        <div class="head-actions"><span class="last-sync" id="lastSync">Aguardando dados</span><button id="refreshBtn" class="icon-btn" aria-label="Atualizar dados" title="Atualizar dados"><span class="refresh-symbol">↻</span></button></div>
+      </div>
+      <div class="notice hidden" id="dataNotice" role="status"></div>
+      <div class="demo-notice hidden" id="demoNotice"><span>✦ MODO DEMONSTRAÇÃO</span> Os números desta prévia são fictícios. <button id="exitDemo">Voltar aos dados reais</button></div>
+      <div class="metrics-grid" id="metrics">
+        <div class="skeleton metric-card"></div><div class="skeleton metric-card"></div><div class="skeleton metric-card"></div><div class="skeleton metric-card"></div><div class="skeleton metric-card"></div><div class="skeleton metric-card"></div>
+      </div>
+      <div class="analytics-grid">
+        <article class="glass-panel chart-panel">
+          <div class="panel-title-row"><div><span class="kicker">ATIVIDADE</span><h3>Movimentação da comunidade</h3></div><span class="panel-tag">Últimos 14 dias</span></div>
+          <div id="activityChart" class="activity-chart"><p class="empty-small">Carregando atividade...</p></div>
+          <div class="chart-legend"><span><i class="legend-dot purple"></i> Lives</span><span><i class="legend-dot cyan"></i> Raids</span></div>
+        </article>
+        <article class="glass-panel distribution-panel">
+          <div class="panel-title-row"><div><span class="kicker">IMPACTO</span><h3>Destino das raids</h3></div></div>
+          <div class="donut-area"><div id="raidDonut" class="donut"><div class="donut-hole"><strong id="donutPct">0%</strong><small>para a NEXO</small></div></div></div>
+          <div id="destinationLegend" class="destination-legend"><span>Sem raids registradas</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="app-content streamer-section" id="streamers">
+      <div class="section-head"><div><span class="kicker">/ 02 — COMUNIDADE</span><h2>Os criadores da <em>NEXO.</em></h2><p>Dados individuais e histórico de colaboração.</p></div><div class="count-chip" id="streamerCount">— streamers</div></div>
+      <div class="filters"><label class="searchbox"><span aria-hidden="true">⌕</span><input id="searchStreamers" type="search" placeholder="Buscar streamer..." aria-label="Buscar streamer" /></label><label class="selectbox">Ordenar por <select id="streamerSort"><option value="lives">Mais lives</option><option value="nexo">Mais raids NEXO</option><option value="raids">Mais raids totais</option><option value="name">Nome (A–Z)</option></select></label></div>
+      <div class="streamers-grid" id="streamerGrid"><p class="empty-state">Carregando streamers...</p></div>
+    </section>
+
+    <section class="app-content history-section" id="historico">
+      <div class="section-head"><div><span class="kicker">/ 03 — TRANSPARÊNCIA</span><h2>Cada live conta uma <em>história.</em></h2><p>Resultados verificados, eventos externos e períodos sem informação.</p></div><div class="filters inline-filters"><select id="historyStatus" aria-label="Filtrar por resultado"><option value="all">Todos os resultados</option><option value="raid_nexo">Raid NEXO</option><option value="raid_externa">Raid externa</option><option value="sem_raid">Sem raid detectada</option><option value="inconclusiva">Inconclusiva</option><option value="live">Ao vivo</option><option value="aguardando">Aguardando</option></select></div></div>
+      <div class="glass-panel history-panel"><div class="table-scroll"><table><thead><tr><th>STREAMER</th><th>INÍCIO</th><th>RESULTADO</th><th>DESTINO</th><th>ESPECTADORES</th><th>COBERTURA</th></tr></thead><tbody id="historyBody"><tr><td colspan="6" class="table-empty">Carregando histórico...</td></tr></tbody></table></div><div class="history-foot"><span id="historyCount">0 registros</span><button class="btn-more" id="loadMore">Mostrar mais ↓</button></div></div>
+    </section>
+
+    <section class="app-content monitor-section"><div class="monitor-card"><div class="monitor-copy"><span class="kicker">MONITORAMENTO</span><h2>Transparência em<br /><em>cada transmissão.</em></h2><p>Se houver falha na captura, o evento é classificado como inconclusivo — nunca como ausência comprovada de raid.</p><div id="monitorStatus" class="monitor-status"><span class="status-light"></span> Verificando integridade</div></div><div class="monitor-art"><div class="scanner-outer"><div class="scanner-middle"><div class="scanner-inner">N</div></div></div><span class="scanner-caption">NEXO / SIGNAL</span></div></div></section>
+  </main>
+  <footer class="footer"><div class="footer-brand"><span class="brand-mark">N</span><span>NEXO <strong>SYNERGY</strong></span></div><p>CRIADORES CONECTADOS. CRESCIMENTO COLETIVO.</p><span>© <span id="year"></span> NEXO Analytics</span></footer>
+
+  <div class="drawer-layer hidden" id="drawerLayer"><div class="drawer-shade" id="drawerShade"></div><aside class="profile-drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle"><button id="closeDrawer" class="drawer-close" aria-label="Fechar perfil">×</button><div id="drawerContent"></div></aside></div>
+</body>
+</html>

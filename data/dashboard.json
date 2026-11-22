@@ -1,0 +1,186 @@
+{
+  "updatedAt": "2026-11-22T22:02:02.204Z",
+  "monitor": {
+    "status": "unconfigured",
+    "lastCheckedAt": null,
+    "issues": [
+      "Aguardando configuração do EventSub e execução do monitoramento"
+    ],
+    "gaps": []
+  },
+  "overview": {
+    "lives": 0,
+    "raids": 0,
+    "nexo": 0,
+    "externas": 0,
+    "semRaid": 0,
+    "inconclusivas": 0,
+    "liveAgora": 0
+  },
+  "streamers": [
+    {
+      "login": "1skilo",
+      "lives": 0,
+      "raids": 0,
+      "nexo": 0,
+      "externas": 0,
+      "semRaid": 0,
+      "inconclusivas": 0
+    },
+    {
+      "login": "behttah",
+      "lives": 0,
+      "raids": 0,
+      "nexo": 0,
+      "externas": 0,
+      "semRaid": 0,
+      "inconclusivas": 0
+    },
+    {
+      "login": "bolosdomikael",
+      "lives": 0,
+      "raids": 0,
+      "nexo": 0,
+      "externas": 0,
+      "semRaid": 0,
+      "inconclusivas": 0
+    },
+    {
+      "login": "byoki77",
+      "lives": 0,
+      "raids": 0,
+      "nexo": 0,
+      "externas": 0,
+      "semRaid": 0,
+      "inconclusivas": 0
+    },
+    {
+      "login": "chboga",
+      "lives": 0,
+      "raids": 0,
+      "nexo": 0,
+      "externas": 0,
+      "semRaid": 0,
+      "inconclusivas": 0
+    },
+    {
+      "login": "coldx68",
+      "lives": 0,
+      "raids": 0,
+      "nexo": 0,
+      "externas": 0,
+      "semRaid": 0,
+      "inconclusivas": 0
+    },
+    {
+      "login": "dree_sp",
+      "lives": 0,
+      "raids": 0,
+      "nexo": 0,
+      "externas": 0,
+      "semRaid": 0,
+      "inconclusivas": 0
+    },
+    {
+      "login": "erick99z",
+      "lives": 0,
+      "raids": 0,
+      "nexo": 0,
+      "externas": 0,
+      "semRaid": 0,
+      "inconclusivas": 0
+    },
+    {
+      "login": "galahadyy",
+      "lives": 0,
+      "raids": 0,
+      "nexo": 0,
+      "externas": 0,
+      "semRaid": 0,
+      "inconclusivas": 0
+    },
+    {
+      "login": "galiodejordan",
+      "lives": 0,
+      "raids": 0,
+      "nexo": 0,
+      "externas": 0,
+      "semRaid": 0,
+      "inconclusivas": 0
+    },
+    {
+      "login": "hecazinha",
+      "lives": 0,
+      "raids": 0,
+      "nexo": 0,
+      "externas": 0,
+      "semRaid": 0,
+      "inconclusivas": 0
+    },
+    {
+      "login": "heyjessh",
+      "lives": 0,
+      "raids": 0,
+      "nexo": 0,
+      "externas": 0,
+      "semRaid": 0,
+      "inconclusivas": 0
+    },
+    {
+      "login": "hudsondark",
+      "lives": 0,
+      "raids": 0,
+      "nexo": 0,
+      "externas": 0,
+      "semRaid": 0,
+      "inconclusivas": 0
+    },
+    {
+      "login": "nanbola",
+      "lives": 0,
+      "raids": 0,
+      "nexo": 0,
+      "externas": 0,
+      "semRaid": 0,
+      "inconclusivas": 0
+    },
+    {
+      "login": "onoox_",
+      "lives": 0,
+      "raids": 0,
+      "nexo": 0,
+      "externas": 0,
+      "semRaid": 0,
+      "inconclusivas": 0
+    },
+    {
+      "login": "quindinhaa",
+      "lives": 0,
+      "raids": 0,
+      "nexo": 0,
+      "externas": 0,
+      "semRaid": 0,
+      "inconclusivas": 0
+    },
+    {
+      "login": "santz_rj",
+      "lives": 0,
+      "raids": 0,
+      "nexo": 0,
+      "externas": 0,
+      "semRaid": 0,
+      "inconclusivas": 0
+    },
+    {
+      "login": "zells001",
+      "lives": 0,
+      "raids": 0,
+      "nexo": 0,
+      "externas": 0,
+      "semRaid": 0,
+      "inconclusivas": 0
+    }
+  ],
+  "recent": [],
+  "daily": []
+}

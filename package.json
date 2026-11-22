@@ -1,0 +1,9 @@
+{
+  "name": "nexo-analytics",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Painel de lives e raids da NEXO Synergy, com dados armazenados no GitHub",
+  "engines": {"node": ">=20"},
+  "scripts": {"test": "node --test", "build:data": "node scripts/aggregate.mjs", "dev": "node scripts/preview.mjs", "sync:twitch": "node scripts/sync-subscriptions.mjs", "health": "node scripts/watchdog.mjs"}
+}

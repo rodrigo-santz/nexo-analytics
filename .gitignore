@@ -1,0 +1,9 @@
+node_modules/
+worker/node_modules/
+_site/
+.DS_Store
+.env
+.dev.vars
+worker/.dev.vars
+.wrangler/
+Microsoft/Windows/PowerShell/ModuleAnalysisCache

@@ -1,0 +1,22 @@
+name: Sincronizar EventSub
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '21 */6 * * *'
+permissions:
+  contents: read
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Criar inscrições Twitch (sem duplicar)
+        env:
+          TWITCH_CLIENT_ID: ${{ secrets.TWITCH_CLIENT_ID }}
+          TWITCH_CLIENT_SECRET: ${{ secrets.TWITCH_CLIENT_SECRET }}
+          TWITCH_WEBHOOK_URL: ${{ secrets.TWITCH_WEBHOOK_URL }}
+          TWITCH_EVENTSUB_SECRET: ${{ secrets.TWITCH_EVENTSUB_SECRET }}
+        run: node scripts/sync-subscriptions.mjs
