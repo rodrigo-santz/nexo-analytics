@@ -18,6 +18,10 @@
 @media(max-width:380px){.app-content{width:calc(100% - 28px)}.metrics-grid,.streamers-grid{grid-template-columns:1fr}.metric-card{min-height:118px}.hero-buttons{flex-direction:column;max-width:260px}.hero-buttons .btn{width:100%}.brand-name{letter-spacing:.12em}.profile-metrics{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 
+html.reveal-ready .reveal-item{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s cubic-bezier(.2,.75,.25,1);transition-delay:var(--reveal-delay,0ms)}
+html.reveal-ready .reveal-item.is-visible{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){html.reveal-ready .reveal-item{opacity:1;transform:none;transition:none}}
+
 .scanner-inner{overflow:hidden}
 .scanner-logo-mark{display:block;width:250px;max-width:none;height:auto;flex:none;transform:translateX(-14px);filter:drop-shadow(0 0 8px rgba(170,95,255,.35))}
 .scanner-inner img{pointer-events:none}
