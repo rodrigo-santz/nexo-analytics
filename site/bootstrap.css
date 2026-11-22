@@ -70,9 +70,9 @@ html.modal-page-lock body {
 }
 
 .analytics-grid.row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: 18px;
   /* Keep the analytics cards aligned with the metrics and monitor cards. */
   margin-right: 0;
   margin-left: 0;
@@ -80,6 +80,15 @@ html.modal-page-lock body {
 
 .analytics-grid.row > * {
   min-width: 0;
+  width: auto;
+  padding-right: 0;
+  padding-left: 0;
+}
+
+@media (max-width: 767.98px) {
+  .analytics-grid.row {
+    grid-template-columns: 1fr;
+  }
 }
 
 .searchbox .form-control,
