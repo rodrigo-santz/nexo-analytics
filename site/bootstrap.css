@@ -2,8 +2,29 @@
  * Bootstrap integration layer.
  * Bootstrap supplies the grid and utilities; the NEXO theme remains in styles.css.
  */
+:root {
+  --nexo-header-height: 86px;
+}
+
 .site-header.navbar {
   --bs-navbar-padding-y: 0;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  height: var(--nexo-header-height);
+  z-index: 1030;
+}
+
+body {
+  padding-top: var(--nexo-header-height);
+}
+
+@media (max-width: 780px) {
+  :root {
+    --nexo-header-height: 72px;
+  }
 }
 
 .brand-logo-horizontal {
