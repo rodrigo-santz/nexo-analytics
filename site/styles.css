@@ -22,10 +22,6 @@ html.reveal-ready .reveal-item{opacity:0;transform:translateY(24px);transition:o
 html.reveal-ready .reveal-item.is-visible{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){html.reveal-ready .reveal-item{opacity:1;transform:none;transition:none}}
 
-/* The footer is a permanent landmark and must remain visible after the
-   reveal animation, including when the page is loaded near its bottom. */
-html.reveal-ready .footer.reveal-item{opacity:1;visibility:visible;transform:none}
-
 /* Keep the document as the only vertical scroll container. Clip decorative
    horizontal overflow without turning body into a second scrollbar. */
 body{overflow-x:clip;overflow-y:visible}

@@ -11,7 +11,7 @@ let drawerModal = null;
 let revealObserver = null;
 
 function initScrollReveal(){
-  const targets = document.querySelectorAll('.section-head, .demo-notice, .metrics-grid .metric-card, .analytics-grid > *, .streamer-card, .history-panel, .monitor-card, .footer');
+  const targets = document.querySelectorAll('.section-head, .demo-notice, .metrics-grid .metric-card, .analytics-grid > *, .streamer-card, .history-panel, .monitor-card');
   if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
     targets.forEach((el)=>el.classList.add('reveal-item','is-visible'));
     return;
