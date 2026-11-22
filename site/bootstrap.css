@@ -6,6 +6,36 @@
   --bs-navbar-padding-y: 0;
 }
 
+/* Bootstrap Modal API + NEXO's right-side profile drawer. */
+.drawer-layer.modal {
+  z-index: 1055;
+  padding-right: 0 !important;
+}
+
+.drawer-layer.modal.fade .modal-dialog {
+  height: 100%;
+  margin: 0 0 0 auto;
+  max-width: 540px;
+  transform: translateX(100%);
+  transition: transform .35s cubic-bezier(.22, 1, .36, 1);
+}
+
+.drawer-layer.modal.show .modal-dialog {
+  transform: translateX(0);
+}
+
+.drawer-layer.modal .profile-drawer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drawer-layer.modal.fade .modal-dialog {
+    transition: none;
+  }
+}
+
 .app-content.container-xxl {
   max-width: 1280px;
 }

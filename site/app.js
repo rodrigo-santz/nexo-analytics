@@ -6,6 +6,26 @@ const statusNames = {raid_nexo:'RAID NEXO',raid_externa:'RAID EXTERNA',sem_raid:
 const badge = (status) => `<span class="status-chip status-${esc(status)}">${statusNames[status] || esc(status)}</span>`;
 const validLogin = (s) => /^[a-z0-9_]{3,25}$/.test(String(s||''));
 let dashboard = null, shown = 10, isDemo = new URLSearchParams(location.search).get('demo') === '1';
+const drawerElement = $('#drawerLayer');
+let drawerModal = null;
+
+function initProfileModal(){
+  if(!drawerElement || !window.bootstrap?.Modal)return;
+  drawerElement.classList.add('modal','fade');
+  drawerElement.classList.remove('hidden');
+  drawerElement.setAttribute('tabindex','-1');
+  drawerElement.setAttribute('aria-hidden','true');
+  $('#drawerShade')?.remove();
+  const profile = drawerElement.querySelector('.profile-drawer');
+  if(profile && !profile.closest('.modal-dialog')){
+    const dialog = document.createElement('div');
+    dialog.className = 'modal-dialog modal-dialog-scrollable';
+    profile.parentNode.insertBefore(dialog,profile);
+    dialog.appendChild(profile);
+    profile.classList.add('modal-content');
+  }
+  drawerModal = window.bootstrap.Modal.getOrCreateInstance(drawerElement,{backdrop:true,keyboard:true,focus:true});
+}
 
 function icon(symbol){return `<span aria-hidden="true">${symbol}</span>`}
 function metric(label,value,symbol,note,variant='') {return `<article class="metric-card ${variant}"><div class="metric-top"><span class="metric-label">${label}</span><span class="metric-icon">${icon(symbol)}</span></div><div class="metric-value">${fmt(value)}</div><div class="metric-note">${note}</div></article>`;}
@@ -53,20 +73,21 @@ function showProfile(login){
   const p=(dashboard?.streamers||[]).find(s=>s.login===login);if(!p)return;
   const sessions=(dashboard.recent||[]).filter(r=>r.login===login).slice(0,60);
   $('#drawerContent').innerHTML=`<span class="kicker">FICHA DO CRIADOR / NEXO SYNERGY</span><div class="profile-header"><span class="avatar">${esc(login.charAt(0).toUpperCase())}</span><div><h2 id="drawerTitle">${esc(login)}</h2>${validLogin(login)?`<a href="https://www.twitch.tv/${encodeURIComponent(login)}" target="_blank" rel="noopener noreferrer">Abrir Twitch ↗</a>`:''}</div></div><div class="profile-metrics">${[['Lives',p.lives],['Raids totais',p.raids],['Para NEXO',p.nexo],['Para fora',p.externas],['Sem raid detectada',p.semRaid],['Inconclusivas',p.inconclusivas]].map(([l,v])=>`<div class="profile-metric"><strong>${fmt(v)}</strong><span>${l}</span></div>`).join('')}</div><h3 class="profile-subhead">Histórico da comunidade</h3>${sessions.length?sessions.map(r=>`<div class="profile-session"><div><time>${esc(dateBR(r.startedAt||r.endedAt))}</time><p>${r.raid?.toLogin?`Destino: ${esc(r.raid.toLogin)}`:r.coverageIssues?.length?'Monitoramento parcial':'Transmissão registrada'}</p></div>${badge(r.status)}</div>`).join(''):'<p class="empty-small">Nenhuma live registrada ainda.</p>'}<div class="profile-issue">⚠ “Sem raid detectada” não significa prova de ausência. Lives com falhas identificadas são classificadas como inconclusivas.</div>`;
-  $('#drawerLayer').classList.remove('hidden');document.body.style.overflow='hidden';$('#closeDrawer').focus();
+  drawerModal?.show();
 }
-function closeProfile(){ $('#drawerLayer').classList.add('hidden');document.body.style.overflow='';}
+function closeProfile(){ drawerModal?.hide(); }
 function render(){renderOverview();renderStreamers();renderHistory();$('#demoNotice').classList.toggle('hidden',!isDemo);$('#dataNotice').classList.toggle('hidden',true)}
 async function loadData(){const b=$('#refreshBtn');b.disabled=true;try{if(window.__NEXO_EMBEDDED){dashboard=window.__NEXO_EMBEDDED;isDemo=true;}else{const file=isDemo?'./data/demo-dashboard.json':'./data/dashboard.json';const res=await fetch(`${file}?_=${Date.now()}`,{cache:'no-store'});if(!res.ok)throw new Error(`HTTP ${res.status}`);dashboard=await res.json();}render();if(!isDemo&&!(dashboard.recent||[]).length){const el=$('#dataNotice');el.classList.remove('hidden');el.innerHTML='Os registros reais ainda estão vazios. <a style="color:#dcb5ff;text-decoration:underline" href="?demo=1#visao-geral">Visualizar demonstração com dados fictícios</a>.';}}catch(e){$('#dataNotice').classList.remove('hidden');$('#dataNotice').textContent=`Não foi possível carregar os dados: ${e.message}. Verifique a publicação dos arquivos.`;console.error(e)}finally{b.disabled=false}}
 function initConstellation(){const canvas=$('#constellation'),ctx=canvas.getContext('2d');if(!ctx)return;let w=0,h=0,pts=[];const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;function resize(){w=canvas.width=window.innerWidth*devicePixelRatio;h=canvas.height=window.innerHeight*devicePixelRatio;ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);const count=Math.min(92,Math.floor(window.innerWidth/19));pts=Array.from({length:count},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,vx:(Math.random()-.5)*.14,vy:(Math.random()-.5)*.14,r:Math.random()*1.6+.4}))}function paint(){ctx.clearRect(0,0,innerWidth,innerHeight);for(let i=0;i<pts.length;i++){const a=pts[i];if(!reduced){a.x+=a.vx;a.y+=a.vy;if(a.x<0||a.x>innerWidth)a.vx*=-1;if(a.y<0||a.y>innerHeight)a.vy*=-1;}ctx.beginPath();ctx.fillStyle='rgba(198,167,255,.72)';ctx.arc(a.x,a.y,a.r,0,Math.PI*2);ctx.fill();for(let j=i+1;j<pts.length;j++){const b=pts[j];const d=Math.hypot(a.x-b.x,a.y-b.y);if(d<116){ctx.strokeStyle=`rgba(163,112,240,${(1-d/116)*.22})`;ctx.lineWidth=.7;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke()}}}if(!reduced)requestAnimationFrame(paint)}window.addEventListener('resize',resize);resize();paint()}
 $('#year').textContent=new Date().getFullYear();
+initProfileModal();
 $('#refreshBtn').addEventListener('click',loadData);
 $('#searchStreamers').addEventListener('input',renderStreamers);
 $('#streamerSort').addEventListener('change',renderStreamers);
 $('#historyStatus').addEventListener('change',()=>{shown=10;renderHistory()});
 $('#loadMore').addEventListener('click',()=>{shown+=10;renderHistory()});
 $('#streamerGrid').addEventListener('click',e=>{const b=e.target.closest('[data-profile]');if(b)showProfile(b.dataset.profile)});
-$('#closeDrawer').addEventListener('click',closeProfile);$('#drawerShade').addEventListener('click',closeProfile);
+$('#closeDrawer').addEventListener('click',closeProfile);
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeProfile()});
 $('#exitDemo').addEventListener('click',()=>{location.href='./#visao-geral'});
 $('#menuToggle').addEventListener('click',()=>{const n=$('.top-nav');n.classList.toggle('open');$('#menuToggle').setAttribute('aria-expanded',String(n.classList.contains('open')))});
