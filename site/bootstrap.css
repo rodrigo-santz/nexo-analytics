@@ -6,6 +6,20 @@
   --bs-navbar-padding-y: 0;
 }
 
+/* Preserve the readable neon outline style of the secondary hero action. */
+.hero-buttons .btn-outline {
+  color: #c9a7ff;
+  border-color: #8b56e5;
+  background: rgba(17, 10, 30, .75);
+}
+
+.hero-buttons .btn-outline:hover,
+.hero-buttons .btn-outline:focus-visible {
+  color: #fff;
+  border-color: #b47cff;
+  background: rgba(91, 42, 160, .55);
+}
+
 /* Keep the document fixed while the profile modal is open. */
 html.modal-page-lock,
 html.modal-page-lock body {
