@@ -6,6 +6,21 @@
   --bs-navbar-padding-y: 0;
 }
 
+.brand-logo-horizontal {
+  display: block;
+  width: 218px;
+  height: 70px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 10px rgba(141, 53, 255, .22));
+}
+
+@media (max-width: 780px) {
+  .brand-logo-horizontal {
+    width: 174px;
+    height: 62px;
+  }
+}
+
 /* Preserve the readable neon outline style of the secondary hero action. */
 .hero-buttons .btn-outline {
   color: #c9a7ff;
