@@ -19,5 +19,5 @@
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 
 .scanner-inner{overflow:hidden}
-.scanner-logo-mark{display:block;width:250px;max-width:none;height:auto;flex:none;transform:translateX(-5px);filter:drop-shadow(0 0 8px rgba(170,95,255,.35))}
+.scanner-logo-mark{display:block;width:250px;max-width:none;height:auto;flex:none;transform:translateX(-14px);filter:drop-shadow(0 0 8px rgba(170,95,255,.35))}
 .scanner-inner img{pointer-events:none}
