@@ -6,6 +6,12 @@
   --bs-navbar-padding-y: 0;
 }
 
+/* Keep the document fixed while the profile modal is open. */
+html.modal-page-lock,
+html.modal-page-lock body {
+  overflow: hidden !important;
+}
+
 /* Bootstrap Modal API + NEXO's right-side profile drawer. */
 .drawer-layer.modal {
   z-index: 1055;

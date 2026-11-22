@@ -25,6 +25,12 @@ function initProfileModal(){
     profile.classList.add('modal-content');
   }
   drawerModal = window.bootstrap.Modal.getOrCreateInstance(drawerElement,{backdrop:true,keyboard:true,focus:true});
+  drawerElement.addEventListener('show.bs.modal', () => {
+    document.documentElement.classList.add('modal-page-lock');
+  });
+  drawerElement.addEventListener('hidden.bs.modal', () => {
+    document.documentElement.classList.remove('modal-page-lock');
+  });
 }
 
 function icon(symbol){return `<span aria-hidden="true">${symbol}</span>`}
