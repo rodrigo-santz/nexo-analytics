@@ -22,6 +22,10 @@ html.reveal-ready .reveal-item{opacity:0;transform:translateY(24px);transition:o
 html.reveal-ready .reveal-item.is-visible{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){html.reveal-ready .reveal-item{opacity:1;transform:none;transition:none}}
 
+/* Keep the document as the only vertical scroll container. Clip decorative
+   horizontal overflow without turning body into a second scrollbar. */
+body{overflow-x:clip;overflow-y:visible}
+
 .scanner-inner{overflow:hidden}
 .scanner-logo-mark{display:block;width:250px;max-width:none;height:auto;flex:none;transform:translateX(-14px);filter:drop-shadow(0 0 8px rgba(170,95,255,.35))}
 .scanner-inner img{pointer-events:none}
