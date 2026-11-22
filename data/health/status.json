@@ -1,6 +1,9 @@
 {
   "status": "unconfigured",
   "lastCheckedAt": null,
-  "issues": ["Aguardando configuração do EventSub e execução do monitoramento"],
-  "gaps": []
+  "issues": [
+    "Configure as credenciais da Twitch e a URL do webhook"
+  ],
+  "gaps": [],
+  "activeStreams": {}
 }
