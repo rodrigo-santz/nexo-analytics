@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-22T23:58:12.679Z",
+  "updatedAt": "2026-11-23T00:07:21.008Z",
   "monitor": {
     "status": "unconfigured",
     "lastCheckedAt": null,
@@ -20,6 +20,7 @@
   "streamers": [
     {
       "login": "1skilo",
+      "profileImageUrl": null,
       "lives": 0,
       "raids": 0,
       "nexo": 0,
@@ -29,6 +30,7 @@
     },
     {
       "login": "behttah",
+      "profileImageUrl": null,
       "lives": 0,
       "raids": 0,
       "nexo": 0,
@@ -38,6 +40,7 @@
     },
     {
       "login": "bolosdomikael",
+      "profileImageUrl": null,
       "lives": 0,
       "raids": 0,
       "nexo": 0,
@@ -47,6 +50,7 @@
     },
     {
       "login": "byoki77",
+      "profileImageUrl": null,
       "lives": 0,
       "raids": 0,
       "nexo": 0,
@@ -56,6 +60,7 @@
     },
     {
       "login": "chboga",
+      "profileImageUrl": null,
       "lives": 0,
       "raids": 0,
       "nexo": 0,
@@ -65,6 +70,7 @@
     },
     {
       "login": "coldx68",
+      "profileImageUrl": null,
       "lives": 0,
       "raids": 0,
       "nexo": 0,
@@ -74,6 +80,7 @@
     },
     {
       "login": "dree_sp",
+      "profileImageUrl": null,
       "lives": 0,
       "raids": 0,
       "nexo": 0,
@@ -83,6 +90,7 @@
     },
     {
       "login": "erick99z",
+      "profileImageUrl": null,
       "lives": 0,
       "raids": 0,
       "nexo": 0,
@@ -92,6 +100,7 @@
     },
     {
       "login": "galahadyy",
+      "profileImageUrl": null,
       "lives": 0,
       "raids": 0,
       "nexo": 0,
@@ -101,6 +110,7 @@
     },
     {
       "login": "galiodejordan",
+      "profileImageUrl": null,
       "lives": 0,
       "raids": 0,
       "nexo": 0,
@@ -110,6 +120,7 @@
     },
     {
       "login": "hecazinha",
+      "profileImageUrl": null,
       "lives": 0,
       "raids": 0,
       "nexo": 0,
@@ -119,6 +130,7 @@
     },
     {
       "login": "heyjessh",
+      "profileImageUrl": null,
       "lives": 0,
       "raids": 0,
       "nexo": 0,
@@ -128,6 +140,7 @@
     },
     {
       "login": "hudsondark",
+      "profileImageUrl": null,
       "lives": 0,
       "raids": 0,
       "nexo": 0,
@@ -137,6 +150,7 @@
     },
     {
       "login": "nanbola",
+      "profileImageUrl": null,
       "lives": 0,
       "raids": 0,
       "nexo": 0,
@@ -146,6 +160,7 @@
     },
     {
       "login": "onoox_",
+      "profileImageUrl": null,
       "lives": 0,
       "raids": 0,
       "nexo": 0,
@@ -155,6 +170,7 @@
     },
     {
       "login": "quindinhaa",
+      "profileImageUrl": null,
       "lives": 0,
       "raids": 0,
       "nexo": 0,
@@ -164,6 +180,7 @@
     },
     {
       "login": "santz_rj",
+      "profileImageUrl": null,
       "lives": 0,
       "raids": 0,
       "nexo": 0,
@@ -173,6 +190,7 @@
     },
     {
       "login": "zells001",
+      "profileImageUrl": null,
       "lives": 0,
       "raids": 0,
       "nexo": 0,
