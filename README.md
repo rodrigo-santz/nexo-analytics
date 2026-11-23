@@ -6,7 +6,6 @@ Central de acompanhamento de **lives, raids para a NEXO, raids externas, lives s
 
 - Painel responsivo em HTML, CSS e JavaScript, com fundo de constelações, animações leves, métricas, gráfico de atividade e distribuição de raids.
 - Busca e ordenação de streamers, fichas individuais, histórico filtrável e identificação de cobertura parcial.
-- Modo demonstrativo com dados **fictícios**, separado da base de dados real.
 - `worker/index.js`: recebe eventos oficiais da Twitch EventSub, valida assinatura HMAC e grava um arquivo JSON **por evento** no GitHub, com idempotência por identificador.
 - `scripts/sync-subscriptions.mjs`: cria as inscrições `stream.online`, `stream.offline` e `channel.raid` para os logins cadastrados.
 - `scripts/watchdog.mjs`: verifica inscrições, detecta períodos prolongados sem checagem e reconcilia início/fim observável pela API da Twitch. Se a cobertura for interrompida, marca as sessões como inconclusivas.
@@ -42,8 +41,6 @@ npm run dev
 ```
 
 Acesse `http://localhost:4173/` para **dados reais**, inicialmente zerados.
-
-Acesse `http://localhost:4173/?demo=1` para **prévia visual com dados fictícios**.
 
 ## 2. Criar o repositório GitHub
 
