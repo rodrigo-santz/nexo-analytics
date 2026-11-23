@@ -65,3 +65,4 @@ body{overflow-x:clip;overflow-y:visible}
 @media(min-width:701px){.history-panel th:nth-child(4),.history-panel td:nth-child(4),.history-panel th:nth-child(5),.history-panel td:nth-child(5){padding-left:12px;padding-right:12px}}
 @media(max-width:700px){.history-panel td:nth-child(n){width:100%;padding:10px 0;text-align:right}.history-panel td:nth-child(3),.history-panel td:nth-child(4),.history-panel td:nth-child(5){padding-left:0;padding-right:0}}
 @media(max-width:700px){.history-panel td{justify-content:flex-start;gap:18px;text-align:left}.history-panel td::before{flex:0 0 88px}.history-panel td .td-user,.history-panel td .date-stack,.history-panel td .views-stack,.history-panel td .coverage-stack{flex:0 1 auto;width:auto;max-width:calc(100% - 106px);text-align:left}.history-panel td .coverage-stack{display:inline-flex;align-items:flex-start}.history-panel td .coverage-detail{white-space:normal}}
+@media(max-width:700px){.history-panel .history-empty{left:0}}
