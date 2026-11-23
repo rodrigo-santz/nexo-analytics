@@ -149,3 +149,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeProfile()});
 $('#menuToggle').addEventListener('click',()=>{const n=$('.top-nav');n.classList.toggle('open');$('#menuToggle').setAttribute('aria-expanded',String(n.classList.contains('open')))});
 document.querySelectorAll('.top-nav a').forEach(a=>a.addEventListener('click',()=>$('.top-nav').classList.remove('open')));
 loadData();
+
+function splitViewDestination(){document.querySelectorAll('#historyBody td[data-label="Views"]').forEach(cell=>{const match=cell.textContent.trim().match(/^(.+?) enviados para (.+)$/);if(!match)return;cell.innerHTML=`<span class="views-stack"><span>${esc(match[1])} enviados</span><small class="views-destination">${esc(match[2])}</small></span>`})}
+const renderHistoryOriginal=renderHistory;
+renderHistory=()=>{renderHistoryOriginal();splitViewDestination()};
