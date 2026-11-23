@@ -100,6 +100,11 @@ function renderOverview(){
   $('#raidDonut').style.setProperty('--pct',`${pct}%`);
   $('#donutPct').textContent=`${pct}%`;
   $('#destinationLegend').innerHTML=`<span><i class="legend-dot purple"></i> NEXO <strong>${fmt(o.nexo)}</strong></span><span><i class="legend-dot cyan"></i> Externas <strong>${fmt(o.externas)}</strong></span>`;
+  const used=o.viewsAproveitadas??audience.used,wasted=o.viewsDesperdicadas??audience.wasted,total=o.viewsTotais??audience.total,hasImpact=Number.isFinite(Number(total))&&Number(total)>0&&Number.isFinite(Number(used))&&Number.isFinite(Number(wasted));
+  const impactPct=hasImpact?Math.round(Number(used)/Number(total)*100):null;
+  const impactDonut=$('#viewsImpactDonut');impactDonut.classList.toggle('no-data',!hasImpact);impactDonut.style.setProperty('--pct',hasImpact?`${impactPct}%`:'0%');
+  $('#viewsImpactPct').textContent=hasImpact?`${impactPct}%`:'—';$('#viewsImpactCaption').textContent=hasImpact?'aproveitadas':'sem dados';
+  $('#viewsImpactLegend').innerHTML=hasImpact?`<span><i class="legend-dot purple"></i> Aproveitadas <strong>${fmt(used)} · ${impactPct}%</strong></span><span><i class="legend-dot cyan"></i> Desperdiçadas <strong>${fmt(wasted)} · ${100-impactPct}%</strong></span>`:'<span>Sem dados suficientes</span>';
   const health=dashboard.monitor||{};
   const el=$('#monitorStatus');el.classList.toggle('healthy',health.status==='healthy');
   el.innerHTML = `<span class="status-light"></span> ${health.status==='healthy'?'Assinaturas ativas e verificadas':health.status==='degraded'?'Atenção: cobertura parcialmente comprometida':'Monitoramento não configurado ou sem verificação recente'}`;
