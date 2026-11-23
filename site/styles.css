@@ -56,3 +56,4 @@ body{overflow-x:clip;overflow-y:visible}
 @media(max-width:700px){.history-panel td .coverage-stack{display:inline}.history-panel td .coverage-detail{font-size:inherit}.history-panel td .coverage-detail::before{content:' · '}}
 .history-panel th:nth-child(4),.history-panel td:nth-child(4){width:14%}.history-panel th:nth-child(5),.history-panel td:nth-child(5){width:15%}
 .history-panel th:nth-child(3),.history-panel td:nth-child(3),.history-panel th:nth-child(4),.history-panel td:nth-child(4),.history-panel th:nth-child(5),.history-panel td:nth-child(5){padding-left:30px;padding-right:21px;text-align:left}
+.history-empty{display:inline-block;position:relative;left:16px}
