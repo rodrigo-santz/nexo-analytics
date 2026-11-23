@@ -1,6 +1,6 @@
 {
   "status": "healthy",
-  "lastCheckedAt": "2026-11-23T15:14:54.127Z",
+  "lastCheckedAt": "2026-11-23T15:20:23.463Z",
   "issues": [],
   "gaps": [
     {
@@ -36,11 +36,11 @@
       "login": "quindinhaa"
     }
   },
-  "lastSuccessfulAt": "2026-11-23T15:14:54.127Z",
+  "lastSuccessfulAt": "2026-11-23T15:20:23.463Z",
   "connection": "online",
   "failures": [],
   "subscriptionHealth": {
-    "checkedAt": "2026-11-23T15:14:54.127Z",
+    "checkedAt": "2026-11-23T15:20:23.463Z",
     "expected": 54,
     "active": 54,
     "missing": []
