@@ -1,32 +1,39 @@
 {
-  "updatedAt": "2026-11-23T14:40:27.625Z",
+  "updatedAt": "2026-11-23T14:26:27.228Z",
   "monitor": {
     "status": "healthy",
-    "lastCheckedAt": "2026-11-23T14:40:26.377Z",
+    "connection": "unknown",
+    "lastCheckedAt": "2026-11-23T02:35:19.561Z",
+    "lastSuccessfulAt": null,
     "issues": [],
+    "failures": [],
     "gaps": [
       {
         "start": "2026-11-23T01:57:52.438Z",
         "end": "2026-11-23T02:35:19.561Z",
         "reason": "Assinaturas ou verificações do monitor indisponíveis"
       }
-    ]
+    ],
+    "subscriptionHealth": null
   },
   "overview": {
-    "lives": 7,
-    "raids": 1,
+    "lives": 1,
+    "raids": 0,
     "nexo": 0,
-    "externas": 1,
+    "externas": 0,
     "semRaid": 0,
-    "inconclusivas": 1,
-    "liveAgora": 5
+    "inconclusivas": 0,
+    "liveAgora": 1,
+    "coverageComplete": 0,
+    "coveragePartial": 1,
+    "coverageFailure": 0
   },
   "streamers": [
     {
       "login": "1skilo",
       "profileImageUrl": "https://static-cdn.jtvnw.net/jtv_user_pictures/c42baee0-9877-45d4-bfcb-f35b782b438a-profile_image-300x300.png",
-      "live": true,
-      "lives": 1,
+      "live": false,
+      "lives": 0,
       "raids": 0,
       "nexo": 0,
       "externas": 0,
@@ -47,8 +54,8 @@
     {
       "login": "bolosdomikael",
       "profileImageUrl": "https://static-cdn.jtvnw.net/jtv_user_pictures/c8d7f711-91c3-42c0-b635-710de452c7f4-profile_image-300x300.png",
-      "live": true,
-      "lives": 1,
+      "live": false,
+      "lives": 0,
       "raids": 0,
       "nexo": 0,
       "externas": 0,
@@ -91,8 +98,8 @@
     {
       "login": "dree_sp",
       "profileImageUrl": "https://static-cdn.jtvnw.net/jtv_user_pictures/5e03ec1c-e9ff-4cfd-86cb-4e71560f71f2-profile_image-300x300.png",
-      "live": true,
-      "lives": 1,
+      "live": false,
+      "lives": 0,
       "raids": 0,
       "nexo": 0,
       "externas": 0,
@@ -103,12 +110,12 @@
       "login": "erick99z",
       "profileImageUrl": "https://static-cdn.jtvnw.net/jtv_user_pictures/b5c66944-96ee-4af5-912b-a3d2cf33e333-profile_image-300x300.png",
       "live": true,
-      "lives": 2,
+      "lives": 1,
       "raids": 0,
       "nexo": 0,
       "externas": 0,
       "semRaid": 0,
-      "inconclusivas": 1
+      "inconclusivas": 0
     },
     {
       "login": "galahadyy",
@@ -190,8 +197,8 @@
     {
       "login": "quindinhaa",
       "profileImageUrl": "https://static-cdn.jtvnw.net/jtv_user_pictures/d29fcea7-eadf-4efe-9ef9-d156033f65d6-profile_image-300x300.png",
-      "live": true,
-      "lives": 1,
+      "live": false,
+      "lives": 0,
       "raids": 0,
       "nexo": 0,
       "externas": 0,
@@ -213,93 +220,47 @@
       "login": "zells001",
       "profileImageUrl": "https://static-cdn.jtvnw.net/jtv_user_pictures/dd737f5b-a16b-4f41-8ac6-7792b68bc858-profile_image-300x300.png",
       "live": false,
-      "lives": 1,
-      "raids": 1,
+      "lives": 0,
+      "raids": 0,
       "nexo": 0,
-      "externas": 1,
+      "externas": 0,
       "semRaid": 0,
       "inconclusivas": 0
     }
   ],
   "recent": [
     {
-      "id": "319644410229",
-      "login": "1skilo",
-      "startedAt": "2026-11-23T14:06:04Z",
-      "endedAt": null,
-      "raid": null,
-      "coverageIssues": [],
-      "status": "live"
-    },
-    {
-      "id": "319644349301",
-      "login": "erick99z",
-      "startedAt": "2026-11-23T13:55:36Z",
-      "endedAt": null,
-      "raid": null,
-      "coverageIssues": [],
-      "status": "live"
-    },
-    {
-      "id": "319555771638",
-      "login": "dree_sp",
-      "startedAt": "2026-11-23T12:32:51Z",
-      "endedAt": null,
-      "raid": null,
-      "coverageIssues": [],
-      "status": "live"
-    },
-    {
-      "id": "319555201782",
-      "login": "quindinhaa",
-      "startedAt": "2026-11-23T10:01:07Z",
-      "endedAt": null,
-      "raid": null,
-      "coverageIssues": [],
-      "status": "live"
-    },
-    {
-      "id": "319643367669",
-      "login": "bolosdomikael",
-      "startedAt": "2026-11-23T10:00:05Z",
-      "endedAt": null,
-      "raid": null,
-      "coverageIssues": [],
-      "status": "live"
-    },
-    {
       "id": "319640200949",
       "login": "erick99z",
       "startedAt": "2026-11-23T01:39:58Z",
-      "endedAt": "2026-11-23T05:37:54.466166965Z",
+      "endedAt": null,
       "raid": null,
       "coverageIssues": [
         "Assinaturas ou verificações do monitor indisponíveis"
       ],
-      "status": "inconclusiva"
-    },
-    {
-      "id": "319641439221",
-      "login": "zells001",
-      "startedAt": "2026-11-23T03:13:37Z",
-      "endedAt": "2026-11-23T03:16:22.761145447Z",
-      "raid": {
-        "toLogin": "yrlonely",
-        "viewers": 1,
-        "toId": "724151873",
-        "at": "2026-11-23T03:15:39.839200477Z",
-        "destinationKnown": true,
-        "isNexo": false
-      },
-      "coverageIssues": [],
-      "status": "raid_externa"
+      "startTimeKnown": true,
+      "updatedAt": "2026-11-23T14:26:27.228Z",
+      "coverageGaps": [
+        {
+          "start": "2026-11-23T01:57:52.438Z",
+          "end": "2026-11-23T02:35:19.561Z",
+          "reason": "Assinaturas ou verificações do monitor indisponíveis",
+          "kind": "monitoring"
+        }
+      ],
+      "coverageStatus": "partial",
+      "monitoredDurationMs": 43742105,
+      "status": "live",
+      "automaticStatus": "live",
+      "inconclusiveReason": null,
+      "reassessmentAt": null
     }
   ],
   "daily": [
     {
       "date": "2026-11-23",
-      "lives": 7,
-      "raids": 1
+      "lives": 1,
+      "raids": 0
     }
   ]
 }

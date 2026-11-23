@@ -5,7 +5,7 @@ const contentTypes={'.html':'text/html; charset=utf-8','.css':'text/css; charset
 const site='site';
 const server=http.createServer(async (req,res)=>{
   const requestPath=decodeURIComponent(new URL(req.url,'http://localhost').pathname);
-  const rel=normalize(requestPath).replace(/^([/\\]|\.\.[/\\])+/g,'');
+  const rel=requestPath.replace(/^\/+/, '').replace(/\\/g,'/');
   if(rel.includes('..')){res.writeHead(403).end();return;}
   let path=rel.startsWith('data/dashboard.json')?'data/dashboard.json':join(site,rel||'index.html');
   try{const data=await readFile(path);res.writeHead(200,{'content-type':contentTypes[extname(path)]||'application/octet-stream','cache-control':'no-store'});res.end(data)}

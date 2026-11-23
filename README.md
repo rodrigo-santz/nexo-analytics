@@ -167,3 +167,8 @@ nexo-analytics/
 ---
 
 Feito como ponto de partida implantável: **é preciso conectar suas próprias contas e configurar os segredos para começar a coletar dados reais**. Não foi publicado em nenhuma conta externa automaticamente.
+## Monitoramento e confiabilidade
+
+O agregador separa o resultado da live da qualidade da observação. Cada registro possui cobertura `complete` ou `partial`, intervalos indisponíveis, tempo efetivamente monitorado e, quando necessário, `inconclusiveReason`. A classificação sem raid só ocorre depois da janela de 10 minutos e não substitui uma falha crítica por ausência de raid.
+
+O workflow de publicação roda a cada 5 minutos. Antes da coleta, ele reconcilia as subscriptions EventSub: mantém apenas uma subscription válida por canal/tipo, remove duplicatas e restaura subscriptions revogadas, expiradas ou ausentes. O watchdog registra falhas da Twitch separadamente de falhas da infraestrutura NEXO, fecha lacunas quando a capacidade de monitoramento é recuperada e usa arquivos com criação exclusiva para evitar duplicação em reinicializações concorrentes.

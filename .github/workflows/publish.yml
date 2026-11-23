@@ -1,5 +1,7 @@
 name: Atualizar dados e publicar painel
 on:
+  schedule:
+    - cron: '*/5 * * * *'
   push:
     branches: [main]
     paths:
@@ -30,6 +32,13 @@ jobs:
           node-version: '22'
       - name: Testar regras
         run: npm test
+      - name: Reconciliar subscriptions EventSub
+        env:
+          TWITCH_CLIENT_ID: ${{ secrets.TWITCH_CLIENT_ID }}
+          TWITCH_CLIENT_SECRET: ${{ secrets.TWITCH_CLIENT_SECRET }}
+          TWITCH_WEBHOOK_URL: ${{ secrets.TWITCH_WEBHOOK_URL }}
+          TWITCH_EVENTSUB_SECRET: ${{ secrets.TWITCH_EVENTSUB_SECRET }}
+        run: node scripts/sync-subscriptions.mjs
       - name: Verificar saúde e recuperar estados observáveis
         env:
           TWITCH_CLIENT_ID: ${{ secrets.TWITCH_CLIENT_ID }}
@@ -48,7 +57,7 @@ jobs:
         run: |
           git config user.name "nexo-analytics[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/dashboard.json data/streamer-profiles.json data/health/status.json data/events/
+          git add data/dashboard.json data/streamer-profiles.json data/health/status.json data/health/subscriptions.json data/events/
           if ! git diff --cached --quiet; then
             git commit -m "chore: atualizar estatísticas da NEXO [skip ci]"
             for attempt in 1 2 3 4; do

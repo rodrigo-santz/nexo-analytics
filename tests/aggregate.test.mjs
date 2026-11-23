@@ -55,3 +55,13 @@ test('Inicio sem horario da Twitch fica inconclusivo',()=>{
   const data=buildDashboard([msg('stream.online','2026-11-22T18:00:00Z',{id:'j',broadcaster_user_id:'100',broadcaster_user_login:'santz_rj'}),offline('j','2026-11-22T20:00:00Z')],members,good,now);
   assert.equal(data.overview.inconclusivas,1);assert.equal(data.overview.semRaid,0);
 });
+test('Duplicação de mensagens e raids não duplica a estatística',()=>{
+  const a=online('dedupe','2026-11-22T18:00:00Z');a.messageId='same';
+  const b={...a};const r=raid('2026-11-22T19:00:00Z','dree_sp');r.messageId='raid-1';
+  const duplicate={...r};const data=buildDashboard([a,b,r,duplicate,offline('dedupe','2026-11-22T20:00:00Z')],members,good,now);
+  assert.equal(data.overview.lives,1);assert.equal(data.overview.raids,1);
+});
+test('Revisão manual preserva o resultado automático',()=>{
+  const data=buildDashboard([msg('stream.online','2026-11-22T18:00:00Z',{id:'manual',broadcaster_user_id:'100',broadcaster_user_login:'manual'}),offline('manual','2026-11-22T20:00:00Z','manual')],['manual'],good,now,{},[{streamId:'manual',action:'complete',conclusion:'sem_raid',reason:'Evidência revisada no VOD',reviewer:'adm',changedAt:now}]);
+  assert.equal(data.recent[0].status,'sem_raid');assert.equal(data.recent[0].automaticStatus,'inconclusiva');assert.equal(data.recent[0].manualReview.reviewer,'adm');
+});
