@@ -156,3 +156,8 @@ renderHistory=()=>{renderHistoryOriginal();splitViewDestination()};
 const viewDestinationObserver=new MutationObserver(splitViewDestination);
 viewDestinationObserver.observe($('#historyBody'),{childList:true,subtree:true});
 splitViewDestination();
+
+function splitCoverageDetails(){document.querySelectorAll('#historyBody td[data-label="Cobertura"]>span:not(.coverage-stack)').forEach(cell=>{const match=cell.textContent.trim().match(/^(.+?) · (.+)$/);if(!match)return;cell.classList.add('coverage-stack');cell.innerHTML=`<span>${esc(match[1])}</span><small class="coverage-detail">${esc(match[2])}</small>`})}
+const coverageObserver=new MutationObserver(splitCoverageDetails);
+coverageObserver.observe($('#historyBody'),{childList:true,subtree:true});
+splitCoverageDetails();
