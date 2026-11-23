@@ -198,9 +198,10 @@ function showProfile(login){
   const content=$('#drawerContent');
   if(!profile||!content)return;
   const watched=(profile.watchedLives||[]).filter((r,i,a)=>a.findIndex(x=>x.id===r.id)===i);
+  if(!watched.length)return;
   const section=document.createElement('section');
   section.className='profile-watched-lives';
-  section.innerHTML=`<h3 class="profile-subhead">Lives assistidas</h3>${watched.length?watched.map(r=>`<div class="profile-session"><div><time>${esc(dateBR(r.startedAt||r.endedAt))}</time><p>${esc(r.login)}</p></div>${badge(r.status)}</div>`).join(''):'<p class="empty-small">Nenhuma aparição registrada ainda.</p>'}`;
+  section.innerHTML=`<h3 class="profile-subhead">Lives assistidas</h3>${watched.map(r=>`<div class="profile-session"><div><time>${esc(dateBR(r.startedAt||r.endedAt))}</time><p>${esc(r.login)}</p></div>${badge(r.status)}</div>`).join('')}`;
   content.appendChild(section);
   const avatar=content.querySelector('.profile-header .avatar');
   if(avatar)avatar.outerHTML=avatarMarkup(login,profile.profileImageUrl);
