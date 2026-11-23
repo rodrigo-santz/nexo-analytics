@@ -1,0 +1,17 @@
+{
+  "messageId": "sCfH4daVoADK9bS0O2mUgzn820a_IBaOOxI_Y0L9UB8=",
+  "messageType": "notification",
+  "subscriptionType": "stream.online",
+  "subscriptionStatus": "enabled",
+  "receivedAt": "2026-11-23T22:10:26.366014008Z",
+  "source": "eventsub",
+  "event": {
+    "id": "319560536566",
+    "broadcaster_user_id": "50253995",
+    "broadcaster_user_login": "hudsondark",
+    "broadcaster_user_name": "hudsondark",
+    "type": "live",
+    "started_at": "2026-11-23T22:10:08Z"
+  },
+  "subscriptionId": "d7fbc182-9a50-4c78-8ba6-9e9a76a29489"
+}
