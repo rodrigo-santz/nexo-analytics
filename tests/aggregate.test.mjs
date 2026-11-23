@@ -31,6 +31,11 @@ test('Queda seguida de retorno em até dez minutos unifica a live e preserva a r
   const data=buildDashboard([online('first','2026-11-22T18:00:00Z'),offline('first','2026-11-22T20:00:00Z'),online('second','2026-11-22T20:09:00Z'),offline('second','2026-11-22T22:00:00Z')],members,good,now);
   assert.equal(data.overview.lives,1);assert.equal(data.recent[0].startedAt,'2026-11-22T18:00:00Z');assert.equal(data.recent[0].reconnections.length,1);assert.equal(data.recent[0].reconnections[0].onlineAt,'2026-11-22T20:09:00Z');
 });
+test('Audiência da queda intermediária não aparece como encerramento da live reconectada',()=>{
+  const health={...good,endedStreams:{first:{endedAt:'2026-11-22T20:00:00Z',viewers:3}}};
+  const data=buildDashboard([online('first','2026-11-22T18:00:00Z'),offline('first','2026-11-22T20:00:00Z'),online('second','2026-11-22T20:09:00Z')],members,health,'2026-11-22T20:12:00Z');
+  assert.equal(data.overview.lives,1);assert.equal(data.recent[0].status,'live');assert.equal(data.recent[0].viewersAtEnd,undefined);
+});
 test('RAID confirmada antes do retorno mantém as sessões separadas',()=>{
   const data=buildDashboard([online('first','2026-11-22T18:00:00Z'),offline('first','2026-11-22T20:00:00Z'),raid('2026-11-22T20:05:00Z','dree_sp'),online('second','2026-11-22T20:09:00Z'),offline('second','2026-11-22T22:00:00Z')],members,good,now);
   assert.equal(data.overview.lives,2);assert.equal(data.overview.raids,1);assert.equal(data.recent.filter(r=>r.reconnections?.length).length,0);
