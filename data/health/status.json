@@ -1,6 +1,6 @@
 {
   "status": "healthy",
-  "lastCheckedAt": "2026-11-23T05:30:33.308Z",
+  "lastCheckedAt": "2026-11-23T05:40:21.102Z",
   "issues": [],
   "gaps": [
     {
@@ -9,11 +9,5 @@
       "reason": "Assinaturas ou verificações do monitor indisponíveis"
     }
   ],
-  "activeStreams": {
-    "187860127": {
-      "streamId": "319640200949",
-      "startedAt": "2026-11-23T01:39:58Z",
-      "login": "erick99z"
-    }
-  }
+  "activeStreams": {}
 }

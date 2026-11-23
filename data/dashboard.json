@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-11-23T05:30:34.377Z",
+  "updatedAt": "2026-11-23T05:40:22.393Z",
   "monitor": {
     "status": "healthy",
-    "lastCheckedAt": "2026-11-23T05:30:33.308Z",
+    "lastCheckedAt": "2026-11-23T05:40:21.102Z",
     "issues": [],
     "gaps": [
       {
@@ -18,8 +18,8 @@
     "nexo": 0,
     "externas": 1,
     "semRaid": 0,
-    "inconclusivas": 0,
-    "liveAgora": 1
+    "inconclusivas": 1,
+    "liveAgora": 0
   },
   "streamers": [
     {
@@ -102,13 +102,13 @@
     {
       "login": "erick99z",
       "profileImageUrl": "https://static-cdn.jtvnw.net/jtv_user_pictures/b5c66944-96ee-4af5-912b-a3d2cf33e333-profile_image-300x300.png",
-      "live": true,
+      "live": false,
       "lives": 1,
       "raids": 0,
       "nexo": 0,
       "externas": 0,
       "semRaid": 0,
-      "inconclusivas": 0
+      "inconclusivas": 1
     },
     {
       "login": "galahadyy",
@@ -223,6 +223,17 @@
   ],
   "recent": [
     {
+      "id": "319640200949",
+      "login": "erick99z",
+      "startedAt": "2026-11-23T01:39:58Z",
+      "endedAt": "2026-11-23T05:37:54.466166965Z",
+      "raid": null,
+      "coverageIssues": [
+        "Assinaturas ou verificações do monitor indisponíveis"
+      ],
+      "status": "inconclusiva"
+    },
+    {
       "id": "319641439221",
       "login": "zells001",
       "startedAt": "2026-11-23T03:13:37Z",
@@ -237,17 +248,6 @@
       },
       "coverageIssues": [],
       "status": "raid_externa"
-    },
-    {
-      "id": "319640200949",
-      "login": "erick99z",
-      "startedAt": "2026-11-23T01:39:58Z",
-      "endedAt": null,
-      "raid": null,
-      "coverageIssues": [
-        "Assinaturas ou verificações do monitor indisponíveis"
-      ],
-      "status": "live"
     }
   ],
   "daily": [
