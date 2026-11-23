@@ -1,6 +1,6 @@
 {
   "status": "healthy",
-  "lastCheckedAt": "2026-11-23T09:50:25.965Z",
+  "lastCheckedAt": "2026-11-23T10:00:31.024Z",
   "issues": [],
   "gaps": [
     {
@@ -9,5 +9,11 @@
       "reason": "Assinaturas ou verificações do monitor indisponíveis"
     }
   ],
-  "activeStreams": {}
+  "activeStreams": {
+    "105627045": {
+      "streamId": "319643367669",
+      "startedAt": "2026-11-23T10:00:05Z",
+      "login": "bolosdomikael"
+    }
+  }
 }

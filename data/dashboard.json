@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-11-23T09:50:27.158Z",
+  "updatedAt": "2026-11-23T10:00:32.098Z",
   "monitor": {
     "status": "healthy",
-    "lastCheckedAt": "2026-11-23T09:50:25.965Z",
+    "lastCheckedAt": "2026-11-23T10:00:31.024Z",
     "issues": [],
     "gaps": [
       {
@@ -13,13 +13,13 @@
     ]
   },
   "overview": {
-    "lives": 2,
+    "lives": 3,
     "raids": 1,
     "nexo": 0,
     "externas": 1,
     "semRaid": 0,
     "inconclusivas": 1,
-    "liveAgora": 0
+    "liveAgora": 1
   },
   "streamers": [
     {
@@ -47,8 +47,8 @@
     {
       "login": "bolosdomikael",
       "profileImageUrl": "https://static-cdn.jtvnw.net/jtv_user_pictures/c8d7f711-91c3-42c0-b635-710de452c7f4-profile_image-300x300.png",
-      "live": false,
-      "lives": 0,
+      "live": true,
+      "lives": 1,
       "raids": 0,
       "nexo": 0,
       "externas": 0,
@@ -223,6 +223,17 @@
   ],
   "recent": [
     {
+      "id": "319643367669",
+      "login": "bolosdomikael",
+      "startedAt": "2026-11-23T10:00:05Z",
+      "endedAt": null,
+      "raid": null,
+      "coverageIssues": [
+        "Início inferido pelo verificador"
+      ],
+      "status": "live"
+    },
+    {
       "id": "319640200949",
       "login": "erick99z",
       "startedAt": "2026-11-23T01:39:58Z",
@@ -253,7 +264,7 @@
   "daily": [
     {
       "date": "2026-11-23",
-      "lives": 2,
+      "lives": 3,
       "raids": 1
     }
   ]

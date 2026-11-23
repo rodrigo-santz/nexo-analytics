@@ -1,0 +1,13 @@
+{
+  "messageId": "watchdog-319643367669-stream.online",
+  "messageType": "notification",
+  "subscriptionType": "stream.online",
+  "receivedAt": "2026-11-23T10:00:05Z",
+  "source": "watchdog",
+  "event": {
+    "id": "319643367669",
+    "broadcaster_user_id": "105627045",
+    "broadcaster_user_login": "bolosdomikael",
+    "started_at": "2026-11-23T10:00:05Z"
+  }
+}
