@@ -129,14 +129,15 @@ const coverageModal=$('#coverageModal');
 const coverageModalContent=$('#coverageModalContent');
 const coverageDateBR=(value)=>value?new Intl.DateTimeFormat('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit',timeZone:'America/Sao_Paulo'}).format(new Date(value)):'Não registrado';
 const coverageDuration=(start,end)=>{const a=new Date(start||0).getTime(),b=new Date(end||0).getTime();if(!Number.isFinite(a)||!Number.isFinite(b)||b<a)return 'Não calculada';const min=Math.round((b-a)/60000);return min>=60?`${Math.floor(min/60)}h ${min%60}min`:`${min} min`};
-function closeCoverageModal(){coverageModal?.classList.add('hidden');document.body.classList.remove('coverage-modal-open');}
+function setCoverageModalLock(locked){document.documentElement.classList.toggle('coverage-modal-open',locked);document.body.classList.toggle('coverage-modal-open',locked)}
+function closeCoverageModal(){coverageModal?.classList.add('hidden');setCoverageModalLock(false);}
 function showCoverageModal(button){
   if(!coverageModal||!coverageModalContent)return;
   try{
     const gaps=JSON.parse(button.dataset.gaps||'[]');
     const login=button.closest('tr')?.querySelector('[data-label="Streamer"]')?.textContent.trim()||'Streamer não identificado';
     coverageModalContent.innerHTML=gaps.length?`<p class="coverage-modal-streamer">Streamer afetado: <strong>${esc(login)}</strong></p><div class="coverage-gap-list">${gaps.map((gap,index)=>`<article class="coverage-gap"><div class="coverage-gap-heading"><span>Interrupção ${index+1}</span><span class="coverage-gap-badge">Falha registrada</span></div><dl><div><dt>Início da falha</dt><dd>${esc(coverageDateBR(gap.start))}</dd></div><div><dt>Fim da falha</dt><dd>${esc(coverageDateBR(gap.end))}</dd></div><div><dt>Duração</dt><dd>${esc(coverageDuration(gap.start,gap.end))}</dd></div><div class="coverage-gap-reason"><dt>Motivo do erro</dt><dd>${esc(gap.reason||'Motivo não informado no registro')}</dd></div></dl></article>`).join('')}</div>`:'<p class="coverage-modal-empty">Nenhum intervalo de falha foi registrado.</p>';
-    coverageModal.classList.remove('hidden');document.body.classList.add('coverage-modal-open');$('#coverageModalClose')?.focus();
+    coverageModal.classList.remove('hidden');setCoverageModalLock(true);$('#coverageModalClose')?.focus();
   }catch{coverageModalContent.innerHTML='<p class="coverage-modal-empty">Não foi possível carregar os detalhes registrados desta falha.</p>';coverageModal.classList.remove('hidden');document.body.classList.add('coverage-modal-open');$('#coverageModalClose')?.focus();}
 }
 function populateHistoryFilters(){const select=$('#historyStreamer');if(!select||select.options.length>1)return;[...(dashboard.streamers||[])].map(s=>s.login).sort().forEach(login=>{const option=document.createElement('option');option.value=login;option.textContent=login;select.appendChild(option)})}
