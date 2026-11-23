@@ -1,8 +1,16 @@
 {
-  "status": "healthy",
-  "lastCheckedAt": "2026-11-23T01:57:52.438Z",
-  "issues": [],
-  "gaps": [],
+  "status": "degraded",
+  "lastCheckedAt": "2026-11-23T02:15:56.653Z",
+  "issues": [
+    "Falha na verificação da Twitch: Falha no OAuth Twitch (403): invalid client secret"
+  ],
+  "gaps": [
+    {
+      "start": "2026-11-23T01:57:52.438Z",
+      "end": null,
+      "reason": "Assinaturas ou verificações do monitor indisponíveis"
+    }
+  ],
   "activeStreams": {
     "187860127": {
       "streamId": "319640200949",
