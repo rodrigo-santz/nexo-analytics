@@ -1,10 +1,10 @@
 {
-  "updatedAt": "2026-11-23T21:10:23.464Z",
+  "updatedAt": "2026-11-23T21:20:23.720Z",
   "monitor": {
     "status": "healthy",
     "connection": "online",
-    "lastCheckedAt": "2026-11-23T21:10:22.076Z",
-    "lastSuccessfulAt": "2026-11-23T21:10:22.076Z",
+    "lastCheckedAt": "2026-11-23T21:20:22.463Z",
+    "lastSuccessfulAt": "2026-11-23T21:20:22.463Z",
     "issues": [],
     "failures": [],
     "gaps": [
@@ -15,7 +15,7 @@
       }
     ],
     "subscriptionHealth": {
-      "checkedAt": "2026-11-23T21:10:22.076Z",
+      "checkedAt": "2026-11-23T21:20:22.463Z",
       "expected": 54,
       "active": 54,
       "missing": []
@@ -23,17 +23,17 @@
   },
   "overview": {
     "lives": 10,
-    "raids": 3,
-    "nexo": 2,
-    "externas": 1,
+    "raids": 5,
+    "nexo": 3,
+    "externas": 2,
     "semRaid": 1,
     "inconclusivas": 1,
-    "liveAgora": 5,
+    "liveAgora": 3,
     "coverageComplete": 9,
     "coveragePartial": 1,
     "coverageFailure": 0,
-    "viewsTotais": 38,
-    "viewsAproveitadas": 10,
+    "viewsTotais": 66,
+    "viewsAproveitadas": 38,
     "viewsDesperdicadas": 28
   },
   "streamers": [
@@ -100,10 +100,10 @@
     {
       "login": "coldx68",
       "profileImageUrl": "https://static-cdn.jtvnw.net/jtv_user_pictures/2683dc46-1182-43c0-b1e1-1ba1e23c0070-profile_image-300x300.png",
-      "live": true,
+      "live": false,
       "lives": 1,
-      "raids": 0,
-      "nexo": 0,
+      "raids": 1,
+      "nexo": 1,
       "externas": 0,
       "semRaid": 0,
       "inconclusivas": 0,
@@ -220,11 +220,11 @@
     {
       "login": "quindinhaa",
       "profileImageUrl": "https://static-cdn.jtvnw.net/jtv_user_pictures/d29fcea7-eadf-4efe-9ef9-d156033f65d6-profile_image-300x300.png",
-      "live": true,
+      "live": false,
       "lives": 1,
-      "raids": 0,
+      "raids": 1,
       "nexo": 0,
-      "externas": 0,
+      "externas": 1,
       "semRaid": 0,
       "inconclusivas": 0,
       "watchedLives": []
@@ -256,6 +256,69 @@
   ],
   "recent": [
     {
+      "id": "319555201782",
+      "streamIds": [
+        "319555201782"
+      ],
+      "login": "quindinhaa",
+      "startedAt": "2026-11-23T10:01:07Z",
+      "endedAt": "2026-11-23T21:19:15.042418823Z",
+      "raid": {
+        "toLogin": "camislima77",
+        "viewers": 12,
+        "toId": "744301146",
+        "at": "2026-11-23T21:18:46.261897133Z",
+        "destinationKnown": true,
+        "isNexo": false
+      },
+      "reconnections": [],
+      "coverageIssues": [],
+      "startTimeKnown": true,
+      "updatedAt": "2026-11-23T21:20:23.720Z",
+      "coverageGaps": [],
+      "coverageStatus": "complete",
+      "monitoredDurationMs": 40688042,
+      "status": "raid_externa",
+      "automaticStatus": "raid_externa",
+      "inconclusiveReason": null,
+      "reassessmentAt": "2026-11-23T21:29:15.042Z"
+    },
+    {
+      "id": "319645789173",
+      "streamIds": [
+        "319557640438",
+        "319645789173"
+      ],
+      "login": "coldx68",
+      "startedAt": "2026-11-23T17:38:26Z",
+      "endedAt": "2026-11-23T21:17:56.560099849Z",
+      "raid": {
+        "toLogin": "hecazinha",
+        "viewers": 16,
+        "toId": "570132958",
+        "at": "2026-11-23T21:17:39.786620067Z",
+        "destinationKnown": true,
+        "isNexo": true
+      },
+      "reconnections": [
+        {
+          "offlineAt": "2026-11-23T17:40:41.818185278Z",
+          "onlineAt": "2026-11-23T17:43:07.983596979Z",
+          "streamId": "319557640438"
+        }
+      ],
+      "coverageIssues": [],
+      "startTimeKnown": true,
+      "updatedAt": "2026-11-23T21:20:23.720Z",
+      "coverageGaps": [],
+      "coverageStatus": "complete",
+      "monitoredDurationMs": 13170560,
+      "status": "raid_nexo",
+      "automaticStatus": "raid_nexo",
+      "inconclusiveReason": null,
+      "reassessmentAt": "2026-11-23T21:27:56.560Z"
+    },
+    {
       "id": "319647282421",
       "streamIds": [
         "319647282421"
@@ -267,10 +330,10 @@
       "reconnections": [],
       "coverageIssues": [],
       "startTimeKnown": true,
-      "updatedAt": "2026-11-23T21:10:23.464Z",
+      "updatedAt": "2026-11-23T21:20:23.720Z",
       "coverageGaps": [],
       "coverageStatus": "complete",
-      "monitoredDurationMs": 2437464,
+      "monitoredDurationMs": 3037720,
       "status": "live",
       "automaticStatus": "live",
       "inconclusiveReason": null,
@@ -295,7 +358,7 @@
       "reconnections": [],
       "coverageIssues": [],
       "startTimeKnown": true,
-      "updatedAt": "2026-11-23T21:10:23.464Z",
+      "updatedAt": "2026-11-23T21:20:23.720Z",
       "coverageGaps": [],
       "coverageStatus": "complete",
       "monitoredDurationMs": 21541704,
@@ -323,7 +386,7 @@
       "reconnections": [],
       "coverageIssues": [],
       "startTimeKnown": true,
-      "updatedAt": "2026-11-23T21:10:23.464Z",
+      "updatedAt": "2026-11-23T21:20:23.720Z",
       "coverageGaps": [],
       "coverageStatus": "complete",
       "monitoredDurationMs": 15942010,
@@ -331,34 +394,6 @@
       "automaticStatus": "raid_nexo",
       "inconclusiveReason": null,
       "reassessmentAt": "2026-11-23T18:41:46.010Z"
-    },
-    {
-      "id": "319645789173",
-      "streamIds": [
-        "319557640438",
-        "319645789173"
-      ],
-      "login": "coldx68",
-      "startedAt": "2026-11-23T17:38:26Z",
-      "endedAt": null,
-      "raid": null,
-      "reconnections": [
-        {
-          "offlineAt": "2026-11-23T17:40:41.818185278Z",
-          "onlineAt": "2026-11-23T17:43:07.983596979Z",
-          "streamId": "319557640438"
-        }
-      ],
-      "coverageIssues": [],
-      "startTimeKnown": true,
-      "updatedAt": "2026-11-23T21:10:23.464Z",
-      "coverageGaps": [],
-      "coverageStatus": "complete",
-      "monitoredDurationMs": 12717464,
-      "status": "live",
-      "automaticStatus": "live",
-      "inconclusiveReason": null,
-      "reassessmentAt": null
     },
     {
       "id": "319557158006",
@@ -372,10 +407,10 @@
       "reconnections": [],
       "coverageIssues": [],
       "startTimeKnown": true,
-      "updatedAt": "2026-11-23T21:10:23.464Z",
+      "updatedAt": "2026-11-23T21:20:23.720Z",
       "coverageGaps": [],
       "coverageStatus": "complete",
-      "monitoredDurationMs": 16371464,
+      "monitoredDurationMs": 16971720,
       "status": "live",
       "automaticStatus": "live",
       "inconclusiveReason": null,
@@ -394,7 +429,7 @@
       "coverageIssues": [],
       "startTimeKnown": true,
       "viewersAtEnd": 28,
-      "updatedAt": "2026-11-23T21:10:23.464Z",
+      "updatedAt": "2026-11-23T21:20:23.720Z",
       "coverageGaps": [],
       "coverageStatus": "complete",
       "monitoredDurationMs": 9008200,
@@ -402,27 +437,6 @@
       "automaticStatus": "sem_raid",
       "inconclusiveReason": null,
       "reassessmentAt": "2026-11-23T16:35:44.200Z"
-    },
-    {
-      "id": "319555201782",
-      "streamIds": [
-        "319555201782"
-      ],
-      "login": "quindinhaa",
-      "startedAt": "2026-11-23T10:01:07Z",
-      "endedAt": null,
-      "raid": null,
-      "reconnections": [],
-      "coverageIssues": [],
-      "startTimeKnown": true,
-      "updatedAt": "2026-11-23T21:10:23.464Z",
-      "coverageGaps": [],
-      "coverageStatus": "complete",
-      "monitoredDurationMs": 40156464,
-      "status": "live",
-      "automaticStatus": "live",
-      "inconclusiveReason": null,
-      "reassessmentAt": null
     },
     {
       "id": "319643367669",
@@ -436,10 +450,10 @@
       "reconnections": [],
       "coverageIssues": [],
       "startTimeKnown": true,
-      "updatedAt": "2026-11-23T21:10:23.464Z",
+      "updatedAt": "2026-11-23T21:20:23.720Z",
       "coverageGaps": [],
       "coverageStatus": "complete",
-      "monitoredDurationMs": 40218464,
+      "monitoredDurationMs": 40818720,
       "status": "live",
       "automaticStatus": "live",
       "inconclusiveReason": null,
@@ -459,7 +473,7 @@
         "Assinaturas ou verificações do monitor indisponíveis"
       ],
       "startTimeKnown": true,
-      "updatedAt": "2026-11-23T21:10:23.464Z",
+      "updatedAt": "2026-11-23T21:20:23.720Z",
       "coverageGaps": [
         {
           "start": "2026-11-23T01:57:52.438Z",
@@ -494,7 +508,7 @@
       "reconnections": [],
       "coverageIssues": [],
       "startTimeKnown": true,
-      "updatedAt": "2026-11-23T21:10:23.464Z",
+      "updatedAt": "2026-11-23T21:20:23.720Z",
       "coverageGaps": [],
       "coverageStatus": "complete",
       "monitoredDurationMs": 165761,
@@ -508,7 +522,7 @@
     {
       "date": "2026-11-23",
       "lives": 10,
-      "raids": 3
+      "raids": 5
     }
   ]
 }
