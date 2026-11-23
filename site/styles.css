@@ -60,3 +60,4 @@ body{overflow-x:clip;overflow-y:visible}
 @media(min-width:701px){.history-panel table{table-layout:auto}.history-panel th:nth-child(n),.history-panel td:nth-child(n){width:auto}}
 .history-panel th:nth-child(4){text-align:center}
 .history-panel th{text-align:center}
+.history-panel th:nth-child(n){text-align:center}
