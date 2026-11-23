@@ -93,7 +93,8 @@ function renderOverview(){
 function sortedStreamers(){
   const query=$('#searchStreamers').value.trim().toLowerCase();
   const field=$('#streamerSort').value;
-  const items=[...(dashboard.streamers||[])].filter(s=>s.login.toLowerCase().includes(query));
+  const liveFilter=$('#streamerLiveFilter').value;
+  const items=[...(dashboard.streamers||[])].filter(s=>s.login.toLowerCase().includes(query)&& (liveFilter==='all'||liveFilter==='live'&&s.live===true||liveFilter==='offline'&&s.live!==true));
   items.sort((a,b)=>field==='name'?a.login.localeCompare(b.login,'pt-BR'):(b[field]||0)-(a[field]||0)||a.login.localeCompare(b.login,'pt-BR'));
   return items;
 }
@@ -129,6 +130,7 @@ initProfileModal();
 $('#refreshBtn').addEventListener('click',loadData);
 $('#searchStreamers').addEventListener('input',renderStreamers);
 $('#streamerSort').addEventListener('change',renderStreamers);
+$('#streamerLiveFilter').addEventListener('change',renderStreamers);
 $('#historyStatus').addEventListener('change',()=>{shown=10;renderHistory()});
 $('#loadMore').addEventListener('click',()=>{shown+=10;renderHistory()});
 $('#streamerGrid').addEventListener('click',e=>{const b=e.target.closest('[data-profile]');if(b)showProfile(b.dataset.profile)});
