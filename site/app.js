@@ -125,6 +125,20 @@ function showProfile(login){
   if(avatar&&profile)avatar.outerHTML=avatarMarkup(login,profile.profileImageUrl);
 }
 function closeProfile(){ drawerModal?.hide(); }
+const coverageModal=$('#coverageModal');
+const coverageModalContent=$('#coverageModalContent');
+const coverageDateBR=(value)=>value?new Intl.DateTimeFormat('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit',timeZone:'America/Sao_Paulo'}).format(new Date(value)):'Não registrado';
+const coverageDuration=(start,end)=>{const a=new Date(start||0).getTime(),b=new Date(end||0).getTime();if(!Number.isFinite(a)||!Number.isFinite(b)||b<a)return 'Não calculada';const min=Math.round((b-a)/60000);return min>=60?`${Math.floor(min/60)}h ${min%60}min`:`${min} min`};
+function closeCoverageModal(){coverageModal?.classList.add('hidden');document.body.classList.remove('coverage-modal-open');}
+function showCoverageModal(button){
+  if(!coverageModal||!coverageModalContent)return;
+  try{
+    const gaps=JSON.parse(button.dataset.gaps||'[]');
+    const login=button.closest('tr')?.querySelector('[data-label="Streamer"]')?.textContent.trim()||'Streamer não identificado';
+    coverageModalContent.innerHTML=gaps.length?`<p class="coverage-modal-streamer">Streamer afetado: <strong>${esc(login)}</strong></p><div class="coverage-gap-list">${gaps.map((gap,index)=>`<article class="coverage-gap"><div class="coverage-gap-heading"><span>Interrupção ${index+1}</span><span class="coverage-gap-badge">Falha registrada</span></div><dl><div><dt>Início da falha</dt><dd>${esc(coverageDateBR(gap.start))}</dd></div><div><dt>Fim da falha</dt><dd>${esc(coverageDateBR(gap.end))}</dd></div><div><dt>Duração</dt><dd>${esc(coverageDuration(gap.start,gap.end))}</dd></div><div class="coverage-gap-reason"><dt>Motivo do erro</dt><dd>${esc(gap.reason||'Motivo não informado no registro')}</dd></div></dl></article>`).join('')}</div>`:'<p class="coverage-modal-empty">Nenhum intervalo de falha foi registrado.</p>';
+    coverageModal.classList.remove('hidden');document.body.classList.add('coverage-modal-open');$('#coverageModalClose')?.focus();
+  }catch{coverageModalContent.innerHTML='<p class="coverage-modal-empty">Não foi possível carregar os detalhes registrados desta falha.</p>';coverageModal.classList.remove('hidden');document.body.classList.add('coverage-modal-open');$('#coverageModalClose')?.focus();}
+}
 function populateHistoryFilters(){const select=$('#historyStreamer');if(!select||select.options.length>1)return;[...(dashboard.streamers||[])].map(s=>s.login).sort().forEach(login=>{const option=document.createElement('option');option.value=login;option.textContent=login;select.appendChild(option)})}
 function render(){renderOverview();renderStreamers();populateHistoryFilters();renderHistory();$('#dataNotice').classList.toggle('hidden',true);initScrollReveal()}
 async function loadData(){const b=$('#refreshBtn');b.disabled=true;try{const res=await fetch(`./data/dashboard.json?_=${Date.now()}`,{cache:'no-store'});if(!res.ok)throw new Error(`HTTP ${res.status}`);dashboard=await res.json();render();if(!(dashboard.recent||[]).length){const el=$('#dataNotice');el.classList.remove('hidden');el.textContent='Os registros reais ainda estão vazios. O painel será atualizado após os primeiros eventos monitorados.';}}catch(e){$('#dataNotice').classList.remove('hidden');$('#dataNotice').textContent=`Não foi possível carregar os dados: ${e.message}. Verifique a publicação dos arquivos.`;console.error(e)}finally{b.disabled=false}}
@@ -142,7 +156,10 @@ $('#streamerLiveFilter').addEventListener('change',renderStreamers);
 $('#historyStatus').addEventListener('change',()=>{shown=10;renderHistory()});
 ['historyStreamer','historyPeriod','historyRaid','historyCoverage'].forEach(id=>$('#'+id).addEventListener('change',()=>{shown=10;renderHistory()}));
 $('#loadMore').addEventListener('click',()=>{shown+=10;renderHistory()});
-$('#historyBody').addEventListener('click',e=>{const button=e.target.closest('.gap-details');if(!button)return;try{const gaps=JSON.parse(button.dataset.gaps||'[]');alert(gaps.map(g=>`${g.start} → ${g.end}: ${g.reason}`).join('\n'))}catch{alert('Não foi possível abrir os intervalos desta transmissão.')}});
+$('#historyBody').addEventListener('click',e=>{const button=e.target.closest('.gap-details');if(button)showCoverageModal(button)});
+$('#coverageModalClose')?.addEventListener('click',closeCoverageModal);
+coverageModal?.addEventListener('click',e=>{if(e.target===coverageModal||e.target.matches('[data-coverage-close]'))closeCoverageModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!coverageModal?.classList.contains('hidden'))closeCoverageModal()});
 $('#streamerGrid').addEventListener('click',e=>{const b=e.target.closest('[data-profile]');if(b)showProfile(b.dataset.profile)});
 $('#closeDrawer').addEventListener('click',closeProfile);
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeProfile()});
