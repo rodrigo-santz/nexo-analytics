@@ -1,0 +1,17 @@
+{
+  "messageId": "pfvdBkeXClbIxAojL6IAnULppWv4-Z24MGMuEvWQ3w4=",
+  "messageType": "notification",
+  "subscriptionType": "stream.online",
+  "subscriptionStatus": "enabled",
+  "receivedAt": "2026-11-23T01:40:16.746532925Z",
+  "source": "eventsub",
+  "event": {
+    "id": "319640200949",
+    "broadcaster_user_id": "187860127",
+    "broadcaster_user_login": "erick99z",
+    "broadcaster_user_name": "Erick99Z",
+    "type": "live",
+    "started_at": "2026-11-23T01:39:58Z"
+  },
+  "subscriptionId": "3c2f0ad9-f09e-4bd4-bccf-1bfd28a629f2"
+}
