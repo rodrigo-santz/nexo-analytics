@@ -1,10 +1,10 @@
 {
-  "updatedAt": "2026-11-23T18:20:26.106Z",
+  "updatedAt": "2026-11-23T18:30:24.219Z",
   "monitor": {
     "status": "healthy",
     "connection": "online",
-    "lastCheckedAt": "2026-11-23T18:20:24.810Z",
-    "lastSuccessfulAt": "2026-11-23T18:20:24.810Z",
+    "lastCheckedAt": "2026-11-23T18:30:23.155Z",
+    "lastSuccessfulAt": "2026-11-23T18:30:23.155Z",
     "issues": [],
     "failures": [],
     "gaps": [
@@ -15,7 +15,7 @@
       }
     ],
     "subscriptionHealth": {
-      "checkedAt": "2026-11-23T18:20:24.810Z",
+      "checkedAt": "2026-11-23T18:30:23.155Z",
       "expected": 54,
       "active": 54,
       "missing": []
@@ -46,7 +46,8 @@
       "nexo": 0,
       "externas": 0,
       "semRaid": 0,
-      "inconclusivas": 0
+      "inconclusivas": 0,
+      "watchedLives": []
     },
     {
       "login": "behttah",
@@ -57,7 +58,8 @@
       "nexo": 0,
       "externas": 0,
       "semRaid": 0,
-      "inconclusivas": 0
+      "inconclusivas": 0,
+      "watchedLives": []
     },
     {
       "login": "bolosdomikael",
@@ -68,7 +70,8 @@
       "nexo": 0,
       "externas": 0,
       "semRaid": 0,
-      "inconclusivas": 0
+      "inconclusivas": 0,
+      "watchedLives": []
     },
     {
       "login": "byoki77",
@@ -79,7 +82,8 @@
       "nexo": 0,
       "externas": 0,
       "semRaid": 0,
-      "inconclusivas": 0
+      "inconclusivas": 0,
+      "watchedLives": []
     },
     {
       "login": "chboga",
@@ -90,7 +94,8 @@
       "nexo": 0,
       "externas": 0,
       "semRaid": 0,
-      "inconclusivas": 0
+      "inconclusivas": 0,
+      "watchedLives": []
     },
     {
       "login": "coldx68",
@@ -101,7 +106,8 @@
       "nexo": 0,
       "externas": 0,
       "semRaid": 0,
-      "inconclusivas": 0
+      "inconclusivas": 0,
+      "watchedLives": []
     },
     {
       "login": "dree_sp",
@@ -112,7 +118,8 @@
       "nexo": 0,
       "externas": 0,
       "semRaid": 0,
-      "inconclusivas": 0
+      "inconclusivas": 0,
+      "watchedLives": []
     },
     {
       "login": "erick99z",
@@ -123,7 +130,8 @@
       "nexo": 0,
       "externas": 0,
       "semRaid": 1,
-      "inconclusivas": 1
+      "inconclusivas": 1,
+      "watchedLives": []
     },
     {
       "login": "galahadyy",
@@ -134,7 +142,8 @@
       "nexo": 0,
       "externas": 0,
       "semRaid": 0,
-      "inconclusivas": 0
+      "inconclusivas": 0,
+      "watchedLives": []
     },
     {
       "login": "galiodejordan",
@@ -145,7 +154,8 @@
       "nexo": 0,
       "externas": 0,
       "semRaid": 0,
-      "inconclusivas": 0
+      "inconclusivas": 0,
+      "watchedLives": []
     },
     {
       "login": "hecazinha",
@@ -156,7 +166,8 @@
       "nexo": 0,
       "externas": 0,
       "semRaid": 0,
-      "inconclusivas": 0
+      "inconclusivas": 0,
+      "watchedLives": []
     },
     {
       "login": "heyjessh",
@@ -167,7 +178,8 @@
       "nexo": 0,
       "externas": 0,
       "semRaid": 0,
-      "inconclusivas": 0
+      "inconclusivas": 0,
+      "watchedLives": []
     },
     {
       "login": "hudsondark",
@@ -178,7 +190,8 @@
       "nexo": 0,
       "externas": 0,
       "semRaid": 0,
-      "inconclusivas": 0
+      "inconclusivas": 0,
+      "watchedLives": []
     },
     {
       "login": "nanbola",
@@ -189,7 +202,8 @@
       "nexo": 0,
       "externas": 0,
       "semRaid": 0,
-      "inconclusivas": 0
+      "inconclusivas": 0,
+      "watchedLives": []
     },
     {
       "login": "onoox_",
@@ -200,7 +214,8 @@
       "nexo": 0,
       "externas": 0,
       "semRaid": 0,
-      "inconclusivas": 0
+      "inconclusivas": 0,
+      "watchedLives": []
     },
     {
       "login": "quindinhaa",
@@ -211,7 +226,8 @@
       "nexo": 0,
       "externas": 0,
       "semRaid": 0,
-      "inconclusivas": 0
+      "inconclusivas": 0,
+      "watchedLives": []
     },
     {
       "login": "santz_rj",
@@ -222,7 +238,8 @@
       "nexo": 0,
       "externas": 0,
       "semRaid": 0,
-      "inconclusivas": 0
+      "inconclusivas": 0,
+      "watchedLives": []
     },
     {
       "login": "zells001",
@@ -233,7 +250,8 @@
       "nexo": 0,
       "externas": 1,
       "semRaid": 0,
-      "inconclusivas": 0
+      "inconclusivas": 0,
+      "watchedLives": []
     }
   ],
   "recent": [
@@ -256,10 +274,10 @@
       ],
       "coverageIssues": [],
       "startTimeKnown": true,
-      "updatedAt": "2026-11-23T18:20:26.106Z",
+      "updatedAt": "2026-11-23T18:30:24.219Z",
       "coverageGaps": [],
       "coverageStatus": "complete",
-      "monitoredDurationMs": 2520106,
+      "monitoredDurationMs": 3118219,
       "status": "live",
       "automaticStatus": "live",
       "inconclusiveReason": null,
@@ -277,10 +295,10 @@
       "reconnections": [],
       "coverageIssues": [],
       "startTimeKnown": true,
-      "updatedAt": "2026-11-23T18:20:26.106Z",
+      "updatedAt": "2026-11-23T18:30:24.219Z",
       "coverageGaps": [],
       "coverageStatus": "complete",
-      "monitoredDurationMs": 6174106,
+      "monitoredDurationMs": 6772219,
       "status": "live",
       "automaticStatus": "live",
       "inconclusiveReason": null,
@@ -299,7 +317,7 @@
       "coverageIssues": [],
       "startTimeKnown": true,
       "viewersAtEnd": 28,
-      "updatedAt": "2026-11-23T18:20:26.106Z",
+      "updatedAt": "2026-11-23T18:30:24.219Z",
       "coverageGaps": [],
       "coverageStatus": "complete",
       "monitoredDurationMs": 9008200,
@@ -320,10 +338,10 @@
       "reconnections": [],
       "coverageIssues": [],
       "startTimeKnown": true,
-      "updatedAt": "2026-11-23T18:20:26.106Z",
+      "updatedAt": "2026-11-23T18:30:24.219Z",
       "coverageGaps": [],
       "coverageStatus": "complete",
-      "monitoredDurationMs": 15262106,
+      "monitoredDurationMs": 15860219,
       "status": "live",
       "automaticStatus": "live",
       "inconclusiveReason": null,
@@ -341,10 +359,10 @@
       "reconnections": [],
       "coverageIssues": [],
       "startTimeKnown": true,
-      "updatedAt": "2026-11-23T18:20:26.106Z",
+      "updatedAt": "2026-11-23T18:30:24.219Z",
       "coverageGaps": [],
       "coverageStatus": "complete",
-      "monitoredDurationMs": 20855106,
+      "monitoredDurationMs": 21453219,
       "status": "live",
       "automaticStatus": "live",
       "inconclusiveReason": null,
@@ -362,10 +380,10 @@
       "reconnections": [],
       "coverageIssues": [],
       "startTimeKnown": true,
-      "updatedAt": "2026-11-23T18:20:26.106Z",
+      "updatedAt": "2026-11-23T18:30:24.219Z",
       "coverageGaps": [],
       "coverageStatus": "complete",
-      "monitoredDurationMs": 29959106,
+      "monitoredDurationMs": 30557219,
       "status": "live",
       "automaticStatus": "live",
       "inconclusiveReason": null,
@@ -383,10 +401,10 @@
       "reconnections": [],
       "coverageIssues": [],
       "startTimeKnown": true,
-      "updatedAt": "2026-11-23T18:20:26.106Z",
+      "updatedAt": "2026-11-23T18:30:24.219Z",
       "coverageGaps": [],
       "coverageStatus": "complete",
-      "monitoredDurationMs": 30021106,
+      "monitoredDurationMs": 30619219,
       "status": "live",
       "automaticStatus": "live",
       "inconclusiveReason": null,
@@ -406,7 +424,7 @@
         "Assinaturas ou verificações do monitor indisponíveis"
       ],
       "startTimeKnown": true,
-      "updatedAt": "2026-11-23T18:20:26.106Z",
+      "updatedAt": "2026-11-23T18:30:24.219Z",
       "coverageGaps": [
         {
           "start": "2026-11-23T01:57:52.438Z",
@@ -441,7 +459,7 @@
       "reconnections": [],
       "coverageIssues": [],
       "startTimeKnown": true,
-      "updatedAt": "2026-11-23T18:20:26.106Z",
+      "updatedAt": "2026-11-23T18:30:24.219Z",
       "coverageGaps": [],
       "coverageStatus": "complete",
       "monitoredDurationMs": 165761,
