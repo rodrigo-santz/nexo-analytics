@@ -83,9 +83,9 @@ body{overflow-x:clip;overflow-y:visible}
 html.coverage-modal-open,body.coverage-modal-open{overflow:hidden}
 
 /* Keep the filter text and arrow as separate flex items with a real gap. */
-.history-section .inline-filter-control{display:flex;align-items:center;justify-content:space-between;gap:12px;min-width:0;width:100%;background:#150d24;border:1px solid var(--line2);border-radius:10px;overflow:hidden}
-.history-section .inline-filter-control select{flex:1 1 auto;width:auto!important;min-width:0;margin:0!important;padding:11px 0 11px 8px!important;border:0!important;border-radius:0;background:transparent!important;background-image:none!important;appearance:none;-webkit-appearance:none;color:#e5d8fc;font-size:10px}
-.history-section .select-chevron{flex:0 0 9px;width:9px;height:9px;margin-right:12px;border-right:1.5px solid #d9c8f5;border-bottom:1.5px solid #d9c8f5;transform:rotate(45deg) translateY(-2px)}
+.history-section .inline-filter-control{display:flex;align-items:center;justify-content:space-between;gap:8px;min-width:0;width:100%;background:#150d24;border:1px solid var(--line2);border-radius:10px;overflow:hidden}
+.history-section .inline-filter-control select{flex:1 1 auto;width:auto!important;min-width:0;margin:0!important;padding:11px 0 11px 8px!important;border:0!important;border-radius:0;background:transparent!important;background-image:none!important;appearance:none;-webkit-appearance:none;color:#e5d8fc;font-size:9px;letter-spacing:-.02em}
+.history-section .select-chevron{flex:0 0 9px;width:9px;height:9px;margin-right:8px;border-right:1.5px solid #d9c8f5;border-bottom:1.5px solid #d9c8f5;transform:rotate(45deg) translateY(-2px)}
 
 /* Position the history filter arrow away from the right edge consistently. */
 .history-section .inline-filters select{-webkit-appearance:none;appearance:none;background-color:#150d24;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='m1 1 5 5 5-5' fill='none' stroke='%23d9c8f5' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;background-size:10px 7px;padding-right:34px;font-size:10px}
