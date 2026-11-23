@@ -1,10 +1,10 @@
 {
-  "updatedAt": "2026-11-23T23:30:35.797Z",
+  "updatedAt": "2026-11-23T23:40:31.160Z",
   "monitor": {
     "status": "healthy",
     "connection": "online",
-    "lastCheckedAt": "2026-11-23T23:30:34.957Z",
-    "lastSuccessfulAt": "2026-11-23T23:30:34.957Z",
+    "lastCheckedAt": "2026-11-23T23:40:30.309Z",
+    "lastSuccessfulAt": "2026-11-23T23:40:30.309Z",
     "issues": [],
     "failures": [],
     "gaps": [
@@ -15,21 +15,21 @@
       }
     ],
     "subscriptionHealth": {
-      "checkedAt": "2026-11-23T23:30:34.957Z",
+      "checkedAt": "2026-11-23T23:40:30.309Z",
       "expected": 54,
       "active": 54,
       "missing": []
     }
   },
   "overview": {
-    "lives": 14,
+    "lives": 15,
     "raids": 7,
     "nexo": 5,
     "externas": 2,
     "semRaid": 1,
     "inconclusivas": 1,
-    "liveAgora": 5,
-    "coverageComplete": 13,
+    "liveAgora": 6,
+    "coverageComplete": 14,
     "coveragePartial": 1,
     "coverageFailure": 0,
     "viewsTotais": 89,
@@ -112,8 +112,8 @@
     {
       "login": "dree_sp",
       "profileImageUrl": "https://static-cdn.jtvnw.net/jtv_user_pictures/5e03ec1c-e9ff-4cfd-86cb-4e71560f71f2-profile_image-300x300.png",
-      "live": false,
-      "lives": 1,
+      "live": true,
+      "lives": 2,
       "raids": 1,
       "nexo": 1,
       "externas": 0,
@@ -256,6 +256,27 @@
   ],
   "recent": [
     {
+      "id": "319561979382",
+      "streamIds": [
+        "319561979382"
+      ],
+      "login": "dree_sp",
+      "startedAt": "2026-11-23T23:35:30Z",
+      "endedAt": null,
+      "raid": null,
+      "reconnections": [],
+      "coverageIssues": [],
+      "startTimeKnown": true,
+      "updatedAt": "2026-11-23T23:40:31.160Z",
+      "coverageGaps": [],
+      "coverageStatus": "complete",
+      "monitoredDurationMs": 301160,
+      "status": "live",
+      "automaticStatus": "live",
+      "inconclusiveReason": null,
+      "reassessmentAt": null
+    },
+    {
       "id": "319557158006",
       "streamIds": [
         "319557158006"
@@ -274,7 +295,7 @@
       "reconnections": [],
       "coverageIssues": [],
       "startTimeKnown": true,
-      "updatedAt": "2026-11-23T23:30:35.797Z",
+      "updatedAt": "2026-11-23T23:40:31.160Z",
       "coverageGaps": [],
       "coverageStatus": "complete",
       "monitoredDurationMs": 22590196,
@@ -295,10 +316,10 @@
       "reconnections": [],
       "coverageIssues": [],
       "startTimeKnown": true,
-      "updatedAt": "2026-11-23T23:30:35.797Z",
+      "updatedAt": "2026-11-23T23:40:31.160Z",
       "coverageGaps": [],
       "coverageStatus": "complete",
-      "monitoredDurationMs": 2576797,
+      "monitoredDurationMs": 3172160,
       "status": "live",
       "automaticStatus": "live",
       "inconclusiveReason": null,
@@ -316,10 +337,10 @@
       "reconnections": [],
       "coverageIssues": [],
       "startTimeKnown": true,
-      "updatedAt": "2026-11-23T23:30:35.797Z",
+      "updatedAt": "2026-11-23T23:40:31.160Z",
       "coverageGaps": [],
       "coverageStatus": "complete",
-      "monitoredDurationMs": 3987797,
+      "monitoredDurationMs": 4583160,
       "status": "live",
       "automaticStatus": "live",
       "inconclusiveReason": null,
@@ -337,10 +358,10 @@
       "reconnections": [],
       "coverageIssues": [],
       "startTimeKnown": true,
-      "updatedAt": "2026-11-23T23:30:35.797Z",
+      "updatedAt": "2026-11-23T23:40:31.160Z",
       "coverageGaps": [],
       "coverageStatus": "complete",
-      "monitoredDurationMs": 4788797,
+      "monitoredDurationMs": 5384160,
       "status": "live",
       "automaticStatus": "live",
       "inconclusiveReason": null,
@@ -365,7 +386,7 @@
       "reconnections": [],
       "coverageIssues": [],
       "startTimeKnown": true,
-      "updatedAt": "2026-11-23T23:30:35.797Z",
+      "updatedAt": "2026-11-23T23:40:31.160Z",
       "coverageGaps": [],
       "coverageStatus": "complete",
       "monitoredDurationMs": 43831714,
@@ -375,21 +396,28 @@
       "reassessmentAt": "2026-11-23T22:20:36.714Z"
     },
     {
-      "id": "319560536566",
+      "id": "319562013814",
       "streamIds": [
-        "319560536566"
+        "319560536566",
+        "319562013814"
       ],
       "login": "hudsondark",
       "startedAt": "2026-11-23T22:10:08Z",
       "endedAt": null,
       "raid": null,
-      "reconnections": [],
+      "reconnections": [
+        {
+          "offlineAt": "2026-11-23T23:37:20.471730367Z",
+          "onlineAt": "2026-11-23T23:38:40.021715999Z",
+          "streamId": "319560536566"
+        }
+      ],
       "coverageIssues": [],
       "startTimeKnown": true,
-      "updatedAt": "2026-11-23T23:30:35.797Z",
+      "updatedAt": "2026-11-23T23:40:31.160Z",
       "coverageGaps": [],
       "coverageStatus": "complete",
-      "monitoredDurationMs": 4827797,
+      "monitoredDurationMs": 5423160,
       "status": "live",
       "automaticStatus": "live",
       "inconclusiveReason": null,
@@ -414,7 +442,7 @@
       "reconnections": [],
       "coverageIssues": [],
       "startTimeKnown": true,
-      "updatedAt": "2026-11-23T23:30:35.797Z",
+      "updatedAt": "2026-11-23T23:40:31.160Z",
       "coverageGaps": [],
       "coverageStatus": "complete",
       "monitoredDurationMs": 40688042,
@@ -449,7 +477,7 @@
       ],
       "coverageIssues": [],
       "startTimeKnown": true,
-      "updatedAt": "2026-11-23T23:30:35.797Z",
+      "updatedAt": "2026-11-23T23:40:31.160Z",
       "coverageGaps": [],
       "coverageStatus": "complete",
       "monitoredDurationMs": 13170560,
@@ -477,10 +505,10 @@
       ],
       "coverageIssues": [],
       "startTimeKnown": true,
-      "updatedAt": "2026-11-23T23:30:35.797Z",
+      "updatedAt": "2026-11-23T23:40:31.160Z",
       "coverageGaps": [],
       "coverageStatus": "complete",
-      "monitoredDurationMs": 10849797,
+      "monitoredDurationMs": 11445160,
       "status": "live",
       "automaticStatus": "live",
       "inconclusiveReason": null,
@@ -505,7 +533,7 @@
       "reconnections": [],
       "coverageIssues": [],
       "startTimeKnown": true,
-      "updatedAt": "2026-11-23T23:30:35.797Z",
+      "updatedAt": "2026-11-23T23:40:31.160Z",
       "coverageGaps": [],
       "coverageStatus": "complete",
       "monitoredDurationMs": 21541704,
@@ -533,7 +561,7 @@
       "reconnections": [],
       "coverageIssues": [],
       "startTimeKnown": true,
-      "updatedAt": "2026-11-23T23:30:35.797Z",
+      "updatedAt": "2026-11-23T23:40:31.160Z",
       "coverageGaps": [],
       "coverageStatus": "complete",
       "monitoredDurationMs": 15942010,
@@ -555,7 +583,7 @@
       "coverageIssues": [],
       "startTimeKnown": true,
       "viewersAtEnd": 28,
-      "updatedAt": "2026-11-23T23:30:35.797Z",
+      "updatedAt": "2026-11-23T23:40:31.160Z",
       "coverageGaps": [],
       "coverageStatus": "complete",
       "monitoredDurationMs": 9008200,
@@ -578,7 +606,7 @@
         "Assinaturas ou verificações do monitor indisponíveis"
       ],
       "startTimeKnown": true,
-      "updatedAt": "2026-11-23T23:30:35.797Z",
+      "updatedAt": "2026-11-23T23:40:31.160Z",
       "coverageGaps": [
         {
           "start": "2026-11-23T01:57:52.438Z",
@@ -613,7 +641,7 @@
       "reconnections": [],
       "coverageIssues": [],
       "startTimeKnown": true,
-      "updatedAt": "2026-11-23T23:30:35.797Z",
+      "updatedAt": "2026-11-23T23:40:31.160Z",
       "coverageGaps": [],
       "coverageStatus": "complete",
       "monitoredDurationMs": 165761,
@@ -626,7 +654,7 @@
   "daily": [
     {
       "date": "2026-11-23",
-      "lives": 14,
+      "lives": 15,
       "raids": 7
     }
   ]
