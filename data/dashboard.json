@@ -1,11 +1,9 @@
 {
-  "updatedAt": "2026-11-23T00:34:48.380Z",
+  "updatedAt": "2026-11-23T01:17:39.970Z",
   "monitor": {
-    "status": "unconfigured",
-    "lastCheckedAt": null,
-    "issues": [
-      "Configure as credenciais da Twitch e a URL do webhook"
-    ],
+    "status": "healthy",
+    "lastCheckedAt": "2026-11-23T01:17:38.649Z",
+    "issues": [],
     "gaps": []
   },
   "overview": {
