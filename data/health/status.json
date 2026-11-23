@@ -1,6 +1,6 @@
 {
   "status": "degraded",
-  "lastCheckedAt": "2026-11-23T02:23:19.979Z",
+  "lastCheckedAt": "2026-11-23T02:25:25.363Z",
   "issues": [
     "Falha na verificação da Twitch: Falha no OAuth Twitch (403): invalid client secret"
   ],
