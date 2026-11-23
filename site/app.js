@@ -136,4 +136,9 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeProfile()});
 $('#exitDemo').addEventListener('click',()=>{location.href='./#visao-geral'});
 $('#menuToggle').addEventListener('click',()=>{const n=$('.top-nav');n.classList.toggle('open');$('#menuToggle').setAttribute('aria-expanded',String(n.classList.contains('open')))});
 document.querySelectorAll('.top-nav a').forEach(a=>a.addEventListener('click',()=>$('.top-nav').classList.remove('open')));
-initConstellation();loadData();
+initConstellation();loadData().then(async()=>{
+  if(!isDemo||window.__NEXO_EMBEDDED)return;
+  const profiles=await fetch(`./data/streamer-profiles.json?_=${Date.now()}`,{cache:'no-store'}).then(r=>r.ok?r.json():{}).catch(()=>({}));
+  dashboard.streamers=(dashboard.streamers||[]).map(p=>({...p,profileImageUrl:profiles[p.login]?.profileImageUrl||p.profileImageUrl||null}));
+  renderStreamers();
+});

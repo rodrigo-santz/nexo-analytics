@@ -65,6 +65,7 @@ jobs:
           mkdir -p _site/data
           cp -r site/. _site/
           cp data/dashboard.json _site/data/dashboard.json
+          cp data/streamer-profiles.json _site/data/streamer-profiles.json
           touch _site/.nojekyll
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
