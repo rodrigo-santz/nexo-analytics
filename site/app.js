@@ -57,6 +57,11 @@ function initProfileModal(){
 }
 
 function icon(symbol){return `<span aria-hidden="true">${symbol}</span>`}
+function avatarMarkup(login, profileImageUrl, className='avatar'){
+  const initial=esc(String(login||'?').charAt(0).toUpperCase());
+  const image=profileImageUrl?`<img src="${esc(profileImageUrl)}" alt="" loading="lazy" decoding="async" onerror="this.remove()">`:'';
+  return `<span class="${className}"><span class="avatar-fallback">${initial}</span>${image}</span>`;
+}
 function metric(label,value,symbol,note,variant='') {return `<article class="metric-card ${variant}"><div class="metric-top"><span class="metric-label">${label}</span><span class="metric-icon">${icon(symbol)}</span></div><div class="metric-value">${fmt(value)}</div><div class="metric-note">${note}</div></article>`;}
 function renderOverview(){
   const o=dashboard.overview||{};
@@ -91,18 +96,28 @@ function sortedStreamers(){
   items.sort((a,b)=>field==='name'?a.login.localeCompare(b.login,'pt-BR'):(b[field]||0)-(a[field]||0)||a.login.localeCompare(b.login,'pt-BR'));
   return items;
 }
-function renderStreamers(){
+function renderStreamersLegacy(){
   const s=sortedStreamers();$('#streamerCount').textContent=`${s.length} streamers`;
   $('#streamerGrid').innerHTML = s.length?s.map(p=>`<button class="streamer-card" data-profile="${esc(p.login)}"><span class="streamer-top"><span class="avatar">${esc(p.login.charAt(0).toUpperCase())}</span><span class="member-badge">NEXO MEMBER</span></span><div class="streamer-name">${esc(p.login)}</div><div class="streamer-link">twitch.tv/${esc(p.login)}</div><div class="streamer-div"></div><div class="streamer-stats"><div class="streamer-stat"><strong>${fmt(p.lives)}</strong><small>LIVES</small></div><div class="streamer-stat"><strong>${fmt(p.raids)}</strong><small>RAIDS</small></div><div class="streamer-stat"><strong style="color:#bd8efb">${fmt(p.nexo)}</strong><small>PARA NEXO</small></div></div><span class="streamer-footer">VER HISTÓRICO <span aria-hidden="true">↗</span></span></button>`).join(''):'<div class="empty-state">Nenhum streamer corresponde à sua busca.</div>';
+}
+function renderStreamers(){
+  const s=sortedStreamers();$('#streamerCount').textContent=`${s.length} streamers`;
+  $('#streamerGrid').innerHTML=s.length?s.map(p=>`<button class="streamer-card" data-profile="${esc(p.login)}"><span class="streamer-top">${avatarMarkup(p.login,p.profileImageUrl)}<span class="member-badge">NEXO MEMBER</span></span><div class="streamer-name">${esc(p.login)}</div><div class="streamer-link">twitch.tv/${esc(p.login)}</div><div class="streamer-div"></div><div class="streamer-stats"><div class="streamer-stat"><strong>${fmt(p.lives)}</strong><small>LIVES</small></div><div class="streamer-stat"><strong>${fmt(p.raids)}</strong><small>RAIDS</small></div><div class="streamer-stat"><strong style="color:#bd8efb">${fmt(p.nexo)}</strong><small>PARA NEXO</small></div></div><span class="streamer-footer">VER HISTORICO <span aria-hidden="true">↗</span></span></button>`).join(''):'<div class="empty-state">Nenhum streamer encontrado.</div>';
 }
 function historySorted(){return [...(dashboard.recent||[])].filter(r=>$('#historyStatus').value==='all'||r.status===$('#historyStatus').value).sort((a,b)=>new Date(b.endedAt||b.startedAt||0)-new Date(a.endedAt||a.startedAt||0));}
 function historyRow(r){const to=r.raid?.toLogin||'—';const audience=r.raid?.viewers;return `<tr><td data-label="Streamer"><div class="td-user"><span class="mini-avatar">${esc(r.login?.charAt(0).toUpperCase()||'?')}</span>${esc(r.login)}</div></td><td data-label="Início">${esc(dateBR(r.startedAt))}</td><td data-label="Resultado">${badge(r.status)}</td><td data-label="Destino">${esc(to)}</td><td data-label="Espectadores">${audience==null?'—':fmt(audience)}</td><td data-label="Cobertura">${r.coverageIssues?.length?`<span title="${esc(r.coverageIssues.join('; '))}" style="color:#ffc17a">⚠ Parcial</span>`:'<span style="color:#91d8b8">✓</span>'}</td></tr>`;}
 function renderHistory(){const rows=historySorted();$('#historyBody').innerHTML=rows.length?rows.slice(0,shown).map(historyRow).join(''):'<tr><td class="table-empty" colspan="6">Nenhum histórico registrado para este filtro.</td></tr>';$('#historyCount').textContent=`Exibindo ${Math.min(shown,rows.length)} de ${fmt(rows.length)} registros`;$('#loadMore').classList.toggle('hidden',shown>=rows.length);}
-function showProfile(login){
+function showProfileLegacy(login){
   const p=(dashboard?.streamers||[]).find(s=>s.login===login);if(!p)return;
   const sessions=(dashboard.recent||[]).filter(r=>r.login===login).slice(0,60);
   $('#drawerContent').innerHTML=`<span class="kicker">FICHA DO CRIADOR / NEXO SYNERGY</span><div class="profile-header"><span class="avatar">${esc(login.charAt(0).toUpperCase())}</span><div><h2 id="drawerTitle">${esc(login)}</h2>${validLogin(login)?`<a href="https://www.twitch.tv/${encodeURIComponent(login)}" target="_blank" rel="noopener noreferrer">Abrir Twitch ↗</a>`:''}</div></div><div class="profile-metrics">${[['Lives',p.lives],['Raids totais',p.raids],['Para NEXO',p.nexo],['Para fora',p.externas],['Sem raid detectada',p.semRaid],['Inconclusivas',p.inconclusivas]].map(([l,v])=>`<div class="profile-metric"><strong>${fmt(v)}</strong><span>${l}</span></div>`).join('')}</div><h3 class="profile-subhead">Histórico da comunidade</h3>${sessions.length?sessions.map(r=>`<div class="profile-session"><div><time>${esc(dateBR(r.startedAt||r.endedAt))}</time><p>${r.raid?.toLogin?`Destino: ${esc(r.raid.toLogin)}`:r.coverageIssues?.length?'Monitoramento parcial':'Transmissão registrada'}</p></div>${badge(r.status)}</div>`).join(''):'<p class="empty-small">Nenhuma live registrada ainda.</p>'}<div class="profile-issue">⚠ “Sem raid detectada” não significa prova de ausência. Lives com falhas identificadas são classificadas como inconclusivas.</div>`;
   drawerModal?.show();
+}
+function showProfile(login){
+  showProfileLegacy(login);
+  const profile=(dashboard?.streamers||[]).find(s=>s.login===login);
+  const avatar=document.querySelector('#drawerContent .profile-header .avatar');
+  if(avatar&&profile)avatar.outerHTML=avatarMarkup(login,profile.profileImageUrl);
 }
 function closeProfile(){ drawerModal?.hide(); }
 function render(){renderOverview();renderStreamers();renderHistory();$('#demoNotice').classList.toggle('hidden',!isDemo);$('#dataNotice').classList.toggle('hidden',true);initScrollReveal()}

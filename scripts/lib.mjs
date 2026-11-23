@@ -1,7 +1,7 @@
 const GRACE_MS=10*60_000;
 const iso = (s) => {const n=Date.parse(s||'');return Number.isFinite(n)?n:NaN};
 const login = (s) => String(s||'').trim().toLowerCase();
-export function buildDashboard(events, names, health, now=new Date().toISOString()) {
+export function buildDashboard(events, names, health, now=new Date().toISOString(), profiles={}) {
   const memberSet=new Set(names.map(login));
   const sessions=[];
   const nowMs=iso(now);
@@ -74,7 +74,7 @@ export function buildDashboard(events, names, health, now=new Date().toISOString
   const obj={lives:sessions.length,raids:sessions.filter(s=>!!s.raid).length,nexo:sessions.filter(s=>s.status==='raid_nexo').length,externas:sessions.filter(s=>s.status==='raid_externa').length,semRaid:sessions.filter(s=>s.status==='sem_raid').length,inconclusivas:sessions.filter(s=>s.status==='inconclusiva').length,liveAgora:sessions.filter(s=>s.status==='live').length};
   const people=names.map(n=>{
     const log=login(n), sub=sessions.filter(s=>s.login===log);
-    return {login:log,lives:sub.length,raids:sub.filter(s=>s.raid).length,nexo:sub.filter(s=>s.status==='raid_nexo').length,externas:sub.filter(s=>s.status==='raid_externa').length,semRaid:sub.filter(s=>s.status==='sem_raid').length,inconclusivas:sub.filter(s=>s.status==='inconclusiva').length};
+    return {login:log,profileImageUrl:profiles[log]?.profileImageUrl||null,lives:sub.length,raids:sub.filter(s=>s.raid).length,nexo:sub.filter(s=>s.status==='raid_nexo').length,externas:sub.filter(s=>s.status==='raid_externa').length,semRaid:sub.filter(s=>s.status==='sem_raid').length,inconclusivas:sub.filter(s=>s.status==='inconclusiva').length};
   });
   const dailyMap=new Map();
   for(const s of sessions){

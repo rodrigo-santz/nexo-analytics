@@ -7,6 +7,7 @@ const files=await allFiles('data/events');
 const events=[];for(const f of files){try{events.push(JSON.parse(await readFile(f,'utf8')))}catch(e){console.warn('Evento inválido:',f,e.message)}}
 const names=await readJson('data/streamers.json',[]);
 const health=await readJson('data/health/status.json',{});
-const data=buildDashboard(events,names,health);
+const profiles=await readJson('data/streamer-profiles.json',{});
+const data=buildDashboard(events,names,health,new Date().toISOString(),profiles);
 await writeFile('data/dashboard.json',JSON.stringify(data,null,2)+'\n');
 console.log(`Gerado dashboard: ${data.overview.lives} lives, ${data.overview.raids} raids, ${files.length} eventos brutos.`);
