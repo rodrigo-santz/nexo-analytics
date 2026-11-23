@@ -41,3 +41,4 @@ body{overflow-x:clip;overflow-y:visible}
 .scanner-logo-mark{display:block;width:250px;max-width:none;height:auto;flex:none;transform:translateX(-14px);filter:drop-shadow(0 0 8px rgba(170,95,255,.35))}
 .scanner-inner img{pointer-events:none}
 @media(max-width:780px){.scanner-logo-mark{width:210px;transform:translateX(-13px)}}
+@media(max-width:520px){.streamer-top{align-items:flex-start}.streamer-meta{display:flex;flex-direction:column;align-items:flex-end;justify-content:flex-start;gap:7px;width:max-content;max-width:calc(100% - 57px);min-width:0}.streamer-meta .live-status,.streamer-meta .member-badge{display:inline-flex;max-width:100%;white-space:nowrap;overflow:visible;text-overflow:clip;flex:0 0 auto}}
