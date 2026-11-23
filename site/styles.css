@@ -81,3 +81,15 @@ body{overflow-x:clip;overflow-y:visible}
 /* Keep the full member label inside compact mobile cards and lock the page behind the modal. */
 @media(max-width:600px){.streamer-meta .member-badge{padding-inline:6px;font-size:clamp(6px,2vw,9px);letter-spacing:0;overflow:visible;text-overflow:clip;white-space:nowrap}}
 html.coverage-modal-open,body.coverage-modal-open{overflow:hidden}
+
+/* Give compact filters breathing room for the native select arrow. */
+.history-section .inline-filters select{padding-right:24px}
+
+/* Fade and lift the audit modal instead of displaying it abruptly. */
+.coverage-modal.hidden{display:grid!important;opacity:0;visibility:hidden;pointer-events:none}
+.coverage-modal{opacity:1;visibility:visible;transition:opacity .22s ease,visibility 0s linear 0s}
+.coverage-modal.hidden{transition:opacity .22s ease,visibility 0s linear .22s}
+.coverage-modal-shade{opacity:1;transition:opacity .22s ease}
+.coverage-modal.hidden .coverage-modal-shade{opacity:0}
+.coverage-modal-dialog{transform:translateY(0) scale(1);transition:transform .22s ease,opacity .22s ease}
+.coverage-modal.hidden .coverage-modal-dialog{transform:translateY(8px) scale(.98);opacity:0}
