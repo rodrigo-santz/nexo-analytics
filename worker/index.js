@@ -32,10 +32,21 @@ async function persist(env,entry){
     throw new Error(`Falha de persistência GitHub (${res.status}): ${(await res.text()).slice(0,160)}`);
   }
 }
+async function triggerPublish(env){
+  const endpoint=`https://api.github.com/repos/${encodeURIComponent(env.GITHUB_OWNER)}/${encodeURIComponent(env.GITHUB_REPO)}/actions/workflows/publish.yml/dispatches`;
+  const response=await fetch(endpoint,{method:'POST',headers:{'Authorization':`Bearer ${env.GITHUB_TOKEN}`,'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28','User-Agent':'nexo-analytics-eventsub','Content-Type':'application/json'},body:JSON.stringify({ref:'main'})});
+  if(!response.ok)throw new Error(`Falha ao disparar publicação (${response.status}): ${(await response.text()).slice(0,160)}`);
+}
 export default {
   async fetch(request,env){
     const url=new URL(request.url);
     if(request.method==='GET' && url.pathname==='/health')return Response.json({service:'nexo-eventsub',ok:true});
+    if(request.method==='POST' && url.pathname==='/cron/publish'){
+      const authorization=request.headers.get('Authorization');
+      if(!env.CRON_TRIGGER_SECRET||authorization!==`Bearer ${env.CRON_TRIGGER_SECRET}`)return new Response('Unauthorized',{status:401});
+      try{await triggerPublish(env);return Response.json({ok:true,dispatched:true})}
+      catch(error){console.error('NÃ£o foi possÃ­vel disparar a publicaÃ§Ã£o:',error.message);return Response.json({ok:false,error:'dispatch_failed'},{status:502})}
+    }
     if(request.method!=='POST'||url.pathname!=='/webhook')return new Response('Not found',{status:404});
     if(!env.TWITCH_EVENTSUB_SECRET||!env.GITHUB_TOKEN||!env.GITHUB_OWNER||!env.GITHUB_REPO)return new Response('Missing configuration',{status:503});
     const messageId=request.headers.get('Twitch-Eventsub-Message-Id');

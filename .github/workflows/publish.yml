@@ -7,8 +7,6 @@ on:
       - 'data/streamers.json'
       - 'scripts/**'
       - '.github/workflows/publish.yml'
-  schedule:
-    - cron: '*/5 * * * *'
   workflow_dispatch:
 permissions:
   contents: write
