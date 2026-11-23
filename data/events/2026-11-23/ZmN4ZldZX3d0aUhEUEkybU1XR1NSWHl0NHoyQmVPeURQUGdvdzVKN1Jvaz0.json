@@ -1,0 +1,17 @@
+{
+  "messageId": "fcxfWY_wtiHDPI2mMWGSRXyt4z2BeOyDPPgow5J7Rok=",
+  "messageType": "notification",
+  "subscriptionType": "stream.online",
+  "subscriptionStatus": "enabled",
+  "receivedAt": "2026-11-23T12:33:06.527340349Z",
+  "source": "eventsub",
+  "event": {
+    "id": "319555771638",
+    "broadcaster_user_id": "526315840",
+    "broadcaster_user_login": "dree_sp",
+    "broadcaster_user_name": "dree_sp",
+    "type": "live",
+    "started_at": "2026-11-23T12:32:51Z"
+  },
+  "subscriptionId": "d2a6799f-00e1-4d00-905c-bfa7ee3c4cd4"
+}
