@@ -50,4 +50,4 @@ body{overflow-x:clip;overflow-y:visible}
 #constellation{contain:strict;will-change:contents}
 @media(max-width:780px){.site-header{-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}.ambient{filter:blur(55px);opacity:.14}.glass-panel,.monitor-card{-webkit-backdrop-filter:none;backdrop-filter:none}.streamer-card:hover,.metric-card:not(.skeleton):hover{transform:none}}
 @media(prefers-reduced-transparency:reduce){.site-header{backdrop-filter:none;-webkit-backdrop-filter:none;background:#10091b}.ambient{display:none}}
-.views-stack{display:flex;flex-direction:column;gap:4px}.views-destination{color:#e5d9f7;font-size:10px;font-weight:700;line-height:1.2;overflow-wrap:anywhere}
+.views-stack{display:flex;flex-direction:column;gap:5px;padding:2px 0}.views-destination{color:#e5d9f7;font-size:10px;font-weight:700;line-height:1.2;overflow-wrap:anywhere}
