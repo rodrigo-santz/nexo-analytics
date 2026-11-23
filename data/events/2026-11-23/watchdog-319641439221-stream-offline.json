@@ -1,0 +1,12 @@
+{
+  "messageId": "watchdog-319641439221-stream.offline",
+  "messageType": "notification",
+  "subscriptionType": "stream.offline",
+  "receivedAt": "2026-11-23T03:16:15.890Z",
+  "source": "watchdog",
+  "event": {
+    "id": "319641439221",
+    "broadcaster_user_id": "594448048",
+    "broadcaster_user_login": "zells001"
+  }
+}

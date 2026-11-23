@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-11-23T03:14:36.621Z",
+  "updatedAt": "2026-11-23T03:16:16.754Z",
   "monitor": {
     "status": "healthy",
-    "lastCheckedAt": "2026-11-23T03:14:35.661Z",
+    "lastCheckedAt": "2026-11-23T03:16:15.890Z",
     "issues": [],
     "gaps": [
       {
@@ -14,12 +14,12 @@
   },
   "overview": {
     "lives": 2,
-    "raids": 0,
+    "raids": 1,
     "nexo": 0,
-    "externas": 0,
+    "externas": 1,
     "semRaid": 0,
     "inconclusivas": 0,
-    "liveAgora": 2
+    "liveAgora": 1
   },
   "streamers": [
     {
@@ -212,11 +212,11 @@
     {
       "login": "zells001",
       "profileImageUrl": "https://static-cdn.jtvnw.net/jtv_user_pictures/dd737f5b-a16b-4f41-8ac6-7792b68bc858-profile_image-300x300.png",
-      "live": true,
+      "live": false,
       "lives": 1,
-      "raids": 0,
+      "raids": 1,
       "nexo": 0,
-      "externas": 0,
+      "externas": 1,
       "semRaid": 0,
       "inconclusivas": 0
     }
@@ -226,10 +226,19 @@
       "id": "319641439221",
       "login": "zells001",
       "startedAt": "2026-11-23T03:13:37Z",
-      "endedAt": null,
-      "raid": null,
-      "coverageIssues": [],
-      "status": "live"
+      "endedAt": "2026-11-23T03:16:15.890Z",
+      "raid": {
+        "toLogin": "yrlonely",
+        "viewers": 1,
+        "toId": "724151873",
+        "at": "2026-11-23T03:15:39.839200477Z",
+        "destinationKnown": true,
+        "isNexo": false
+      },
+      "coverageIssues": [
+        "Encerramento inferido pelo verificador"
+      ],
+      "status": "raid_externa"
     },
     {
       "id": "319640200949",
@@ -247,7 +256,7 @@
     {
       "date": "2026-11-23",
       "lives": 2,
-      "raids": 0
+      "raids": 1
     }
   ]
 }
