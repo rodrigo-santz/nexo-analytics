@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#090612" />
+  <meta name="robots" content="noindex, nofollow, noarchive" />
   <meta name="description" content="NEXO Analytics — dados e crescimento coletivo para criadores conectados." />
   <title>NEXO Analytics | Nexo Synergy</title>
   <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg" />
@@ -81,7 +82,7 @@
     </section>
 
     <section class="app-content container-xxl history-section" id="historico">
-      <div class="section-head"><div><span class="kicker">/ 03 — TRANSPARÊNCIA</span><h2>Cada live conta uma <em>história.</em></h2><p>Resultados verificados, eventos externos e períodos sem informação.</p></div><div class="filters inline-filters"><select id="historyStatus" aria-label="Filtrar por resultado"><option value="all">Todos os resultados</option><option value="raid_nexo">Raid NEXO</option><option value="raid_externa">Raid externa</option><option value="sem_raid">Sem raid detectada</option><option value="inconclusiva">Inconclusiva</option><option value="live">Ao vivo</option><option value="aguardando">Aguardando</option></select></div></div>
+      <div class="section-head"><div><span class="kicker">/ 03 — TRANSPARÊNCIA</span><h2>Cada live conta uma <em>história.</em></h2><p>Resultados verificados, eventos externos e períodos sem informação.</p></div><div class="filters inline-filters"><select id="historyStreamer" aria-label="Filtrar por streamer"><option value="all">Todos os streamers</option></select><select id="historyPeriod" aria-label="Filtrar por período"><option value="all">Todo o período</option><option value="24h">Últimas 24h</option><option value="7d">Últimos 7 dias</option><option value="30d">Últimos 30 dias</option></select><select id="historyRaid" aria-label="Filtrar por status de raid"><option value="all">Todas as raids</option><option value="confirmed">Raid confirmada</option><option value="none">Sem raid</option><option value="unknown">Raid não verificada</option></select><select id="historyCoverage" aria-label="Filtrar por cobertura"><option value="all">Toda cobertura</option><option value="complete">Completa</option><option value="partial">Parcial</option><option value="failure">Falha</option></select><select id="historyStatus" aria-label="Filtrar por resultado"><option value="all">Todos os resultados</option><option value="raid_nexo">Raid NEXO</option><option value="raid_externa">Raid externa</option><option value="sem_raid">Sem raid detectada</option><option value="inconclusiva">Inconclusiva</option><option value="live">Ao vivo</option><option value="aguardando">Aguardando</option></select></div></div>
       <div class="glass-panel history-panel"><div class="table-scroll"><table><thead><tr><th>STREAMER</th><th>INÍCIO / FIM</th><th>DURAÇÃO</th><th>RAID</th><th>COBERTURA</th><th>ATUALIZADO</th></tr></thead><tbody id="historyBody"><tr><td colspan="6" class="table-empty">Carregando histórico...</td></tr></tbody></table></div><div class="history-foot"><span id="historyCount">0 registros</span><button class="btn-more" id="loadMore">Mostrar mais ↓</button></div></div>
     </section>
 
