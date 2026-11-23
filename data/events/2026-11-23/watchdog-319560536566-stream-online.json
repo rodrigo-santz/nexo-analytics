@@ -1,0 +1,13 @@
+{
+  "messageId": "watchdog-319560536566-stream.online",
+  "messageType": "notification",
+  "subscriptionType": "stream.online",
+  "receivedAt": "2026-11-23T22:10:08Z",
+  "source": "watchdog",
+  "event": {
+    "id": "319560536566",
+    "broadcaster_user_id": "50253995",
+    "broadcaster_user_login": "hudsondark",
+    "started_at": "2026-11-23T22:10:08Z"
+  }
+}
