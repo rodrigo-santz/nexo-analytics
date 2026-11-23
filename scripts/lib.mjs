@@ -20,15 +20,25 @@ export function buildDashboard(events,names,health,now=new Date().toISOString(),
     if(id){const exact=c.find(s=>s.streamId===id);if(exact)return exact}
     return c.filter(s=>!s.endedAt||(iso(when)-iso(s.endedAt)<20*60_000&&iso(when)-iso(s.endedAt)>-10*60_000)).sort((a,b)=>iso(b.startedAt||b.endedAt)-iso(a.startedAt||a.endedAt))[0]||null;
   };
-  const fresh=(uid,log,id,reason)=>{const s={id:id||`inferred-${uid}-${log}-${sessions.length}`,streamId:id||null,userId:uid,login:log,startedAt:null,endedAt:null,raid:null,coverageIssues:reason?[reason]:[],sourceStart:null,sourceEnd:null,startTimeKnown:false};sessions.push(s);return s};
+  const fresh=(uid,log,id,reason)=>{const s={id:id||`inferred-${uid}-${log}-${sessions.length}`,streamId:id||null,streamIds:id?[id]:[],userId:uid,login:log,startedAt:null,endedAt:null,raid:null,reconnections:[],coverageIssues:reason?[reason]:[],sourceStart:null,sourceEnd:null,startTimeKnown:false};sessions.push(s);return s};
   for(const msg of sorted){
     const e=msg.event,t=msg.subscriptionType,when=msg.receivedAt||now;if(!Number.isFinite(iso(when)))continue;
     if(t==='stream.online'){
       const uid=String(e.broadcaster_user_id||''),log=login(e.broadcaster_user_login);if(!members.has(log))continue;const id=String(e.id||'');
       let s=sessions.find(v=>v.streamId&&v.streamId===id)||sessions.find(v=>v.login===log&&!v.streamId&&!v.startedAt&&!v.endedAt&&Math.abs(iso(when)-iso(v.raid?.at||when))<30*60_000);
+      if(!s){
+        const reconnect=sessions.filter(v=>v.login===log&&!v.raid&&Number.isFinite(iso(v.endedAt))&&iso(when)>=iso(v.endedAt)&&iso(when)-iso(v.endedAt)<=GRACE_MS).sort((a,b)=>iso(b.endedAt)-iso(a.endedAt))[0];
+        if(reconnect){
+          reconnect.reconnections.push({offlineAt:reconnect.endedAt,onlineAt:when,streamId:reconnect.streamId||null});
+          reconnect.endedAt=null;
+          reconnect.sourceEnd=null;
+          s=reconnect;
+        }
+      }
       if(s){s.id=id||s.id;s.streamId=id||s.streamId;s.coverageIssues=s.coverageIssues.filter(v=>v!=='Início da transmissão não capturado')}
+      if(s&&id&&!s.streamIds.includes(id))s.streamIds.push(id);
       if(!s){for(const p of sessions.filter(v=>v.login===log&&!v.endedAt)){p.endedAt=when;p.coverageIssues.push('Novo início sem confirmação de fim da live anterior')}s=fresh(uid,log,id)}
-      s.startedAt=e.started_at||when;s.startTimeKnown=Boolean(e.started_at);if(!e.started_at)s.coverageIssues.push('Horário de início não informado pelo evento');
+      if(!s.startedAt){s.startedAt=e.started_at||when;s.startTimeKnown=Boolean(e.started_at);if(!e.started_at)s.coverageIssues.push('Horário de início não informado pelo evento')}
       if(msg.source==='watchdog'&&s.sourceStart!=='eventsub')s.coverageIssues.push('Início inferido pelo verificador');
       if(msg.source!=='watchdog'){s.sourceStart='eventsub';s.coverageIssues=s.coverageIssues.filter(v=>v!=='Início inferido pelo verificador')}
     }else if(t==='stream.offline'){
@@ -43,7 +53,7 @@ export function buildDashboard(events,names,health,now=new Date().toISOString(),
   const gaps=(health?.gaps||[]).filter(g=>g.start).map(g=>({start:iso(g.start),end:iso(g.end||now),reason:g.reason||'Indisponibilidade detectada',kind:g.kind||'monitoring'})).filter(g=>Number.isFinite(g.start));
   for(const s of sessions){
     const start=iso(s.startedAt),end=iso(s.endedAt||now),effectiveEnd=s.endedAt?end:nowMs,affected=gaps.filter(g=>overlaps(Number.isFinite(start)?start:end,effectiveEnd,g.start,g.end));
-    const endedSample=health?.endedStreams?.[s.streamId];if(!s.raid&&endedSample&&Number.isFinite(Number(endedSample.viewers)))s.viewersAtEnd=Number(endedSample.viewers);
+    const endedSamples=(s.streamIds||[s.streamId]).map(id=>health?.endedStreams?.[id]).filter(Boolean);const endedSample=endedSamples.at(-1);if(!s.raid&&endedSample&&Number.isFinite(Number(endedSample.viewers)))s.viewersAtEnd=Number(endedSample.viewers);
     const liveGaps=affected.filter(g=>!s.endedAt||g.start<end-10*60_000),closingGaps=affected.filter(g=>s.endedAt&&g.end>=end-10*60_000);
     s.updatedAt=new Date(Math.max(...[start,end,iso(s.raid?.at)].filter(Number.isFinite),nowMs)).toISOString();
     s.coverageGaps=affected.map(g=>({start:new Date(g.start).toISOString(),end:new Date(g.end).toISOString(),reason:g.reason,kind:g.kind}));s.coverageStatus=affected.some(g=>g.kind==='failure')?'failure':affected.length?'partial':'complete';

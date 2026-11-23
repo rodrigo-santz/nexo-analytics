@@ -87,8 +87,8 @@ function renderOverview(){
   $('#lastSync').textContent = `Atualizado: ${last}`;
   $('#metrics').innerHTML += [
     metric('Views totais',o.viewsTotais??audience.total,'◉','Público em resultados confirmados'),
-    metric('Views aproveitadas',o.viewsAproveitadas??audience.used,'↗','Espectadores enviados em raids','accent'),
-    metric('Views desperdiçadas',o.viewsDesperdicadas??audience.wasted,'⊘','Público em lives sem raid confirmada','warning')].join('');
+    metric('Views efetivas',o.viewsAproveitadas??audience.used,'↗','Espectadores enviados em raids','accent'),
+    metric('Views perdidas',o.viewsDesperdicadas??audience.wasted,'⊘','Público em lives sem raid confirmada','warning')].join('');
   const daily = dashboard.daily || [];
   const days = Array.from({length:14},(_,i)=>{const dt = new Date();dt.setUTCDate(dt.getUTCDate()-13+i);return dt.toISOString().slice(0,10)});
   const byDay = new Map(daily.map(d=>[d.date,d]));
@@ -103,8 +103,8 @@ function renderOverview(){
   const used=o.viewsAproveitadas??audience.used,wasted=o.viewsDesperdicadas??audience.wasted,total=o.viewsTotais??audience.total,hasImpact=Number.isFinite(Number(total))&&Number(total)>0&&Number.isFinite(Number(used))&&Number.isFinite(Number(wasted));
   const impactPct=hasImpact?Math.round(Number(used)/Number(total)*100):null;
   const impactDonut=$('#viewsImpactDonut');impactDonut.classList.toggle('no-data',!hasImpact);impactDonut.style.setProperty('--pct',hasImpact?`${impactPct}%`:'0%');
-  $('#viewsImpactPct').textContent=hasImpact?`${impactPct}%`:'—';$('#viewsImpactCaption').textContent=hasImpact?'aproveitadas':'sem dados';
-  $('#viewsImpactLegend').innerHTML=hasImpact?`<span><i class="legend-dot purple"></i> Aproveitadas <strong>${fmt(used)} · ${impactPct}%</strong></span><span><i class="legend-dot cyan"></i> Desperdiçadas <strong>${fmt(wasted)} · ${100-impactPct}%</strong></span>`:'<span>Sem dados suficientes</span>';
+  $('#viewsImpactPct').textContent=hasImpact?`${impactPct}%`:'—';$('#viewsImpactCaption').textContent=hasImpact?'efetivas':'sem dados';
+  $('#viewsImpactLegend').innerHTML=hasImpact?`<span><i class="legend-dot purple"></i> Efetivas: <strong>${fmt(used)} · ${impactPct}%</strong></span><span><i class="legend-dot cyan"></i> Perdidas: <strong>${fmt(wasted)} · ${100-impactPct}%</strong></span>`:'<span>Sem dados suficientes</span>';
   const health=dashboard.monitor||{};
   const el=$('#monitorStatus');el.classList.toggle('healthy',health.status==='healthy');
   el.innerHTML = `<span class="status-light"></span> ${health.status==='healthy'?'Assinaturas ativas e verificadas':health.status==='degraded'?'Atenção: cobertura parcialmente comprometida':'Monitoramento não configurado ou sem verificação recente'}`;
@@ -131,10 +131,17 @@ function historySorted(){const streamer=$('#historyStreamer').value,period=$('#h
 function duration(start,end){const a=new Date(start||0).getTime(),b=new Date(end||0).getTime();if(!start||!end||!Number.isFinite(a)||!Number.isFinite(b))return '<span class="history-empty">—</span>';const min=Math.max(0,Math.round((b-a)/60000));return min>=60?`${Math.floor(min/60)}h ${min%60}min`:`${min}min`;}
 function historyRow(r){const monitored=r.monitoredDurationMs!=null?`${Math.round(r.monitoredDurationMs/60000)} min monitorados`:'';const coverage=r.coverageStatus==='failure'?`<span title="${esc((r.coverageIssues||[]).join('; '))}" style="color:#ff8d8d">✕ Falha</span>`:r.coverageStatus==='partial'?`<span title="${esc([...(r.coverageIssues||[]),...(r.coverageGaps||[]).map(g=>`${g.start} → ${g.end}`)].join('; '))}" style="color:#ffc17a">⚠ Parcial${monitored?` · ${monitored}`:''}</span>`:`<span style="color:#91d8b8">✓ Completa${monitored?` · ${monitored}`:''}</span>`;const raid=badge(r.status),views=r.raid?.viewers!=null?`${fmt(r.raid.viewers)} enviados${r.raid.toLogin?` para ${esc(r.raid.toLogin)}`:''}`:!r.raid&&r.viewersAtEnd!=null?`${fmt(r.viewersAtEnd)} no encerramento`:'<span class="history-empty">—</span>';return `<tr><td data-label="Streamer"><div class="td-user">${historyStreamerAvatar(r.login)}${esc(r.login)}</div></td><td data-label="Início / fim"><span class="date-stack">${esc(dateBR(r.startedAt))}<small>fim: ${esc(dateBR(r.endedAt))}</small></span></td><td data-label="Duração">${duration(r.startedAt,r.endedAt)}</td><td data-label="Raid">${raid}</td><td data-label="Views">${views}</td><td data-label="Cobertura">${coverage}${r.coverageGaps?.length?`<button class="gap-details" type="button" data-gaps="${esc(JSON.stringify(r.coverageGaps))}">ver intervalos</button>`:''}</td><td data-label="Atualizado">${esc(dateBR(r.manualReview?.changedAt||r.updatedAt||dashboard.updatedAt))}</td></tr>`;}
 function renderHistory(){const rows=historySorted();$('#historyBody').innerHTML=rows.length?rows.slice(0,shown).map(historyRow).join(''):'<tr><td class="table-empty" colspan="7">Nenhum histórico registrado para este filtro.</td></tr>';$('#historyCount').textContent=`Exibindo ${Math.min(shown,rows.length)} de ${fmt(rows.length)} registros`;$('#loadMore').classList.toggle('hidden',shown>=rows.length);}
+function historyDescription(r){
+  if(r.reconnections?.length)return 'Reconectou';
+  if(r.status==='aguardando')return 'Pendente';
+  if(r.raid?.toLogin)return `Destino: ${esc(r.raid.toLogin)}`;
+  if(r.coverageIssues?.length)return 'Monitoramento parcial';
+  return r.endedAt?'Live finalizada':'Live iniciada';
+}
 function showProfileLegacy(login){
   const p=(dashboard?.streamers||[]).find(s=>s.login===login);if(!p)return;
   const sessions=(dashboard.recent||[]).filter(r=>r.login===login).slice(0,60);
-  $('#drawerContent').innerHTML=`<span class="kicker">FICHA DO CRIADOR / NEXO SYNERGY</span><div class="profile-header"><span class="avatar">${esc(login.charAt(0).toUpperCase())}</span><div><h2 id="drawerTitle">${esc(login)}</h2>${validLogin(login)?`<a href="https://www.twitch.tv/${encodeURIComponent(login)}" target="_blank" rel="noopener noreferrer">Abrir Twitch ↗</a>`:''}</div></div><div class="profile-metrics">${[['Lives',p.lives],['Raids totais',p.raids],['Para NEXO',p.nexo],['Para fora',p.externas],['Sem raid detectada',p.semRaid],['Inconclusivas',p.inconclusivas]].map(([l,v])=>`<div class="profile-metric"><strong>${fmt(v)}</strong><span>${l}</span></div>`).join('')}</div><h3 class="profile-subhead">Histórico da comunidade</h3>${sessions.length?sessions.map(r=>`<div class="profile-session"><div><time>${esc(dateBR(r.startedAt||r.endedAt))}</time><p>${r.raid?.toLogin?`Destino: ${esc(r.raid.toLogin)}`:r.coverageIssues?.length?'Monitoramento parcial':'Transmissão registrada'}</p></div>${badge(r.status)}</div>`).join(''):'<p class="empty-small">Nenhuma live registrada ainda.</p>'}<div class="profile-issue">⚠ “Sem raid detectada” não significa prova de ausência. Lives com falhas identificadas são classificadas como inconclusivas.</div>`;
+  $('#drawerContent').innerHTML=`<span class="kicker">FICHA DO CRIADOR / NEXO SYNERGY</span><div class="profile-header"><span class="avatar">${esc(login.charAt(0).toUpperCase())}</span><div><h2 id="drawerTitle">${esc(login)}</h2>${validLogin(login)?`<a href="https://www.twitch.tv/${encodeURIComponent(login)}" target="_blank" rel="noopener noreferrer">Abrir Twitch ↗</a>`:''}</div></div><div class="profile-metrics">${[['Lives',p.lives],['Raids totais',p.raids],['Para NEXO',p.nexo],['Para fora',p.externas],['Sem raid detectada',p.semRaid],['Inconclusivas',p.inconclusivas]].map(([l,v])=>`<div class="profile-metric"><strong>${fmt(v)}</strong><span>${l}</span></div>`).join('')}</div><h3 class="profile-subhead">Histórico da comunidade</h3>${sessions.length?sessions.map(r=>`<div class="profile-session"><div><time>${esc(dateBR(r.startedAt||r.endedAt))}</time><p>${historyDescription(r)}</p></div>${badge(r.status)}</div>`).join(''):'<p class="empty-small">Nenhuma live registrada ainda.</p>'}<div class="profile-issue">⚠ “Sem raid detectada” não significa prova de ausência. Lives com falhas identificadas são classificadas como inconclusivas.</div>`;
   drawerModal?.show();
 }
 function showProfile(login){
