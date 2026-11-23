@@ -1,0 +1,15 @@
+{
+  "messageId": "kjwVwKo-3fU6jTynsDau_01A6T7cTz6lSXeixXjVGpo=",
+  "messageType": "notification",
+  "subscriptionType": "stream.offline",
+  "subscriptionStatus": "enabled",
+  "receivedAt": "2026-11-23T22:02:41.963144423Z",
+  "source": "eventsub",
+  "event": {
+    "id": "319647282421",
+    "broadcaster_user_id": "142716844",
+    "broadcaster_user_login": "heyjessh",
+    "broadcaster_user_name": "heyjessh"
+  },
+  "subscriptionId": "c53a5201-05a9-4162-a3d9-eb37843592a6"
+}
