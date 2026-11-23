@@ -166,6 +166,8 @@ $('#closeDrawer').addEventListener('click',closeProfile);
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeProfile()});
 $('#menuToggle').addEventListener('click',()=>{const n=$('.top-nav');n.classList.toggle('open');$('#menuToggle').setAttribute('aria-expanded',String(n.classList.contains('open')))});
 document.querySelectorAll('.top-nav a').forEach(a=>a.addEventListener('click',()=>$('.top-nav').classList.remove('open')));
+function initHistoryFilterLabels(){document.querySelectorAll('.inline-filter-control select').forEach(select=>{const control=select.parentElement;let label=control.querySelector('.select-label');if(!label){label=document.createElement('span');label.className='select-label';control.insertBefore(label,select)}const sync=()=>{label.textContent=select.options[select.selectedIndex]?.textContent||''};sync();select.addEventListener('change',sync)})}
+initHistoryFilterLabels();
 loadData();
 
 function splitViewDestination(){document.querySelectorAll('#historyBody td[data-label="Views"]').forEach(cell=>{const match=cell.textContent.trim().match(/^(.+?) enviados para (.+)$/);if(!match)return;cell.innerHTML=`<span class="views-stack"><span>${esc(match[1])} enviados</span><small class="views-destination">${esc(match[2])}</small></span>`})}
