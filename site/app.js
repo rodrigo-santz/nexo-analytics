@@ -144,7 +144,7 @@ function showProfileLegacy(login){
   $('#drawerContent').innerHTML=`<span class="kicker">FICHA DO CRIADOR / NEXO SYNERGY</span><div class="profile-header"><span class="avatar">${esc(login.charAt(0).toUpperCase())}</span><div><h2 id="drawerTitle">${esc(login)}</h2>${validLogin(login)?`<a href="https://www.twitch.tv/${encodeURIComponent(login)}" target="_blank" rel="noopener noreferrer">Abrir Twitch ↗</a>`:''}</div></div><div class="profile-metrics">${[['Lives',p.lives],['Raids totais',p.raids],['Para NEXO',p.nexo],['Para fora',p.externas],['Sem raid detectada',p.semRaid],['Inconclusivas',p.inconclusivas]].map(([l,v])=>`<div class="profile-metric"><strong>${fmt(v)}</strong><span>${l}</span></div>`).join('')}</div><h3 class="profile-subhead">Histórico da comunidade</h3>${sessions.length?sessions.map(r=>`<div class="profile-session"><div><time>${esc(dateBR(r.startedAt||r.endedAt))}</time><p>${historyDescription(r)}</p></div>${badge(r.status)}</div>`).join(''):'<p class="empty-small">Nenhuma live registrada ainda.</p>'}<div class="profile-issue">⚠ “Sem raid detectada” não significa prova de ausência. Lives com falhas identificadas são classificadas como inconclusivas.</div>`;
   drawerModal?.show();
 }
-function showProfile(login){
+function showProfileBase(login){
   showProfileLegacy(login);
   const profile=(dashboard?.streamers||[]).find(s=>s.login===login);
   const avatar=document.querySelector('#drawerContent .profile-header .avatar');
@@ -192,6 +192,19 @@ $('#closeDrawer').addEventListener('click',closeProfile);
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeProfile()});
 $('#menuToggle').addEventListener('click',()=>{const n=$('.top-nav');n.classList.toggle('open');$('#menuToggle').setAttribute('aria-expanded',String(n.classList.contains('open')))});
 document.querySelectorAll('.top-nav a').forEach(a=>a.addEventListener('click',()=>$('.top-nav').classList.remove('open')));
+function showProfile(login){
+  showProfileLegacy(login);
+  const profile=(dashboard?.streamers||[]).find(s=>s.login===login);
+  const content=$('#drawerContent');
+  if(!profile||!content)return;
+  const watched=(profile.watchedLives||[]).filter((r,i,a)=>a.findIndex(x=>x.id===r.id)===i);
+  const section=document.createElement('section');
+  section.className='profile-watched-lives';
+  section.innerHTML=`<h3 class="profile-subhead">Lives assistidas</h3>${watched.length?watched.map(r=>`<div class="profile-session"><div><time>${esc(dateBR(r.startedAt||r.endedAt))}</time><p>${esc(r.login)}</p></div>${badge(r.status)}</div>`).join(''):'<p class="empty-small">Nenhuma aparição registrada ainda.</p>'}`;
+  content.appendChild(section);
+  const avatar=content.querySelector('.profile-header .avatar');
+  if(avatar)avatar.outerHTML=avatarMarkup(login,profile.profileImageUrl);
+}
 loadData();
 
 function splitViewDestination(){document.querySelectorAll('#historyBody td[data-label="Views"]').forEach(cell=>{const match=cell.textContent.trim().match(/^(.+?) enviados para (.+)$/);if(!match)return;cell.innerHTML=`<span class="views-stack"><span>${esc(match[1])} enviados</span><small class="views-destination">${esc(match[2])}</small></span>`})}

@@ -8,10 +8,18 @@ const online=(id,at,who='santz_rj')=>msg('stream.online',at,{id,broadcaster_user
 const offline=(id,at,who='santz_rj')=>msg('stream.offline',at,{id,broadcaster_user_id:'100',broadcaster_user_login:who});
 const raid=(at,to)=>msg('channel.raid',at,{from_broadcaster_user_id:'100',from_broadcaster_user_login:'santz_rj',to_broadcaster_user_id:'200',to_broadcaster_user_login:to,viewers:42});
 const members=['santz_rj','dree_sp'];
+const chatters=(streamId,at,users)=>msg('chatters.snapshot',at,{stream_id:streamId,chatters:users.map(user_login=>({user_login}))},'chatters');
 
 test('Live terminou sem raid: sem_raid apenas com cobertura posterior ao encerramento',()=>{
   const data=buildDashboard([online('a','2026-11-22T18:00:00Z'),offline('a','2026-11-22T20:00:00Z')],members,good,now);
   assert.equal(data.overview.lives,1);assert.equal(data.overview.semRaid,1);assert.equal(data.recent[0].status,'sem_raid');
+});
+test('Presença de membro fica ligada à live canônica e reconexão não duplica a aparição',()=>{
+  const events=[online('a','2026-11-22T18:00:00Z'),chatters('a','2026-11-22T18:30:00Z',['dree_sp']),offline('a','2026-11-22T19:00:00Z'),online('b','2026-11-22T19:05:00Z'),chatters('b','2026-11-22T19:10:00Z',['dree_sp']),offline('b','2026-11-22T20:00:00Z')];
+  const data=buildDashboard(events,members,good,now);
+  assert.equal(data.overview.lives,1);
+  assert.deepEqual(data.streamers.find(s=>s.login==='dree_sp').watchedLives.map(s=>s.id),['b']);
+  assert.equal(data.recent[0].appearedViewers.length,1);
 });
 test('Última audiência observada é preservada para live encerrada sem raid',()=>{
   const health={...good,endedStreams:{a:{endedAt:'2026-11-22T20:00:00Z',viewers:137}}};

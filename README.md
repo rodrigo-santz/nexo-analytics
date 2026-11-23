@@ -66,6 +66,8 @@ git push -u origin main
 
 No [Twitch Developer Console](https://dev.twitch.tv/console/apps), crie uma aplicação. Guarde o **Client ID** e gere um **Client Secret**. Os eventos usados são de leitura pública e usam token de aplicativo, sem exigir que cada streamer faça login na aplicação. Não publique credenciais no repositório.
 
+Para a presença estimada de membros nas lives, configure também `TWITCH_CHATTERS_TOKEN` com um User Access Token da aplicação autorizado com `moderator:read:chatters`, e `TWITCH_CHATTERS_MODERATOR_ID` com o ID da conta que é broadcaster ou moderadora dos canais monitorados. A coleta registra apenas aparições de membros em snapshots do chat e relaciona a aparição à sessão canônica da live, incluindo reconexões.
+
 Defina um **segredo de webhook** próprio, aleatório, com 10 a 100 caracteres ASCII (recomenda-se 32+). O **mesmo segredo** será usado no Worker e no GitHub Actions.
 
 ## 4. Criar o token do GitHub
