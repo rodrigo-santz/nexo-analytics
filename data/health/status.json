@@ -1,6 +1,6 @@
 {
   "status": "healthy",
-  "lastCheckedAt": "2026-11-23T10:00:31.024Z",
+  "lastCheckedAt": "2026-11-23T10:10:32.622Z",
   "issues": [],
   "gaps": [
     {
@@ -14,6 +14,11 @@
       "streamId": "319643367669",
       "startedAt": "2026-11-23T10:00:05Z",
       "login": "bolosdomikael"
+    },
+    "1314842283": {
+      "streamId": "319555201782",
+      "startedAt": "2026-11-23T10:01:07Z",
+      "login": "quindinhaa"
     }
   }
 }
