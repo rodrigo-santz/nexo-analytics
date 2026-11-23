@@ -88,6 +88,9 @@ html.coverage-modal-open,body.coverage-modal-open{overflow:hidden}
 /* Give compact filters breathing room for the native select arrow. */
 .history-section .inline-filters select{padding-right:34px}
 
+/* Use the same inset arrow treatment in the streamer filters. */
+.streamer-section .selectbox select{-webkit-appearance:none;appearance:none;background-color:#150d24;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='m1 1 5 5 5-5' fill='none' stroke='%23d9c8f5' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;background-size:10px 7px;padding-right:42px}
+
 /* Fade and lift the audit modal instead of displaying it abruptly. */
 .coverage-modal.hidden{display:grid!important;opacity:0;visibility:hidden;pointer-events:none}
 .coverage-modal{opacity:1;visibility:visible;transition:opacity .22s ease,visibility 0s linear 0s}
