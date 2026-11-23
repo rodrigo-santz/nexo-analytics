@@ -153,3 +153,6 @@ loadData();
 function splitViewDestination(){document.querySelectorAll('#historyBody td[data-label="Views"]').forEach(cell=>{const match=cell.textContent.trim().match(/^(.+?) enviados para (.+)$/);if(!match)return;cell.innerHTML=`<span class="views-stack"><span>${esc(match[1])} enviados</span><small class="views-destination">${esc(match[2])}</small></span>`})}
 const renderHistoryOriginal=renderHistory;
 renderHistory=()=>{renderHistoryOriginal();splitViewDestination()};
+const viewDestinationObserver=new MutationObserver(splitViewDestination);
+viewDestinationObserver.observe($('#historyBody'),{childList:true,subtree:true});
+splitViewDestination();
