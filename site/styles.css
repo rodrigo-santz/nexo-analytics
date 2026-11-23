@@ -55,4 +55,4 @@ body{overflow-x:clip;overflow-y:visible}
 .coverage-stack{display:inline-flex;flex-direction:column;gap:4px}.coverage-detail{font-size:10px;color:#b2a6c6;line-height:1.2}
 @media(max-width:700px){.history-panel td .coverage-stack{display:inline}.history-panel td .coverage-detail{font-size:inherit}.history-panel td .coverage-detail::before{content:' · '}}
 .history-panel th:nth-child(4),.history-panel td:nth-child(4){width:14%}.history-panel th:nth-child(5),.history-panel td:nth-child(5){width:15%}
-.history-panel th:nth-child(3),.history-panel td:nth-child(3),.history-panel th:nth-child(4),.history-panel td:nth-child(4),.history-panel th:nth-child(5),.history-panel td:nth-child(5){padding-left:21px;padding-right:21px;text-align:left}
+.history-panel th:nth-child(3),.history-panel td:nth-child(3),.history-panel th:nth-child(4),.history-panel td:nth-child(4),.history-panel th:nth-child(5),.history-panel td:nth-child(5){padding-left:30px;padding-right:21px;text-align:left}
