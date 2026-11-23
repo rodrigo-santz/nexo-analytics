@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-11-23T02:26:05.912Z",
+  "updatedAt": "2026-11-23T02:27:56.998Z",
   "monitor": {
     "status": "degraded",
-    "lastCheckedAt": "2026-11-23T02:26:05.481Z",
+    "lastCheckedAt": "2026-11-23T02:27:56.488Z",
     "issues": [
       "Falha na verificação da Twitch: Falha no OAuth Twitch (403): invalid client secret"
     ],
