@@ -13,6 +13,11 @@ test('Live terminou sem raid: sem_raid apenas com cobertura posterior ao encerra
   const data=buildDashboard([online('a','2026-11-22T18:00:00Z'),offline('a','2026-11-22T20:00:00Z')],members,good,now);
   assert.equal(data.overview.lives,1);assert.equal(data.overview.semRaid,1);assert.equal(data.recent[0].status,'sem_raid');
 });
+test('Última audiência observada é preservada para live encerrada sem raid',()=>{
+  const health={...good,endedStreams:{a:{endedAt:'2026-11-22T20:00:00Z',viewers:137}}};
+  const data=buildDashboard([online('a','2026-11-22T18:00:00Z'),offline('a','2026-11-22T20:00:00Z')],members,health,now);
+  assert.equal(data.recent[0].viewersAtEnd,137);
+});
 test('Live em andamento aparece como ativa no streamer',()=>{
   const data=buildDashboard([online('active','2026-11-22T22:00:00Z')],members,good,now);
   assert.equal(data.overview.liveAgora,1);assert.equal(data.streamers.find(s=>s.login==='santz_rj').live,true);

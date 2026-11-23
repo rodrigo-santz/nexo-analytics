@@ -43,6 +43,7 @@ export function buildDashboard(events,names,health,now=new Date().toISOString(),
   const gaps=(health?.gaps||[]).filter(g=>g.start).map(g=>({start:iso(g.start),end:iso(g.end||now),reason:g.reason||'Indisponibilidade detectada',kind:g.kind||'monitoring'})).filter(g=>Number.isFinite(g.start));
   for(const s of sessions){
     const start=iso(s.startedAt),end=iso(s.endedAt||now),effectiveEnd=s.endedAt?end:nowMs,affected=gaps.filter(g=>overlaps(Number.isFinite(start)?start:end,effectiveEnd,g.start,g.end));
+    const endedSample=health?.endedStreams?.[s.streamId];if(!s.raid&&endedSample&&Number.isFinite(Number(endedSample.viewers)))s.viewersAtEnd=Number(endedSample.viewers);
     const liveGaps=affected.filter(g=>!s.endedAt||g.start<end-10*60_000),closingGaps=affected.filter(g=>s.endedAt&&g.end>=end-10*60_000);
     s.updatedAt=new Date(Math.max(...[start,end,iso(s.raid?.at)].filter(Number.isFinite),nowMs)).toISOString();
     s.coverageGaps=affected.map(g=>({start:new Date(g.start).toISOString(),end:new Date(g.end).toISOString(),reason:g.reason,kind:g.kind}));s.coverageStatus=affected.some(g=>g.kind==='failure')?'failure':affected.length?'partial':'complete';
