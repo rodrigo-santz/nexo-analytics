@@ -1,6 +1,7 @@
 const $ = (s) => document.querySelector(s);
 const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fmt = (v) => new Intl.NumberFormat('pt-BR').format(Number(v)||0);
+const metricFmt = (v) => v == null ? 'Indisponível' : fmt(v);
 const dateBR = (v) => v ? new Intl.DateTimeFormat('pt-BR',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit',timeZone:'America/Sao_Paulo'}).format(new Date(v)) : 'Não registrado';
 const statusNames = {raid_nexo:'RAID NEXO',raid_externa:'RAID EXTERNA',sem_raid:'SEM RAID DETECTADA',inconclusiva:'INCONCLUSIVA',live:'AO VIVO',aguardando:'AGUARDANDO'};
 const badge = (status) => `<span class="status-chip status-${esc(status)}">${statusNames[status] || esc(status)}</span>`;
@@ -63,9 +64,17 @@ function avatarMarkup(login, profileImageUrl, className='avatar'){
   return `<span class="${className}"><span class="avatar-fallback">${initial}</span>${image}</span>`;
 }
 function liveStatusMarkup(isLive){return `<span class="live-status ${isLive?'is-live':'is-offline'}" title="${isLive?'AO VIVO':'OFFLINE'}" aria-label="${isLive?'Ao vivo':'Offline'}"><i class="live-dot" aria-hidden="true"></i><span>${isLive?'AO VIVO':'OFFLINE'}</span></span>`;}
-function metric(label,value,symbol,note,variant='') {return `<article class="metric-card ${variant}"><div class="metric-top"><span class="metric-label">${label}</span><span class="metric-icon">${icon(symbol)}</span></div><div class="metric-value">${fmt(value)}</div><div class="metric-note">${note}</div></article>`;}
+function metric(label,value,symbol,note,variant='') {return `<article class="metric-card ${variant}"><div class="metric-top"><span class="metric-label">${label}</span><span class="metric-icon">${icon(symbol)}</span></div><div class="metric-value">${metricFmt(value)}</div><div class="metric-note">${note}</div></article>`;}
+function audienceMetrics(){
+  const records=dashboard.recent||[],confirmedRaids=records.filter(r=>r.status==='raid_nexo'||r.status==='raid_externa'),confirmedNoRaids=records.filter(r=>r.status==='sem_raid');
+  const audienceValue=(value)=>value==null||value===''||!Number.isFinite(Number(value))||Number(value)<0?null:Number(value);
+  const sum=(items,read)=>items.every(r=>audienceValue(read(r))!=null)?items.reduce((total,r)=>total+audienceValue(read(r)),0):null;
+  const used=sum(confirmedRaids,r=>r.raid?.viewers),wasted=sum(confirmedNoRaids,r=>r.viewersAtEnd),total=confirmedRaids.length+confirmedNoRaids.length&&used!=null&&wasted!=null?used+wasted:null;
+  return {total,used,wasted};
+}
 function renderOverview(){
   const o=dashboard.overview||{};
+  const audience=audienceMetrics();
   $('#metrics').innerHTML = [
     metric('Lives monitoradas',o.lives,'◉','Transmissões com registro'),
     metric('Raids enviadas',o.raids,'↗','Total de raids identificadas','accent'),
@@ -75,6 +84,10 @@ function renderOverview(){
     metric('Inconclusivas',o.inconclusivas,'!','Não foi possível confirmar','warning')].join('');
   const last = dashboard.updatedAt ? dateBR(dashboard.updatedAt) : 'Sem sincronização';
   $('#lastSync').textContent = `Atualizado: ${last}`;
+  $('#metrics').innerHTML += [
+    metric('Views totais',o.viewsTotais??audience.total,'◉','Público em resultados confirmados'),
+    metric('Views aproveitadas',o.viewsAproveitadas??audience.used,'↗','Espectadores enviados em raids','accent'),
+    metric('Views desperdiçadas',o.viewsDesperdicadas??audience.wasted,'⊘','Público em lives sem raid confirmada','warning')].join('');
   const daily = dashboard.daily || [];
   const days = Array.from({length:14},(_,i)=>{const dt = new Date();dt.setUTCDate(dt.getUTCDate()-13+i);return dt.toISOString().slice(0,10)});
   const byDay = new Map(daily.map(d=>[d.date,d]));

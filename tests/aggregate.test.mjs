@@ -35,6 +35,15 @@ test('Raid externa classificada corretamente',()=>{
   const data=buildDashboard([online('c','2026-11-22T18:00:00Z'),offline('c','2026-11-22T20:00:00Z'),raid('2026-11-22T20:01:00Z','foradogrupo')],members,good,now);
   assert.equal(data.overview.externas,1);
 });
+test('Métricas de audiência usam somente resultados confirmados',()=>{
+  const health={...good,endedStreams:{sem:{endedAt:'2026-11-22T20:00:00Z',viewers:137}}};
+  const data=buildDashboard([online('sem','2026-11-22T16:00:00Z'),offline('sem','2026-11-22T18:00:00Z'),online('raid-live','2026-11-22T20:00:00Z'),raid('2026-11-22T21:59:00Z','dree_sp'),offline('raid-live','2026-11-22T22:00:00Z')],members,health,'2026-11-22T23:00:00Z');
+  assert.equal(data.overview.viewsAproveitadas,42);assert.equal(data.overview.viewsDesperdicadas,137);assert.equal(data.overview.viewsTotais,179);
+});
+test('Audiência fica indisponível quando falta dado confirmado',()=>{
+  const data=buildDashboard([online('sem','2026-11-22T18:00:00Z'),offline('sem','2026-11-22T20:00:00Z')],members,good,now);
+  assert.equal(data.overview.viewsDesperdicadas,null);assert.equal(data.overview.viewsTotais,null);
+});
 test('Lacuna durante live impede sem_raid',()=>{
   const health={...good,gaps:[{start:'2026-11-22T19:00:00Z',end:'2026-11-22T19:15:00Z',reason:'Falha no receptor'}]};
   const data=buildDashboard([online('d','2026-11-22T18:00:00Z'),offline('d','2026-11-22T20:00:00Z')],members,health,now);
