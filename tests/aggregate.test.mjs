@@ -13,6 +13,10 @@ test('Live terminou sem raid: sem_raid apenas com cobertura posterior ao encerra
   const data=buildDashboard([online('a','2026-11-22T18:00:00Z'),offline('a','2026-11-22T20:00:00Z')],members,good,now);
   assert.equal(data.overview.lives,1);assert.equal(data.overview.semRaid,1);assert.equal(data.recent[0].status,'sem_raid');
 });
+test('Live em andamento aparece como ativa no streamer',()=>{
+  const data=buildDashboard([online('active','2026-11-22T22:00:00Z')],members,good,now);
+  assert.equal(data.overview.liveAgora,1);assert.equal(data.streamers.find(s=>s.login==='santz_rj').live,true);
+});
 test('Raid para NEXO classificada como interna',()=>{
   const data=buildDashboard([online('b','2026-11-22T18:00:00Z'),raid('2026-11-22T19:59:00Z','dree_sp'),offline('b','2026-11-22T20:00:00Z')],members,good,now);
   assert.equal(data.overview.nexo,1);assert.equal(data.overview.externas,0);assert.equal(data.recent[0].raid.viewers,42);
