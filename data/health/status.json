@@ -1,7 +1,13 @@
 {
   "status": "healthy",
-  "lastCheckedAt": "2026-11-23T01:39:03.433Z",
+  "lastCheckedAt": "2026-11-23T01:49:08.141Z",
   "issues": [],
   "gaps": [],
-  "activeStreams": {}
+  "activeStreams": {
+    "187860127": {
+      "streamId": "319640200949",
+      "startedAt": "2026-11-23T01:39:58Z",
+      "login": "erick99z"
+    }
+  }
 }

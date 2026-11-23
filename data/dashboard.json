@@ -1,19 +1,19 @@
 {
-  "updatedAt": "2026-11-23T01:39:04.840Z",
+  "updatedAt": "2026-11-23T01:49:09.193Z",
   "monitor": {
     "status": "healthy",
-    "lastCheckedAt": "2026-11-23T01:39:03.433Z",
+    "lastCheckedAt": "2026-11-23T01:49:08.141Z",
     "issues": [],
     "gaps": []
   },
   "overview": {
-    "lives": 0,
+    "lives": 1,
     "raids": 0,
     "nexo": 0,
     "externas": 0,
     "semRaid": 0,
     "inconclusivas": 0,
-    "liveAgora": 0
+    "liveAgora": 1
   },
   "streamers": [
     {
@@ -96,8 +96,8 @@
     {
       "login": "erick99z",
       "profileImageUrl": "https://static-cdn.jtvnw.net/jtv_user_pictures/b5c66944-96ee-4af5-912b-a3d2cf33e333-profile_image-300x300.png",
-      "live": false,
-      "lives": 0,
+      "live": true,
+      "lives": 1,
       "raids": 0,
       "nexo": 0,
       "externas": 0,
@@ -215,6 +215,22 @@
       "inconclusivas": 0
     }
   ],
-  "recent": [],
-  "daily": []
+  "recent": [
+    {
+      "id": "319640200949",
+      "login": "erick99z",
+      "startedAt": "2026-11-23T01:39:58Z",
+      "endedAt": null,
+      "raid": null,
+      "coverageIssues": [],
+      "status": "live"
+    }
+  ],
+  "daily": [
+    {
+      "date": "2026-11-23",
+      "lives": 1,
+      "raids": 0
+    }
+  ]
 }
