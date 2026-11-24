@@ -14,6 +14,8 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 concurrency:
   group: nexo-analytics-publish
@@ -72,4 +74,22 @@ jobs:
               if [ "$attempt" -eq 4 ]; then exit 1; fi
               sleep 2
             done
+      - name: Preparar site estatico
+        run: |
+          mkdir -p _site/data
+          cp -r site/. _site/
+          cp data/dashboard.json _site/data/dashboard.json
+          cp data/streamer-profiles.json _site/data/streamer-profiles.json
+          touch _site/.nojekyll
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+      - name: Publicar interface do painel
+        uses: actions/deploy-pages@v4
+        id: deployment
+        continue-on-error: true
+      - name: Repetir publicacao do painel
+        if: steps.deployment.outcome == 'failure'
+        uses: actions/deploy-pages@v4
           fi

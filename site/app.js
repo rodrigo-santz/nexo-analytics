@@ -23,7 +23,7 @@ const badge = (status) => `<span class="status-chip status-${esc(status)}">${sta
 const validLogin = (s) => /^[a-z0-9_]{3,25}$/.test(String(s||''));
 let dashboard = null, historyPage = 1, historyPageSize = 10;
 let dataRequestInFlight = false;
-const DATA_REFRESH_INTERVAL_MS = 2 * 60 * 1000;
+const DATA_REFRESH_INTERVAL_MS = 10 * 60 * 1000;
 const dateFilter = { preset: 'all', start: '', end: '' };
 const drawerElement = $('#drawerLayer');
 let drawerModal = null;
