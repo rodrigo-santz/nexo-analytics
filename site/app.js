@@ -175,6 +175,7 @@ function initConstellation(){const canvas=$('#constellation'),ctx=canvas?.getCon
 initConstellation();
 }
 $('#year').textContent=new Date().getFullYear();
+$('#loginForm')?.addEventListener('submit',event=>event.preventDefault());
 initProfileModal();
 $('#refreshBtn').addEventListener('click',loadData);
 $('#searchStreamers').addEventListener('input',renderStreamers);

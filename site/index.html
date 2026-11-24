@@ -17,6 +17,21 @@
   <script src="./app.js?v=audience-12" type="module"></script>
 </head>
 <body>
+  <section class="login-screen" id="loginScreen" aria-label="Acesso NEXO Analytics">
+    <div class="login-orbit login-orbit-one" aria-hidden="true"></div>
+    <div class="login-orbit login-orbit-two" aria-hidden="true"></div>
+    <div class="login-card">
+      <img src="./assets/nexo-logo.png" alt="Nexo Synergy" class="login-logo" />
+      <div class="login-rule" aria-hidden="true"></div>
+      <form id="loginForm" class="login-form">
+        <label for="loginUser">LOGIN</label>
+        <input id="loginUser" name="login" type="text" autocomplete="username" placeholder="Digite seu login" required />
+        <label for="loginPassword">SENHA</label>
+        <input id="loginPassword" name="password" type="password" autocomplete="current-password" placeholder="Digite sua senha" required />
+        <button type="submit" class="login-submit">ENTRAR <span aria-hidden="true">↗</span></button>
+      </form>
+    </div>
+  </section>
   <canvas id="constellation" aria-hidden="true"></canvas>
   <div class="ambient ambient-one" aria-hidden="true"></div>
   <div class="ambient ambient-two" aria-hidden="true"></div>
