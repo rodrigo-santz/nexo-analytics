@@ -1,3 +1,5 @@
+const AUTH_KEY = 'nexo.analytics.auth';
+if (sessionStorage.getItem(AUTH_KEY) !== 'ok') window.location.replace('./');
 const $ = (s) => document.querySelector(s);
 const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fmt = (v) => new Intl.NumberFormat('pt-BR').format(Number(v)||0);
@@ -175,7 +177,6 @@ function initConstellation(){const canvas=$('#constellation'),ctx=canvas?.getCon
 initConstellation();
 }
 $('#year').textContent=new Date().getFullYear();
-$('#loginForm')?.addEventListener('submit',event=>event.preventDefault());
 initProfileModal();
 $('#refreshBtn').addEventListener('click',loadData);
 $('#searchStreamers').addEventListener('input',renderStreamers);
