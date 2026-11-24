@@ -1,6 +1,6 @@
 {
   "status": "healthy",
-  "lastCheckedAt": "2026-11-24T11:50:19.222Z",
+  "lastCheckedAt": "2026-11-24T12:00:36.735Z",
   "issues": [],
   "gaps": [
     {
@@ -20,14 +20,14 @@
       "streamId": "319566951414",
       "startedAt": "2026-11-24T09:40:36Z",
       "login": "quindinhaa",
-      "viewerCount": 3
+      "viewerCount": 7
     }
   },
-  "lastSuccessfulAt": "2026-11-24T11:50:19.222Z",
+  "lastSuccessfulAt": "2026-11-24T12:00:36.735Z",
   "connection": "online",
   "failures": [],
   "subscriptionHealth": {
-    "checkedAt": "2026-11-24T11:50:19.222Z",
+    "checkedAt": "2026-11-24T12:00:36.735Z",
     "expected": 51,
     "active": 51,
     "missing": []
