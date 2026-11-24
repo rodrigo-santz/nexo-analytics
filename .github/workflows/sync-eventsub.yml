@@ -1,6 +1,11 @@
 name: Sincronizar EventSub
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'data/streamers.json'
+      - 'data/streamers-archived.json'
   schedule:
     - cron: '21 */6 * * *'
 permissions:

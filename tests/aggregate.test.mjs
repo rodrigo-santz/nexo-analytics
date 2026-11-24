@@ -15,6 +15,10 @@ test('Live depois do arquivamento nao entra, mas o historico anterior permanece'
   const data=buildDashboard(events,['archived'],good,now,{},[],[],{'archived':'2026-11-23T00:00:00Z'});
   assert.equal(data.overview.lives,1);assert.equal(data.recent[0].startedAt,'2026-11-22T18:00:00Z');
 });
+test('Membro arquivado que retorna volta a ser monitorado',()=>{
+  const data=buildDashboard([online('return','2026-11-23T18:00:00Z','archived')],['archived'],good,now,{},[],['archived'],{'archived':'2026-11-23T00:00:00Z'});
+  assert.equal(data.overview.lives,1);assert.equal(data.streamers[0].active,true);
+});
 
 test('Live terminou sem raid: sem_raid apenas com cobertura posterior ao encerramento',()=>{
   const data=buildDashboard([online('a','2026-11-22T18:00:00Z'),offline('a','2026-11-22T20:00:00Z')],members,good,now);

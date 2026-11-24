@@ -8,7 +8,7 @@ const overlaps=(a,b,c,d)=>Number.isFinite(a)&&Number.isFinite(b)&&a<=d&&b>=c;
 // A partial observation is not automatically an inconclusive result.
 export function buildDashboard(events,names,health,now=new Date().toISOString(),profiles={},manualReviews=[],activeNames=names,archivedAt={}){
   const members=new Set(names.map(login)),activeMembers=new Set(activeNames.map(login)),sessions=[],nowMs=iso(now),seenMessages=new Set(),seenRaids=new Set();
-  const isMemberAt=(name,when)=>members.has(name)&&(!archivedAt[name]||iso(when)<iso(archivedAt[name]));
+  const isMemberAt=(name,when)=>members.has(name)&&(activeMembers.has(name)||!archivedAt[name]||iso(when)<iso(archivedAt[name]));
   const sorted=[...events].filter(x=>x&&x.event&&x.subscriptionType).filter(x=>{
     if(x.messageId){if(seenMessages.has(x.messageId))return false;seenMessages.add(x.messageId)}
     if(x.subscriptionType==='channel.raid'){
