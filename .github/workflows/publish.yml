@@ -1,8 +1,6 @@
 name: Atualizar dados da NEXO
 
 on:
-  schedule:
-    - cron: '*/5 * * * *'
   push:
     branches: [main]
     paths:
