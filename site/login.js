@@ -1,3 +1,4 @@
+// Deploy marker: refresh authentication feedback on GitHub Pages.
 import { supabase } from './supabase.js';
 
 const form = document.querySelector('#loginForm');
