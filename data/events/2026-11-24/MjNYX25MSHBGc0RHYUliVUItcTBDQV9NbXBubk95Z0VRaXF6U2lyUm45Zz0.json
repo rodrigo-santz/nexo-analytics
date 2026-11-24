@@ -1,0 +1,17 @@
+{
+  "messageId": "23X_nLHpFsDGaIbUB-q0CA_MmpnnOygEQiqzSirRn9g=",
+  "messageType": "notification",
+  "subscriptionType": "stream.online",
+  "subscriptionStatus": "enabled",
+  "receivedAt": "2026-11-24T23:21:21.67722613Z",
+  "source": "eventsub",
+  "event": {
+    "id": "319661132533",
+    "broadcaster_user_id": "488741363",
+    "broadcaster_user_login": "coldx68",
+    "broadcaster_user_name": "coldx68",
+    "type": "live",
+    "started_at": "2026-11-24T23:21:02Z"
+  },
+  "subscriptionId": "4029fa46-0a14-4073-94ac-b44bdfcc895d"
+}
