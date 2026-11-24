@@ -60,6 +60,12 @@ test('Raid externa classificada corretamente',()=>{
   const data=buildDashboard([online('c','2026-11-22T18:00:00Z'),offline('c','2026-11-22T20:00:00Z'),raid('2026-11-22T20:01:00Z','foradogrupo')],members,good,now);
   assert.equal(data.overview.externas,1);
 });
+test('Raid infere o fim quando o evento offline não chega e o canal não está mais ao vivo',()=>{
+  const health={...good,activeStreams:{}};
+  const data=buildDashboard([online('raid-ended','2026-11-22T18:00:00Z'),raid('2026-11-22T19:59:00Z','dree_sp')],members,health,now);
+  assert.equal(data.recent[0].endedAt,'2026-11-22T19:59:00.000Z');
+  assert.ok(data.recent[0].coverageIssues.at(-1).includes('Encerramento inferido pela raid'));
+});
 test('Métricas de audiência usam somente resultados confirmados',()=>{
   const health={...good,endedStreams:{sem:{endedAt:'2026-11-22T20:00:00Z',viewers:137}}};
   const data=buildDashboard([online('sem','2026-11-22T16:00:00Z'),offline('sem','2026-11-22T18:00:00Z'),online('raid-live','2026-11-22T20:00:00Z'),raid('2026-11-22T21:59:00Z','dree_sp'),offline('raid-live','2026-11-22T22:00:00Z')],members,health,'2026-11-22T23:00:00Z');

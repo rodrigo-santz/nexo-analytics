@@ -50,6 +50,16 @@ export function buildDashboard(events,names,health,now=new Date().toISOString(),
       const target=login(e.to_broadcaster_user_login),targetId=String(e.to_broadcaster_user_id||''),known=Boolean(target&&targetId),viewers=Number.isFinite(Number(e.viewers))?Number(e.viewers):null;if(!s.raid)s.raid={toLogin:target||'desconhecido',viewers,toId:targetId,at:when,destinationKnown:known,isNexo:known&&members.has(target)};
     }
   }
+  const activeStreams=Object.values(health?.activeStreams||{}),hasActiveStreamSnapshot=Boolean(health&&Object.prototype.hasOwnProperty.call(health,'activeStreams'));
+  for(const s of sessions){
+    const raidAt=iso(s.raid?.at);
+    if(s.endedAt||!s.raid||!hasActiveStreamSnapshot||!Number.isFinite(raidAt)||nowMs-raidAt<10*60_000)continue;
+    const stillLive=activeStreams.some(stream=>login(stream?.login)===s.login);
+    if(stillLive)continue;
+    s.endedAt=new Date(raidAt).toISOString();
+    s.sourceEnd='raid-inferred';
+    s.coverageIssues.push('Encerramento inferido pela raid; evento offline não recebido');
+  }
   const gaps=(health?.gaps||[]).filter(g=>g.start).map(g=>({start:iso(g.start),end:iso(g.end||now),reason:g.reason||'Indisponibilidade detectada',kind:g.kind||'monitoring'})).filter(g=>Number.isFinite(g.start));
   for(const s of sessions){
     const start=iso(s.startedAt),end=iso(s.endedAt||now),effectiveEnd=s.endedAt?end:nowMs,affected=gaps.filter(g=>overlaps(Number.isFinite(start)?start:end,effectiveEnd,g.start,g.end));
