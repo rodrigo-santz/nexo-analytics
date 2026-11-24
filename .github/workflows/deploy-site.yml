@@ -42,7 +42,18 @@ jobs:
         uses: actions/deploy-pages@v4
         id: deployment
         continue-on-error: true
+      - name: Aguardar sincronizacao do artefato
+        if: steps.deployment.outcome == 'failure'
+        run: sleep 15
       - name: Repetir publicacao no GitHub Pages
         if: steps.deployment.outcome == 'failure'
         uses: actions/deploy-pages@v4
         id: deployment_retry
+        continue-on-error: true
+      - name: Aguardar segunda sincronizacao do artefato
+        if: steps.deployment_retry.outcome == 'failure'
+        run: sleep 15
+      - name: Ultima tentativa de publicacao no GitHub Pages
+        if: steps.deployment_retry.outcome == 'failure'
+        uses: actions/deploy-pages@v4
+        id: deployment_last
