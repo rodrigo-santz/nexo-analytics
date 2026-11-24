@@ -37,6 +37,7 @@ function initScrollReveal(){
   revealObserver ||= new IntersectionObserver((entries)=>entries.forEach((entry)=>{
     if(entry.isIntersecting){
       entry.target.classList.add('is-visible');
+      entry.target.querySelectorAll('.donut[data-target-pct]').forEach((donut)=>animateDonut(donut,Number(donut.dataset.targetPct)));
       revealObserver.unobserve(entry.target);
     }
   }),{threshold:.12,rootMargin:'0px 0px -8% 0px'});
@@ -124,9 +125,13 @@ function overviewForFilter(){
 }
 function animateDonut(element,percentage){
   if(!element)return;
+  const revealParent=element.closest('.reveal-item');
+  const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  element.dataset.targetPct=String(percentage);
   element.style.setProperty('--target-pct',`${percentage}%`);
   element.style.setProperty('--pct','0%');
   element.classList.remove('is-filling');
+  if(revealParent&&!revealParent.classList.contains('is-visible')&&!reducedMotion)return;
   void element.offsetWidth;
   element.classList.add('is-filling');
 }
