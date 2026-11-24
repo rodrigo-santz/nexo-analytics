@@ -97,6 +97,8 @@ html.coverage-modal-open,body.coverage-modal-open{overflow:hidden}
 
 /* Fade and lift the audit modal instead of displaying it abruptly. */
 .coverage-modal.hidden{display:grid!important;opacity:0;visibility:hidden;pointer-events:none}
+.menu-toggle{display:none;border:1px solid rgba(160,113,236,.45);border-radius:8px;padding:7px 9px;color:#e9dcff;background:#1b102d;font-size:18px;line-height:1;cursor:pointer}
+@media(max-width:780px){.menu-toggle{display:block;position:relative;z-index:12}.top-nav.open{z-index:11}}
 .coverage-modal{opacity:1;visibility:visible;transition:opacity .22s ease,visibility 0s linear 0s}
 .coverage-modal.hidden{transition:opacity .22s ease,visibility 0s linear .22s}
 .coverage-modal-shade{opacity:1;transition:opacity .22s ease}
