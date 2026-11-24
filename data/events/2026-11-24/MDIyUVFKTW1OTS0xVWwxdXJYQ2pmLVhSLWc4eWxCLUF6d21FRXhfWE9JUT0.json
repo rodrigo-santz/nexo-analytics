@@ -1,0 +1,15 @@
+{
+  "messageId": "022QQJMmNM-1Ul1urXCjf-XR-g8ylB-AzwmEEx_XOIQ=",
+  "messageType": "notification",
+  "subscriptionType": "stream.offline",
+  "subscriptionStatus": "enabled",
+  "receivedAt": "2026-11-24T01:06:55.560757073Z",
+  "source": "eventsub",
+  "event": {
+    "id": "319562013814",
+    "broadcaster_user_id": "50253995",
+    "broadcaster_user_login": "hudsondark",
+    "broadcaster_user_name": "hudsondark"
+  },
+  "subscriptionId": "5de852a6-2a6d-4ca1-90c8-3fca263d0f11"
+}
