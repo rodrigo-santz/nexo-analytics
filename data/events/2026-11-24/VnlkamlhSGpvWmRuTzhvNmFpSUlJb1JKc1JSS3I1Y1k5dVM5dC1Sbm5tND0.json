@@ -1,0 +1,15 @@
+{
+  "messageId": "VydjiaHjoZdnO8o6aiIIIoRJsRRKr5cY9uS9t-Rnnm4=",
+  "messageType": "notification",
+  "subscriptionType": "stream.offline",
+  "subscriptionStatus": "enabled",
+  "receivedAt": "2026-11-24T10:29:20.335483195Z",
+  "source": "eventsub",
+  "event": {
+    "id": "319565005174",
+    "broadcaster_user_id": "488741363",
+    "broadcaster_user_login": "coldx68",
+    "broadcaster_user_name": "coldx68"
+  },
+  "subscriptionId": "a58e43ab-320c-461c-aa3f-b8867d054e80"
+}
