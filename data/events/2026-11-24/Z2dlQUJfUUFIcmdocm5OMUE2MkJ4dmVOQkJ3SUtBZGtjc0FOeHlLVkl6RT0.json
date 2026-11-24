@@ -1,0 +1,15 @@
+{
+  "messageId": "ggeAB_QAHrghrnN1A62BxveNBBwIKAdkcsANxyKVIzE=",
+  "messageType": "notification",
+  "subscriptionType": "stream.offline",
+  "subscriptionStatus": "enabled",
+  "receivedAt": "2026-11-24T22:00:43.598139522Z",
+  "source": "eventsub",
+  "event": {
+    "id": "319568775670",
+    "broadcaster_user_id": "485677113",
+    "broadcaster_user_login": "1skilo",
+    "broadcaster_user_name": "1SkiLO"
+  },
+  "subscriptionId": "213555e1-a533-41f7-a245-e79c80e5518b"
+}
