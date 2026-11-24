@@ -1,10 +1,10 @@
 {
-  "updatedAt": "2026-11-24T02:50:18.902Z",
+  "updatedAt": "2026-11-24T02:52:32.145Z",
   "monitor": {
     "status": "healthy",
     "connection": "online",
-    "lastCheckedAt": "2026-11-24T02:50:17.507Z",
-    "lastSuccessfulAt": "2026-11-24T02:50:17.507Z",
+    "lastCheckedAt": "2026-11-24T02:52:30.923Z",
+    "lastSuccessfulAt": "2026-11-24T02:52:30.923Z",
     "issues": [],
     "failures": [],
     "gaps": [
@@ -15,9 +15,9 @@
       }
     ],
     "subscriptionHealth": {
-      "checkedAt": "2026-11-24T02:50:17.507Z",
-      "expected": 54,
-      "active": 54,
+      "checkedAt": "2026-11-24T02:52:30.923Z",
+      "expected": 51,
+      "active": 51,
       "missing": []
     }
   },
@@ -39,6 +39,7 @@
   "streamers": [
     {
       "login": "1skilo",
+      "active": true,
       "profileImageUrl": "https://static-cdn.jtvnw.net/jtv_user_pictures/c42baee0-9877-45d4-bfcb-f35b782b438a-profile_image-300x300.png",
       "live": false,
       "lives": 2,
@@ -51,6 +52,7 @@
     },
     {
       "login": "behttah",
+      "active": true,
       "profileImageUrl": "https://static-cdn.jtvnw.net/jtv_user_pictures/5b3e4dd7-58e0-458d-bbaf-e0d4db2d72b4-profile_image-300x300.png",
       "live": true,
       "lives": 1,
@@ -63,6 +65,7 @@
     },
     {
       "login": "bolosdomikael",
+      "active": true,
       "profileImageUrl": "https://static-cdn.jtvnw.net/jtv_user_pictures/c8d7f711-91c3-42c0-b635-710de452c7f4-profile_image-300x300.png",
       "live": false,
       "lives": 1,
@@ -75,6 +78,7 @@
     },
     {
       "login": "byoki77",
+      "active": true,
       "profileImageUrl": "https://static-cdn.jtvnw.net/jtv_user_pictures/016f2c3d-f3f2-40e0-b01e-b06fa41a3ee7-profile_image-300x300.png",
       "live": false,
       "lives": 0,
@@ -87,6 +91,7 @@
     },
     {
       "login": "chboga",
+      "active": true,
       "profileImageUrl": "https://static-cdn.jtvnw.net/jtv_user_pictures/75fa3df0-3440-4846-89b0-d8a26f01edc1-profile_image-300x300.png",
       "live": false,
       "lives": 0,
@@ -99,6 +104,7 @@
     },
     {
       "login": "coldx68",
+      "active": true,
       "profileImageUrl": "https://static-cdn.jtvnw.net/jtv_user_pictures/2683dc46-1182-43c0-b1e1-1ba1e23c0070-profile_image-300x300.png",
       "live": false,
       "lives": 1,
@@ -111,6 +117,7 @@
     },
     {
       "login": "dree_sp",
+      "active": true,
       "profileImageUrl": "https://static-cdn.jtvnw.net/jtv_user_pictures/5e03ec1c-e9ff-4cfd-86cb-4e71560f71f2-profile_image-300x300.png",
       "live": true,
       "lives": 2,
@@ -122,19 +129,8 @@
       "watchedLives": []
     },
     {
-      "login": "erick99z",
-      "profileImageUrl": "https://static-cdn.jtvnw.net/jtv_user_pictures/b5c66944-96ee-4af5-912b-a3d2cf33e333-profile_image-300x300.png",
-      "live": false,
-      "lives": 2,
-      "raids": 0,
-      "nexo": 0,
-      "externas": 0,
-      "semRaid": 1,
-      "inconclusivas": 1,
-      "watchedLives": []
-    },
-    {
       "login": "galahadyy",
+      "active": true,
       "profileImageUrl": "https://static-cdn.jtvnw.net/jtv_user_pictures/8a5df968-f5b7-429d-b1b5-bd98ee9237e3-profile_image-300x300.png",
       "live": false,
       "lives": 0,
@@ -147,6 +143,7 @@
     },
     {
       "login": "galiodejordan",
+      "active": true,
       "profileImageUrl": "https://static-cdn.jtvnw.net/jtv_user_pictures/52117eff-b845-49ac-a7c0-c277e52fd9c3-profile_image-300x300.jpeg",
       "live": false,
       "lives": 0,
@@ -159,6 +156,7 @@
     },
     {
       "login": "hecazinha",
+      "active": true,
       "profileImageUrl": "https://static-cdn.jtvnw.net/jtv_user_pictures/62fd3430-0f2a-4da9-aa5f-d2dcc3a7d7d6-profile_image-300x300.png",
       "live": false,
       "lives": 1,
@@ -171,6 +169,7 @@
     },
     {
       "login": "heyjessh",
+      "active": true,
       "profileImageUrl": "https://static-cdn.jtvnw.net/jtv_user_pictures/09d83fe3-acd0-424e-aa7a-22a2e338d547-profile_image-300x300.jpeg",
       "live": false,
       "lives": 1,
@@ -183,6 +182,7 @@
     },
     {
       "login": "hudsondark",
+      "active": true,
       "profileImageUrl": "https://static-cdn.jtvnw.net/jtv_user_pictures/237df599-7b48-4141-8c51-cfcbea60e4d6-profile_image-300x300.png",
       "live": false,
       "lives": 1,
@@ -195,6 +195,7 @@
     },
     {
       "login": "nanbola",
+      "active": true,
       "profileImageUrl": "https://static-cdn.jtvnw.net/jtv_user_pictures/f4147dca-d47d-485a-ba1c-c82eb44c085a-profile_image-300x300.png",
       "live": false,
       "lives": 0,
@@ -207,6 +208,7 @@
     },
     {
       "login": "onoox_",
+      "active": true,
       "profileImageUrl": "https://static-cdn.jtvnw.net/jtv_user_pictures/e232c527-1d75-416d-841f-d549922ef4c2-profile_image-300x300.png",
       "live": false,
       "lives": 1,
@@ -219,6 +221,7 @@
     },
     {
       "login": "quindinhaa",
+      "active": true,
       "profileImageUrl": "https://static-cdn.jtvnw.net/jtv_user_pictures/d29fcea7-eadf-4efe-9ef9-d156033f65d6-profile_image-300x300.png",
       "live": false,
       "lives": 1,
@@ -231,6 +234,7 @@
     },
     {
       "login": "santz_rj",
+      "active": true,
       "profileImageUrl": "https://static-cdn.jtvnw.net/jtv_user_pictures/d6380cdd-48ba-4c05-8834-a11bce87e8fb-profile_image-300x300.png",
       "live": false,
       "lives": 0,
@@ -243,6 +247,7 @@
     },
     {
       "login": "zells001",
+      "active": true,
       "profileImageUrl": "https://static-cdn.jtvnw.net/jtv_user_pictures/dd737f5b-a16b-4f41-8ac6-7792b68bc858-profile_image-300x300.png",
       "live": false,
       "lives": 1,
@@ -251,6 +256,19 @@
       "externas": 1,
       "semRaid": 0,
       "inconclusivas": 0,
+      "watchedLives": []
+    },
+    {
+      "login": "erick99z",
+      "active": false,
+      "profileImageUrl": "https://static-cdn.jtvnw.net/jtv_user_pictures/b5c66944-96ee-4af5-912b-a3d2cf33e333-profile_image-300x300.png",
+      "live": false,
+      "lives": 2,
+      "raids": 0,
+      "nexo": 0,
+      "externas": 0,
+      "semRaid": 1,
+      "inconclusivas": 1,
       "watchedLives": []
     }
   ],
@@ -281,7 +299,7 @@
       "coverageIssues": [],
       "startTimeKnown": true,
       "viewersAtEnd": 1,
-      "updatedAt": "2026-11-24T02:50:18.902Z",
+      "updatedAt": "2026-11-24T02:52:32.145Z",
       "coverageGaps": [],
       "coverageStatus": "complete",
       "monitoredDurationMs": 11826203,
@@ -309,7 +327,7 @@
       "reconnections": [],
       "coverageIssues": [],
       "startTimeKnown": true,
-      "updatedAt": "2026-11-24T02:50:18.902Z",
+      "updatedAt": "2026-11-24T02:52:32.145Z",
       "coverageGaps": [],
       "coverageStatus": "complete",
       "monitoredDurationMs": 11695580,
@@ -344,7 +362,7 @@
       ],
       "coverageIssues": [],
       "startTimeKnown": true,
-      "updatedAt": "2026-11-24T02:50:18.902Z",
+      "updatedAt": "2026-11-24T02:52:32.145Z",
       "coverageGaps": [],
       "coverageStatus": "complete",
       "monitoredDurationMs": 17689143,
@@ -366,7 +384,7 @@
       "coverageIssues": [],
       "startTimeKnown": true,
       "viewersAtEnd": 2,
-      "updatedAt": "2026-11-24T02:50:18.902Z",
+      "updatedAt": "2026-11-24T02:52:32.145Z",
       "coverageGaps": [],
       "coverageStatus": "complete",
       "monitoredDurationMs": 6994672,
@@ -387,10 +405,10 @@
       "reconnections": [],
       "coverageIssues": [],
       "startTimeKnown": true,
-      "updatedAt": "2026-11-24T02:50:18.902Z",
+      "updatedAt": "2026-11-24T02:52:32.145Z",
       "coverageGaps": [],
       "coverageStatus": "complete",
-      "monitoredDurationMs": 11688902,
+      "monitoredDurationMs": 11822145,
       "status": "live",
       "automaticStatus": "live",
       "inconclusiveReason": null,
@@ -415,7 +433,7 @@
       "reconnections": [],
       "coverageIssues": [],
       "startTimeKnown": true,
-      "updatedAt": "2026-11-24T02:50:18.902Z",
+      "updatedAt": "2026-11-24T02:52:32.145Z",
       "coverageGaps": [],
       "coverageStatus": "complete",
       "monitoredDurationMs": 22590196,
@@ -436,10 +454,10 @@
       "reconnections": [],
       "coverageIssues": [],
       "startTimeKnown": true,
-      "updatedAt": "2026-11-24T02:50:18.902Z",
+      "updatedAt": "2026-11-24T02:52:32.145Z",
       "coverageGaps": [],
       "coverageStatus": "complete",
-      "monitoredDurationMs": 15970902,
+      "monitoredDurationMs": 16104145,
       "status": "live",
       "automaticStatus": "live",
       "inconclusiveReason": null,
@@ -464,7 +482,7 @@
       "reconnections": [],
       "coverageIssues": [],
       "startTimeKnown": true,
-      "updatedAt": "2026-11-24T02:50:18.902Z",
+      "updatedAt": "2026-11-24T02:52:32.145Z",
       "coverageGaps": [],
       "coverageStatus": "complete",
       "monitoredDurationMs": 43831714,
@@ -492,7 +510,7 @@
       "reconnections": [],
       "coverageIssues": [],
       "startTimeKnown": true,
-      "updatedAt": "2026-11-24T02:50:18.902Z",
+      "updatedAt": "2026-11-24T02:52:32.145Z",
       "coverageGaps": [],
       "coverageStatus": "complete",
       "monitoredDurationMs": 40688042,
@@ -527,7 +545,7 @@
       ],
       "coverageIssues": [],
       "startTimeKnown": true,
-      "updatedAt": "2026-11-24T02:50:18.902Z",
+      "updatedAt": "2026-11-24T02:52:32.145Z",
       "coverageGaps": [],
       "coverageStatus": "complete",
       "monitoredDurationMs": 13170560,
@@ -555,7 +573,7 @@
       "reconnections": [],
       "coverageIssues": [],
       "startTimeKnown": true,
-      "updatedAt": "2026-11-24T02:50:18.902Z",
+      "updatedAt": "2026-11-24T02:52:32.145Z",
       "coverageGaps": [],
       "coverageStatus": "complete",
       "monitoredDurationMs": 21541704,
@@ -583,7 +601,7 @@
       "reconnections": [],
       "coverageIssues": [],
       "startTimeKnown": true,
-      "updatedAt": "2026-11-24T02:50:18.902Z",
+      "updatedAt": "2026-11-24T02:52:32.145Z",
       "coverageGaps": [],
       "coverageStatus": "complete",
       "monitoredDurationMs": 15942010,
@@ -605,7 +623,7 @@
       "coverageIssues": [],
       "startTimeKnown": true,
       "viewersAtEnd": 28,
-      "updatedAt": "2026-11-24T02:50:18.902Z",
+      "updatedAt": "2026-11-24T02:52:32.145Z",
       "coverageGaps": [],
       "coverageStatus": "complete",
       "monitoredDurationMs": 9008200,
@@ -628,7 +646,7 @@
         "Assinaturas ou verificações do monitor indisponíveis"
       ],
       "startTimeKnown": true,
-      "updatedAt": "2026-11-24T02:50:18.902Z",
+      "updatedAt": "2026-11-24T02:52:32.145Z",
       "coverageGaps": [
         {
           "start": "2026-11-23T01:57:52.438Z",
@@ -663,7 +681,7 @@
       "reconnections": [],
       "coverageIssues": [],
       "startTimeKnown": true,
-      "updatedAt": "2026-11-24T02:50:18.902Z",
+      "updatedAt": "2026-11-24T02:52:32.145Z",
       "coverageGaps": [],
       "coverageStatus": "complete",
       "monitoredDurationMs": 165761,
