@@ -1,13 +1,6 @@
 name: Atualizar dados da NEXO
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'data/streamers.json'
-      - 'data/streamers-archived.json'
-      - 'scripts/**'
-      - '.github/workflows/publish.yml'
   workflow_dispatch:
 
 permissions:
