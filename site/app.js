@@ -127,13 +127,32 @@ function animateDonut(element,percentage){
   if(!element)return;
   const revealParent=element.closest('.reveal-item');
   const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const purple=element.querySelector('.donut-purple'),blue=element.querySelector('.donut-blue');
+  if(!purple||!blue)return;
+  const circumference=2*Math.PI*72;
+  const purpleLength=circumference*Math.max(0,Math.min(100,percentage))/100;
+  const blueLength=circumference-purpleLength;
+  const purpleDuration=Math.max(280,Math.round(900*purpleLength/circumference));
+  const blueDuration=Math.max(280,Math.round(900*blueLength/circumference));
   element.dataset.targetPct=String(percentage);
-  element.style.setProperty('--target-pct',`${percentage}%`);
-  element.style.setProperty('--pct','0%');
-  element.classList.remove('is-filling');
+  purple.style.transition='none';
+  blue.style.transition='none';
+  purple.style.strokeDasharray=`0 ${circumference}`;
+  blue.style.strokeDasharray=`0 ${circumference}`;
+  blue.style.strokeDashoffset=`-${purpleLength}`;
   if(revealParent&&!revealParent.classList.contains('is-visible')&&!reducedMotion)return;
   void element.offsetWidth;
-  element.classList.add('is-filling');
+  if(reducedMotion){
+    purple.style.strokeDasharray=`${purpleLength} ${circumference-purpleLength}`;
+    blue.style.strokeDasharray=`${blueLength} ${circumference}`;
+    return;
+  }
+  purple.style.transition=`stroke-dasharray ${purpleDuration}ms cubic-bezier(.2,.8,.25,1)`;
+  blue.style.transition=`stroke-dasharray ${blueDuration}ms cubic-bezier(.2,.8,.25,1) ${purpleDuration}ms`;
+  requestAnimationFrame(()=>{
+    purple.style.strokeDasharray=`${purpleLength} ${circumference-purpleLength}`;
+    blue.style.strokeDasharray=`${blueLength} ${circumference}`;
+  });
 }
 function renderOverview(){
   const o=overviewForFilter();

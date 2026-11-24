@@ -126,4 +126,17 @@ html.reveal-ready .analytics-grid>.reveal-item.is-visible .activity-bars .bar-li
 .coverage-modal.hidden .coverage-modal-shade{opacity:0}
 .coverage-modal-dialog{transform:translateY(0) scale(1);transition:transform .22s ease,opacity .22s ease}
 .coverage-modal.hidden .coverage-modal-dialog{transform:translateY(8px) scale(.98);opacity:0}
+/* Donut segments are animated independently from the static center label. */
+.donut{position:relative;background:none!important;transform:none!important}
+.donut-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.donut-track,.donut-segment{fill:none;stroke-width:20;transform:rotate(-90deg);transform-origin:50% 50%}
+.donut-track{stroke:transparent}
+.donut-purple{stroke:#a36cf8}
+.donut-blue{stroke:#4e97c3}
+.donut-hole{position:relative;z-index:1}
+.impact-donut.no-data .donut-track{stroke:#302242}
+.impact-donut.no-data .donut-segment{stroke:transparent}
+html.reveal-ready .analytics-grid>.reveal-item .donut{opacity:1;transition:opacity .6s ease;animation:none}
+html.reveal-ready .analytics-grid>.reveal-item.is-visible .donut{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){html.reveal-ready .analytics-grid>.reveal-item .donut{opacity:1;transition:none;transform:none}}
 /* Keep Pages deployment retryable after transient artifact metadata failures. */
