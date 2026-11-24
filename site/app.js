@@ -230,10 +230,31 @@ $('#year').textContent=new Date().getFullYear();
 initProfileModal();
 $('#refreshBtn').addEventListener('click',loadData);
 const dateRangeFilter=$('#dateRangeFilter'),customDateRange=$('#customDateRange'),dateRangeStart=$('#dateRangeStart'),dateRangeEnd=$('#dateRangeEnd');
-function refreshDateFilter(){customDateRange?.classList.toggle('hidden',dateFilter.preset!=='custom');if(dashboard){renderOverview();shown=10;renderHistory();}}
-dateRangeFilter?.addEventListener('change',()=>{dateFilter.preset=dateRangeFilter.value;refreshDateFilter();});
-dateRangeStart?.addEventListener('change',()=>{dateFilter.start=dateRangeStart.value;refreshDateFilter();});
-dateRangeEnd?.addEventListener('change',()=>{dateFilter.end=dateRangeEnd.value;refreshDateFilter();});
+const applyDateRange=$('#applyDateRange'),closeCustomDate=$('#closeCustomDate');
+function renderDateFiltered(){if(dashboard){renderOverview();shown=10;renderHistory();}}
+function updateApplyDateRange(){if(!applyDateRange)return;applyDateRange.disabled=!dateRangeStart?.value||!dateRangeEnd?.value||dateRangeEnd.value<dateRangeStart.value;}
+function openNativeDatePicker(input){input?.focus();try{input?.showPicker?.();}catch{}}
+dateRangeFilter?.addEventListener('change',()=>{
+  dateFilter.preset=dateRangeFilter.value;
+  if(dateFilter.preset==='custom'){
+    customDateRange?.classList.remove('hidden');
+    if(dateFilter.start)dateRangeStart.value=dateFilter.start;
+    if(dateFilter.end)dateRangeEnd.value=dateFilter.end;
+    updateApplyDateRange();
+    openNativeDatePicker(dateRangeStart);
+    return;
+  }
+  customDateRange?.classList.add('hidden');
+  renderDateFiltered();
+});
+dateRangeStart?.addEventListener('change',()=>{
+  if(dateRangeStart.value){dateRangeEnd.min=dateRangeStart.value;if(dateRangeEnd.value&&dateRangeEnd.value<dateRangeStart.value)dateRangeEnd.value='';}
+  updateApplyDateRange();
+  if(!dateRangeEnd.value)openNativeDatePicker(dateRangeEnd);
+});
+dateRangeEnd?.addEventListener('change',updateApplyDateRange);
+applyDateRange?.addEventListener('click',()=>{if(applyDateRange.disabled)return;dateFilter.start=dateRangeStart.value;dateFilter.end=dateRangeEnd.value;customDateRange?.classList.add('hidden');renderDateFiltered();});
+closeCustomDate?.addEventListener('click',()=>{dateRangeFilter.value='all';dateFilter.preset='all';customDateRange?.classList.add('hidden');renderDateFiltered();});
 $('#searchStreamers').addEventListener('input',renderStreamers);
 $('#streamerSort').addEventListener('change',renderStreamers);
 $('#streamerLiveFilter').addEventListener('change',renderStreamers);
