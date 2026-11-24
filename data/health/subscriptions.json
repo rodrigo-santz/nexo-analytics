@@ -1,9 +1,9 @@
 {
   "status": "healthy",
-  "lastReconciledAt": "2026-11-24T04:50:18.061Z",
+  "lastReconciledAt": "2026-11-24T05:00:25.183Z",
   "issues": [],
   "subscriptionHealth": {
-    "checkedAt": "2026-11-24T04:50:18.061Z",
+    "checkedAt": "2026-11-24T05:00:25.183Z",
     "configuredUsers": 17,
     "expected": 51,
     "active": 51,
