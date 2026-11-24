@@ -1,0 +1,17 @@
+{
+  "messageId": "GhXThPRF-NXt7AeQ_km02AeMexFP4xvNeMLzqcIsb2I=",
+  "messageType": "notification",
+  "subscriptionType": "stream.online",
+  "subscriptionStatus": "enabled",
+  "receivedAt": "2026-11-24T16:26:02.006128463Z",
+  "source": "eventsub",
+  "event": {
+    "id": "319720883444",
+    "broadcaster_user_id": "105627045",
+    "broadcaster_user_login": "bolosdomikael",
+    "broadcaster_user_name": "bolosdomikael",
+    "type": "live",
+    "started_at": "2026-11-24T16:25:45Z"
+  },
+  "subscriptionId": "8cb8a806-df27-40a5-86e3-2614e8c4008d"
+}
