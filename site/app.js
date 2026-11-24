@@ -122,6 +122,14 @@ function overviewForFilter(){
   const raids=records.filter(r=>r.status==='raid_nexo'||r.status==='raid_externa');
   return {lives:records.length,raids:raids.length,nexo:records.filter(r=>r.status==='raid_nexo').length,externas:records.filter(r=>r.status==='raid_externa').length,semRaid:records.filter(r=>r.status==='sem_raid').length,inconclusivas:records.filter(r=>r.status==='inconclusiva').length,viewsTotais:audience.total,viewsAproveitadas:audience.used,viewsDesperdicadas:audience.wasted};
 }
+function animateDonut(element,percentage){
+  if(!element)return;
+  element.style.setProperty('--target-pct',`${percentage}%`);
+  element.style.setProperty('--pct','0%');
+  element.classList.remove('is-filling');
+  void element.offsetWidth;
+  element.classList.add('is-filling');
+}
 function renderOverview(){
   const o=overviewForFilter();
   const audience=audienceMetrics();
@@ -149,12 +157,12 @@ function renderOverview(){
   const activityRangeLabel=$('#activityRangeLabel')||document.querySelector('.panel-tag');if(activityRangeLabel)activityRangeLabel.textContent=periodLabel();
   const raids = (o.nexo||0)+(o.externas||0);
   const pct = raids>0 ? Math.round((o.nexo||0)/raids*100) : 0;
-  $('#raidDonut').style.setProperty('--pct',`${pct}%`);
+  animateDonut($('#raidDonut'),pct);
   $('#donutPct').textContent=`${pct}%`;
   $('#destinationLegend').innerHTML=`<span><i class="legend-dot purple"></i> NEXO <strong>${fmt(o.nexo)}</strong></span><span><i class="legend-dot cyan"></i> Externas <strong>${fmt(o.externas)}</strong></span>`;
   const used=o.viewsAproveitadas??audience.used,wasted=o.viewsDesperdicadas??audience.wasted,total=o.viewsTotais??audience.total,hasImpact=Number.isFinite(Number(total))&&Number(total)>0&&Number.isFinite(Number(used))&&Number.isFinite(Number(wasted));
   const impactPct=hasImpact?Math.round(Number(used)/Number(total)*100):null;
-  const impactDonut=$('#viewsImpactDonut');impactDonut.classList.toggle('no-data',!hasImpact);impactDonut.style.setProperty('--pct',hasImpact?`${impactPct}%`:'0%');
+  const impactDonut=$('#viewsImpactDonut');impactDonut.classList.toggle('no-data',!hasImpact);animateDonut(impactDonut,hasImpact?impactPct:0);
   $('#viewsImpactPct').textContent=hasImpact?`${impactPct}%`:'—';$('#viewsImpactCaption').textContent=hasImpact?'efetivas':'sem dados';
   $('#viewsImpactLegend').innerHTML=hasImpact?`<span><i class="legend-dot purple"></i> Efetivas: <strong>${fmt(used)} · ${impactPct}%</strong></span><span><i class="legend-dot cyan"></i> Perdidas: <strong>${fmt(wasted)} · ${100-impactPct}%</strong></span>`:'<span>Sem dados suficientes</span>';
   const health=dashboard.monitor||{};
