@@ -1,0 +1,17 @@
+{
+  "messageId": "KP-yUnVxHUZbxNLRpkUUBy3TOr0WlJSX044uoqB9wcI=",
+  "messageType": "notification",
+  "subscriptionType": "stream.online",
+  "subscriptionStatus": "enabled",
+  "receivedAt": "2026-11-24T23:55:58.81905654Z",
+  "source": "eventsub",
+  "event": {
+    "id": "319661752949",
+    "broadcaster_user_id": "142716844",
+    "broadcaster_user_login": "heyjessh",
+    "broadcaster_user_name": "heyjessh",
+    "type": "live",
+    "started_at": "2026-11-24T23:55:43Z"
+  },
+  "subscriptionId": "c9bf9e94-b226-49c5-bf5c-cce061a13560"
+}
