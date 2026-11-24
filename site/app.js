@@ -21,7 +21,7 @@ const dateBR = (v) => v ? new Intl.DateTimeFormat('pt-BR',{day:'2-digit',month:'
 const statusNames = {raid_nexo:'RAID NEXO',raid_externa:'RAID EXTERNA',sem_raid:'SEM RAID DETECTADA',inconclusiva:'INCONCLUSIVA',live:'AO VIVO',aguardando:'AGUARDANDO'};
 const badge = (status) => `<span class="status-chip status-${esc(status)}">${statusNames[status] || esc(status)}</span>`;
 const validLogin = (s) => /^[a-z0-9_]{3,25}$/.test(String(s||''));
-let dashboard = null, shown = 10;
+let dashboard = null, historyPage = 1, historyPageSize = 10;
 const dateFilter = { preset: 'all', start: '', end: '' };
 const drawerElement = $('#drawerLayer');
 let drawerModal = null;
@@ -231,7 +231,7 @@ function historySorted(){
 }
 function duration(start,end){const a=new Date(start||0).getTime(),b=new Date(end||0).getTime();if(!start||!end||!Number.isFinite(a)||!Number.isFinite(b))return '<span class="history-empty">—</span>';const min=Math.max(0,Math.round((b-a)/60000));return min>=60?`${Math.floor(min/60)}h ${min%60}min`:`${min}min`;}
 function historyRow(r){const profile=(dashboard?.streamers||[]).find(s=>s.login===r.login),archived=profile?.active===false;const monitored=r.monitoredDurationMs!=null?`${Math.round(r.monitoredDurationMs/60000)} min monitorados`:'';const coverage=r.coverageStatus==='failure'?`<span title="${esc((r.coverageIssues||[]).join('; '))}" style="color:#ff8d8d">✕ Falha</span>`:r.coverageStatus==='partial'?`<span title="${esc([...(r.coverageIssues||[]),...(r.coverageGaps||[]).map(g=>`${g.start} → ${g.end}`)].join('; '))}" style="color:#ffc17a">⚠ Parcial${monitored?` · ${monitored}`:''}</span>`:`<span style="color:#91d8b8">✓ Completa${monitored?` · ${monitored}`:''}</span>`;const raid=badge(r.status),views=r.raid?.viewers!=null?`${fmt(r.raid.viewers)} enviados${r.raid.toLogin?` para ${esc(r.raid.toLogin)}`:''}`:!r.raid&&r.viewersAtEnd!=null?`${fmt(r.viewersAtEnd)} no encerramento`:'<span class="history-empty">—</span>';return `<tr class="${archived?'history-row-archived':''}"><td data-label="Streamer"><div class="td-user">${historyStreamerAvatar(r.login)}${esc(r.login)}${archived?'<small class="archived-label">ARQUIVADO</small>':''}</div></td><td data-label="Início / fim"><span class="date-stack">${esc(dateBR(r.startedAt))}<small>fim: ${esc(dateBR(r.endedAt))}</small></span></td><td data-label="Duração">${duration(r.startedAt,r.endedAt)}</td><td data-label="Raid">${raid}</td><td data-label="Views">${views}</td><td data-label="Cobertura">${coverage}${r.coverageGaps?.length?`<button class="gap-details" type="button" data-gaps="${esc(JSON.stringify(r.coverageGaps))}">ver intervalos</button>`:''}</td><td data-label="Atualizado">${esc(dateBR(r.manualReview?.changedAt||r.updatedAt||dashboard.updatedAt))}</td></tr>`;}
-function renderHistory(){const rows=historySorted();$('#historyBody').innerHTML=rows.length?rows.slice(0,shown).map(historyRow).join(''):'<tr><td class="table-empty" colspan="7">Nenhum histórico registrado para este filtro.</td></tr>';$('#historyCount').textContent=`Exibindo ${Math.min(shown,rows.length)} de ${fmt(rows.length)} registros`;$('#loadMore').classList.toggle('hidden',shown>=rows.length);}
+function renderHistory(){const rows=historySorted(),totalPages=Math.max(1,Math.ceil(rows.length/historyPageSize));historyPage=Math.min(historyPage,totalPages);const start=(historyPage-1)*historyPageSize;$('#historyBody').innerHTML=rows.length?rows.slice(start,start+historyPageSize).map(historyRow).join(''):'<tr><td class="table-empty" colspan="7">Nenhum histórico registrado para este filtro.</td></tr>';$('#historyCount').textContent=rows.length?`Exibindo ${start+1}–${Math.min(start+historyPageSize,rows.length)} de ${fmt(rows.length)} registros`:'0 registros';const firstPage=Math.max(1,Math.min(historyPage-2,totalPages-4)),lastPage=Math.min(totalPages,firstPage+4);$('#historyPages').innerHTML=Array.from({length:lastPage-firstPage+1},(_,i)=>{const page=firstPage+i;return `<button class="history-page-number${page===historyPage?' active':''}" type="button" data-page="${page}" aria-label="Página ${page}" aria-current="${page===historyPage?'page':'false'}">${page}</button>`}).join('');$('#historyPrev').disabled=historyPage<=1;$('#historyNext').disabled=historyPage>=totalPages;}
 function historyDescription(r){
   if(r.reconnections?.length)return 'Reconectou';
   if(r.status==='aguardando')return 'Pendente';
@@ -280,7 +280,7 @@ initProfileModal();
 $('#refreshBtn').addEventListener('click',loadData);
 const dateRangeFilter=$('#dateRangeFilter'),customDateRange=$('#customDateRange'),dateRangeStart=$('#dateRangeStart'),dateRangeEnd=$('#dateRangeEnd');
 const applyDateRange=$('#applyDateRange'),closeCustomDate=$('#closeCustomDate');
-function renderDateFiltered(){if(dashboard){renderOverview();shown=10;renderHistory();}}
+function renderDateFiltered(){if(dashboard){renderOverview();historyPage=1;renderHistory();}}
 function updateApplyDateRange(){if(!applyDateRange)return;applyDateRange.disabled=!dateRangeStart?.value||!dateRangeEnd?.value||dateRangeEnd.value<dateRangeStart.value;}
 function openNativeDatePicker(input){input?.focus();try{input?.showPicker?.();}catch{}}
 dateRangeFilter?.addEventListener('change',()=>{
@@ -308,9 +308,11 @@ $('#searchStreamers').addEventListener('input',renderStreamers);
 $('#streamerSort').addEventListener('change',renderStreamers);
 $('#streamerMemberFilter').addEventListener('change',renderStreamers);
 $('#streamerLiveFilter').addEventListener('change',renderStreamers);
-$('#historyStatus').addEventListener('change',()=>{shown=10;renderHistory()});
-['historyStreamer','historyPeriod','historyRaid','historyCoverage'].forEach(id=>$('#'+id).addEventListener('change',()=>{shown=10;renderHistory()}));
-$('#loadMore').addEventListener('click',()=>{shown+=10;renderHistory()});
+$('#historyStatus').addEventListener('change',()=>{historyPage=1;renderHistory()});
+['historyStreamer','historyPeriod','historyRaid','historyCoverage'].forEach(id=>$('#'+id).addEventListener('change',()=>{historyPage=1;renderHistory()}));
+$('#historyPrev').addEventListener('click',()=>{if(historyPage>1){historyPage--;renderHistory()}});
+$('#historyNext').addEventListener('click',()=>{const totalPages=Math.ceil(historySorted().length/historyPageSize);if(historyPage<totalPages){historyPage++;renderHistory()}});
+$('#historyPages').addEventListener('click',e=>{const button=e.target.closest('[data-page]');if(button){historyPage=Number(button.dataset.page);renderHistory()}});
 $('#historyBody').addEventListener('click',e=>{const button=e.target.closest('.gap-details');if(button)showCoverageModal(button)});
 $('#coverageModalClose')?.addEventListener('click',closeCoverageModal);
 coverageModal?.addEventListener('click',e=>{if(e.target===coverageModal||e.target.matches('[data-coverage-close]'))closeCoverageModal()});

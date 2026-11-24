@@ -141,6 +141,7 @@ html.reveal-ready .analytics-grid>.reveal-item.is-visible .activity-bars .bar-li
 .streamer-card-archived{filter:grayscale(1);opacity:.58}.streamer-card-archived:hover{border-color:#6d6875;transform:translateY(-3px)}.streamer-card-archived .member-badge{color:#aaa5b2;background:#2b2931;border-color:#55515d}.streamer-card-archived .streamer-footer{color:#aaa5b2}
 .archived-member-tag{display:inline-flex;margin-top:10px;margin-left:12px;padding:6px 9px;border:1px solid #605967;border-radius:999px;background:#2b2931;color:#b7b1bd;font-size:8px;font-weight:800;letter-spacing:.08em}
 .history-panel th{background:rgba(20,11,34,.94)!important}
+.history-pagination{display:flex;align-items:center;gap:5px}.history-page-arrow,.history-page-number{min-width:28px;height:28px;padding:0;border:1px solid transparent;border-radius:7px;background:transparent;color:#a98bca;font-size:11px;font-weight:800}.history-page-arrow{font-size:18px}.history-page-arrow:hover:not(:disabled),.history-page-number:hover{border-color:var(--line2);background:#211332}.history-page-arrow:disabled{opacity:.3;cursor:default}.history-page-number.active{border-color:#8f5bca;background:#392052;color:#fff}
 .impact-donut.no-data .donut-track{stroke:#302242}
 .impact-donut.no-data .donut-segment{stroke:transparent}
 html.reveal-ready .analytics-grid>.reveal-item .donut{opacity:1;transition:opacity .6s ease;animation:none}
