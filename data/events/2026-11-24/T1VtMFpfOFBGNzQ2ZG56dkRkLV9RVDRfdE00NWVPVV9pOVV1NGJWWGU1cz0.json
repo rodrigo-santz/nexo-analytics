@@ -1,0 +1,15 @@
+{
+  "messageId": "OUm0Z_8PF746dnzvDd-_QT4_tM45eOU_i9Uu4bVXe5s=",
+  "messageType": "notification",
+  "subscriptionType": "stream.offline",
+  "subscriptionStatus": "enabled",
+  "receivedAt": "2026-11-24T07:11:35.460739342Z",
+  "source": "eventsub",
+  "event": {
+    "id": "319561979382",
+    "broadcaster_user_id": "526315840",
+    "broadcaster_user_login": "dree_sp",
+    "broadcaster_user_name": "dree_sp"
+  },
+  "subscriptionId": "bc92588e-5598-41f4-a559-fb57b35c303d"
+}
