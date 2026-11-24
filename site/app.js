@@ -204,6 +204,9 @@ function sortedStreamers(){
   items.sort((a,b)=>field==='name'?a.login.localeCompare(b.login,'pt-BR'):field==='live'?Number(Boolean(b.live))-Number(Boolean(a.live))||(b.lives||0)-(a.lives||0)||a.login.localeCompare(b.login,'pt-BR'):(b[field]||0)-(a[field]||0)||a.login.localeCompare(b.login,'pt-BR'));
   return items;
 }
+function markArchivedStreamerCards(){document.querySelectorAll('#streamerGrid [data-profile]').forEach(card=>{const profile=(dashboard?.streamers||[]).find(s=>s.login===card.dataset.profile);card.classList.toggle('streamer-card-archived',profile?.active===false);});}
+const streamerGridObserver=new MutationObserver(markArchivedStreamerCards);
+streamerGridObserver.observe($('#streamerGrid'),{childList:true});
 function renderStreamersLegacy(){
   const s=sortedStreamers();$('#streamerCount').textContent=`${s.length} streamers`;
   $('#streamerGrid').innerHTML = s.length?s.map(p=>`<button class="streamer-card" data-profile="${esc(p.login)}"><span class="streamer-top"><span class="avatar">${esc(p.login.charAt(0).toUpperCase())}</span><span class="member-badge">NEXO MEMBER</span></span><div class="streamer-name">${esc(p.login)}</div><div class="streamer-link">twitch.tv/${esc(p.login)}</div><div class="streamer-div"></div><div class="streamer-stats"><div class="streamer-stat"><strong>${fmt(p.lives)}</strong><small>LIVES</small></div><div class="streamer-stat"><strong>${fmt(p.raids)}</strong><small>RAIDS</small></div><div class="streamer-stat"><strong style="color:#bd8efb">${fmt(p.nexo)}</strong><small>PARA NEXO</small></div></div><span class="streamer-footer">VER HISTÓRICO <span aria-hidden="true">↗</span></span></button>`).join(''):'<div class="empty-state">Nenhum streamer corresponde à sua busca.</div>';
