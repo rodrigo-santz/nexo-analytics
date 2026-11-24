@@ -132,8 +132,8 @@ function animateDonut(element,percentage){
   const circumference=2*Math.PI*72;
   const purpleLength=circumference*Math.max(0,Math.min(100,percentage))/100;
   const blueLength=circumference-purpleLength;
-  const purpleDuration=Math.max(420,Math.round(1400*purpleLength/circumference));
-  const blueDuration=Math.max(420,Math.round(1400*blueLength/circumference));
+  const purpleDuration=Math.max(800,Math.round(1400*purpleLength/circumference));
+  const blueDuration=Math.max(800,Math.round(1400*blueLength/circumference));
   element.dataset.targetPct=String(percentage);
   purple.style.transition='none';
   blue.style.transition='none';
