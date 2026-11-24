@@ -10,6 +10,12 @@ const raid=(at,to)=>msg('channel.raid',at,{from_broadcaster_user_id:'100',from_b
 const members=['santz_rj','dree_sp'];
 const chatters=(streamId,at,users)=>msg('chatters.snapshot',at,{stream_id:streamId,chatters:users.map(user_login=>({user_login}))},'chatters');
 
+test('Live depois do arquivamento nao entra, mas o historico anterior permanece',()=>{
+  const events=[online('old','2026-11-22T18:00:00Z','archived'),offline('old','2026-11-22T20:00:00Z','archived'),online('new','2026-11-23T18:00:00Z','archived'),offline('new','2026-11-23T20:00:00Z','archived')];
+  const data=buildDashboard(events,['archived'],good,now,{},[],[],{'archived':'2026-11-23T00:00:00Z'});
+  assert.equal(data.overview.lives,1);assert.equal(data.recent[0].startedAt,'2026-11-22T18:00:00Z');
+});
+
 test('Live terminou sem raid: sem_raid apenas com cobertura posterior ao encerramento',()=>{
   const data=buildDashboard([online('a','2026-11-22T18:00:00Z'),offline('a','2026-11-22T20:00:00Z')],members,good,now);
   assert.equal(data.overview.lives,1);assert.equal(data.overview.semRaid,1);assert.equal(data.recent[0].status,'sem_raid');

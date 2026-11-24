@@ -6,8 +6,9 @@ const overlaps=(a,b,c,d)=>Number.isFinite(a)&&Number.isFinite(b)&&a<=d&&b>=c;
 
 // The result and the quality of the observation are deliberately separate.
 // A partial observation is not automatically an inconclusive result.
-export function buildDashboard(events,names,health,now=new Date().toISOString(),profiles={},manualReviews=[],activeNames=names){
+export function buildDashboard(events,names,health,now=new Date().toISOString(),profiles={},manualReviews=[],activeNames=names,archivedAt={}){
   const members=new Set(names.map(login)),activeMembers=new Set(activeNames.map(login)),sessions=[],nowMs=iso(now),seenMessages=new Set(),seenRaids=new Set();
+  const isMemberAt=(name,when)=>members.has(name)&&(!archivedAt[name]||iso(when)<iso(archivedAt[name]));
   const sorted=[...events].filter(x=>x&&x.event&&x.subscriptionType).filter(x=>{
     if(x.messageId){if(seenMessages.has(x.messageId))return false;seenMessages.add(x.messageId)}
     if(x.subscriptionType==='channel.raid'){
@@ -24,7 +25,7 @@ export function buildDashboard(events,names,health,now=new Date().toISOString(),
   for(const msg of sorted){
     const e=msg.event,t=msg.subscriptionType,when=msg.receivedAt||now;if(!Number.isFinite(iso(when)))continue;
     if(t==='stream.online'){
-      const uid=String(e.broadcaster_user_id||''),log=login(e.broadcaster_user_login);if(!members.has(log))continue;const id=String(e.id||'');
+      const uid=String(e.broadcaster_user_id||''),log=login(e.broadcaster_user_login);if(!isMemberAt(log,when))continue;const id=String(e.id||'');
       let s=sessions.find(v=>v.streamId&&v.streamId===id)||sessions.find(v=>v.login===log&&!v.streamId&&!v.startedAt&&!v.endedAt&&Math.abs(iso(when)-iso(v.raid?.at||when))<30*60_000);
       if(!s){
         const reconnect=sessions.filter(v=>v.login===log&&!v.raid&&Number.isFinite(iso(v.endedAt))&&iso(when)>=iso(v.endedAt)&&iso(when)-iso(v.endedAt)<=GRACE_MS).sort((a,b)=>iso(b.endedAt)-iso(a.endedAt))[0];
@@ -42,12 +43,12 @@ export function buildDashboard(events,names,health,now=new Date().toISOString(),
       if(msg.source==='watchdog'&&s.sourceStart!=='eventsub')s.coverageIssues.push('Início inferido pelo verificador');
       if(msg.source!=='watchdog'){s.sourceStart='eventsub';s.coverageIssues=s.coverageIssues.filter(v=>v!=='Início inferido pelo verificador')}
     }else if(t==='stream.offline'){
-      const uid=String(e.broadcaster_user_id||''),log=login(e.broadcaster_user_login);if(!members.has(log))continue;let s=find(uid,log,e.id,when);if(!s)s=fresh(uid,log,String(e.id||''),'Início da transmissão não capturado');
+      const uid=String(e.broadcaster_user_id||''),log=login(e.broadcaster_user_login);if(!isMemberAt(log,when))continue;let s=find(uid,log,e.id,when);if(!s)s=fresh(uid,log,String(e.id||''),'Início da transmissão não capturado');
       if(!s.endedAt||msg.source!=='watchdog')s.endedAt=when;if(msg.source==='watchdog'&&s.sourceEnd!=='eventsub')s.coverageIssues.push('Encerramento inferido pelo verificador');
       if(msg.source!=='watchdog'){s.sourceEnd='eventsub';s.coverageIssues=s.coverageIssues.filter(v=>v!=='Encerramento inferido pelo verificador')}
     }else if(t==='channel.raid'){
-      const uid=String(e.from_broadcaster_user_id||''),log=login(e.from_broadcaster_user_login);if(!members.has(log))continue;let s=find(uid,log,null,when);if(!s)s=fresh(uid,log,null,'Início da transmissão não capturado');
-      const target=login(e.to_broadcaster_user_login),targetId=String(e.to_broadcaster_user_id||''),known=Boolean(target&&targetId),viewers=Number.isFinite(Number(e.viewers))?Number(e.viewers):null;if(!s.raid)s.raid={toLogin:target||'desconhecido',viewers,toId:targetId,at:when,destinationKnown:known,isNexo:known&&members.has(target)};
+      const uid=String(e.from_broadcaster_user_id||''),log=login(e.from_broadcaster_user_login);if(!isMemberAt(log,when))continue;let s=find(uid,log,null,when);if(!s)s=fresh(uid,log,null,'Início da transmissão não capturado');
+      const target=login(e.to_broadcaster_user_login),targetId=String(e.to_broadcaster_user_id||''),known=Boolean(target&&targetId),viewers=Number.isFinite(Number(e.viewers))?Number(e.viewers):null;if(!s.raid)s.raid={toLogin:target||'desconhecido',viewers,toId:targetId,at:when,destinationKnown:known,isNexo:known&&isMemberAt(target,when)};
     }
   }
   const activeStreams=Object.values(health?.activeStreams||{}),hasActiveStreamSnapshot=Boolean(health&&Object.prototype.hasOwnProperty.call(health,'activeStreams'));
