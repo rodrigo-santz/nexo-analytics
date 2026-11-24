@@ -1,0 +1,12 @@
+/* Ajustes visuais do histórico */
+table td {
+  border-top: 0;
+}
+
+.history-panel {
+  border: 0;
+}
+
+.history-row-archived td {
+  border: 0 !important;
+}
