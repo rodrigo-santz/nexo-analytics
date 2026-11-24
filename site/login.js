@@ -36,8 +36,16 @@ if (inviteFlow && session) {
     if (!email) return showFeedback('Digite seu email para receber o link de recuperação.');
     forgotPassword.disabled = true;
     const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo: `${window.location.origin}${window.location.pathname}set-password.html` });
-    if (error) showFeedback('Não foi possível solicitar a recuperação agora.');
-    else showFeedback('Enviamos um link de recuperação para seu email.', 'is-success');
+    if (error) {
+      const errorText = `${error.code || ''} ${error.message || ''}`.toLowerCase();
+      if (errorText.includes('rate limit') || errorText.includes('over_email_send_rate_limit')) {
+        showFeedback('O limite de emails do projeto foi atingido. Tente novamente mais tarde.');
+      } else if (errorText.includes('redirect')) {
+        showFeedback('O endereço de recuperação ainda não está autorizado no Supabase.');
+      } else {
+        showFeedback('Não foi possível solicitar a recuperação agora.');
+      }
+    } else showFeedback('Enviamos um link de recuperação para seu email.', 'is-success');
     forgotPassword.disabled = false;
   });
 }
