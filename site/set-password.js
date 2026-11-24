@@ -7,6 +7,7 @@ const feedback = document.querySelector('#passwordFeedback');
 const submit = form?.querySelector('button[type="submit"]');
 const showFeedback = (message, type = 'is-error') => { feedback.textContent = message; feedback.className = `login-feedback ${type}`; };
 const { data: { session } } = await supabase.auth.getSession();
+document.documentElement.classList.remove('auth-pending');
 
 if (!session) {
   showFeedback('Este convite expirou ou já foi utilizado. Solicite um novo convite.');

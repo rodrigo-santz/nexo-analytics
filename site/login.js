@@ -14,6 +14,7 @@ if (inviteFlow && session) {
 } else if (session) {
   window.location.replace('./analytics.html');
 } else {
+  document.documentElement.classList.remove('auth-pending');
   form?.addEventListener('submit', async event => {
     event.preventDefault();
     const email = userInput.value.trim().toLowerCase();
