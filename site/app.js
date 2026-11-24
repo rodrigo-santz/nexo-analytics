@@ -22,6 +22,8 @@ const statusNames = {raid_nexo:'RAID NEXO',raid_externa:'RAID EXTERNA',sem_raid:
 const badge = (status) => `<span class="status-chip status-${esc(status)}">${statusNames[status] || esc(status)}</span>`;
 const validLogin = (s) => /^[a-z0-9_]{3,25}$/.test(String(s||''));
 let dashboard = null, historyPage = 1, historyPageSize = 10;
+let dataRequestInFlight = false;
+const DATA_REFRESH_INTERVAL_MS = 2 * 60 * 1000;
 const dateFilter = { preset: 'all', start: '', end: '' };
 const drawerElement = $('#drawerLayer');
 let drawerModal = null;
@@ -270,7 +272,28 @@ function showCoverageModal(button){
 }
 function populateHistoryFilters(){const select=$('#historyStreamer');if(!select||select.options.length>1)return;[...(dashboard.streamers||[])].sort((a,b)=>Number(a.active===false)-Number(b.active===false)||a.login.localeCompare(b.login,'pt-BR')).forEach(profile=>{const option=document.createElement('option');option.value=profile.login;option.textContent=profile.active===false?`${profile.login} (arquivado)`:profile.login;select.appendChild(option)})}
 function render(){renderOverview();renderStreamers();populateHistoryFilters();renderHistory();$('#dataNotice').classList.toggle('hidden',true);initScrollReveal()}
-async function loadData(){const b=$('#refreshBtn');b.disabled=true;try{const res=await fetch(`./data/dashboard.json?_=${Date.now()}`,{cache:'no-store'});if(!res.ok)throw new Error(`HTTP ${res.status}`);dashboard=await res.json();render();if(!(dashboard.recent||[]).length){const el=$('#dataNotice');el.classList.remove('hidden');el.textContent='Os registros reais ainda estão vazios. O painel será atualizado após os primeiros eventos monitorados.';}}catch(e){$('#dataNotice').classList.remove('hidden');$('#dataNotice').textContent=`Não foi possível carregar os dados: ${e.message}. Verifique a publicação dos arquivos.`;console.error(e)}finally{b.disabled=false}}
+async function loadData(){
+  if(dataRequestInFlight)return;
+  const b=$('#refreshBtn');
+  dataRequestInFlight=true;
+  b.disabled=true;
+  try{
+    const res=await fetch(`./data/dashboard.json?_=${Date.now()}`,{cache:'no-store'});
+    if(!res.ok)throw new Error(`HTTP ${res.status}`);
+    const nextDashboard=await res.json();
+    const changed=!dashboard||dashboard.updatedAt!==nextDashboard.updatedAt;
+    dashboard=nextDashboard;
+    if(changed)render();
+    if(!(dashboard.recent||[]).length){const el=$('#dataNotice');el.classList.remove('hidden');el.textContent='Os registros reais ainda estão vazios. O painel será atualizado após os primeiros eventos monitorados.';}
+  }catch(e){
+    $('#dataNotice').classList.remove('hidden');
+    $('#dataNotice').textContent=`Não foi possível carregar os dados: ${e.message}. Verifique a publicação dos arquivos.`;
+    console.error(e);
+  }finally{
+    dataRequestInFlight=false;
+    b.disabled=false;
+  }
+}
 function initConstellation(){const canvas=$('#constellation'),ctx=canvas.getContext('2d');if(!ctx)return;let w=0,h=0,pts=[],mouse=null;const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;function resize(){w=canvas.width=window.innerWidth*devicePixelRatio;h=canvas.height=window.innerHeight*devicePixelRatio;ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);const count=Math.min(92,Math.floor(window.innerWidth/19));pts=Array.from({length:count},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,vx:(Math.random()-.5)*.14,vy:(Math.random()-.5)*.14,r:Math.random()*1.6+.4}))}function paint(){ctx.clearRect(0,0,innerWidth,innerHeight);for(let i=0;i<pts.length;i++){const a=pts[i];if(!reduced){a.x+=a.vx;a.y+=a.vy;if(a.x<0||a.x>innerWidth)a.vx*=-1;if(a.y<0||a.y>innerHeight)a.vy*=-1;}ctx.beginPath();ctx.fillStyle='rgba(198,167,255,.72)';ctx.arc(a.x,a.y,a.r,0,Math.PI*2);ctx.fill();for(let j=i+1;j<pts.length;j++){const b=pts[j];const d=Math.hypot(a.x-b.x,a.y-b.y);if(d<116){ctx.strokeStyle=`rgba(163,112,240,${(1-d/116)*.22})`;ctx.lineWidth=.7;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke()}}if(mouse){const d=Math.hypot(a.x-mouse.x,a.y-mouse.y);if(d<155){ctx.strokeStyle=`rgba(194,126,255,${(1-d/155)*.42})`;ctx.lineWidth=.9;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(mouse.x,mouse.y);ctx.stroke()}}}if(mouse){ctx.beginPath();ctx.fillStyle='rgba(218,174,255,.8)';ctx.arc(mouse.x,mouse.y,1.8,0,Math.PI*2);ctx.fill()}if(!reduced)requestAnimationFrame(paint)}window.addEventListener('resize',resize);window.addEventListener('pointermove',e=>{mouse={x:e.clientX,y:e.clientY};if(reduced)paint()});window.addEventListener('pointerleave',()=>{mouse=null;if(reduced)paint()});resize();paint()}
 { // Safari/iOS: cap the expensive decorative layer without removing it.
 function initConstellation(){const canvas=$('#constellation'),ctx=canvas?.getContext('2d',{alpha:true});if(!ctx)return;let w=0,h=0,pts=[],mouse=null,lastPaint=0,raf=0;const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches,coarse=matchMedia('(pointer:coarse)').matches;function resize(){const dpr=Math.min(window.devicePixelRatio||1,coarse?1.25:1.75);w=innerWidth;h=innerHeight;canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);canvas.style.width=`${w}px`;canvas.style.height=`${h}px`;ctx.setTransform(dpr,0,0,dpr,0,0);const count=coarse?Math.min(38,Math.floor(w/10)):Math.min(72,Math.floor(w/19));pts=Array.from({length:count},()=>({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.14,vy:(Math.random()-.5)*.14,r:Math.random()*1.4+.35}))}function paint(time=0){raf=0;if(document.hidden)return;if(!reduced&&time-lastPaint<32){raf=requestAnimationFrame(paint);return}lastPaint=time;ctx.clearRect(0,0,w,h);const linkDistance=coarse?92:116;for(let i=0;i<pts.length;i++){const a=pts[i];if(!reduced){a.x+=a.vx;a.y+=a.vy;if(a.x<0||a.x>w)a.vx*=-1;if(a.y<0||a.y>h)a.vy*=-1}ctx.beginPath();ctx.fillStyle='rgba(198,167,255,.72)';ctx.arc(a.x,a.y,a.r,0,Math.PI*2);ctx.fill();if(coarse)continue;for(let j=i+1;j<pts.length;j++){const b=pts[j],dx=a.x-b.x,dy=a.y-b.y,d=Math.hypot(dx,dy);if(d<linkDistance){ctx.strokeStyle=`rgba(163,112,240,${(1-d/linkDistance)*.22})`;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke()}}}if(!reduced)raf=requestAnimationFrame(paint)}function schedule(){if(!raf&&!document.hidden)raf=requestAnimationFrame(paint)}window.addEventListener('resize',()=>{resize();schedule()},{passive:true});document.addEventListener('visibilitychange',()=>{if(!document.hidden){lastPaint=0;schedule()}});if(!coarse){window.addEventListener('pointermove',e=>{mouse={x:e.clientX,y:e.clientY}},{passive:true});window.addEventListener('pointerleave',()=>{mouse=null},{passive:true})}resize();paint()}
@@ -279,6 +302,8 @@ initConstellation();
 $('#year').textContent=new Date().getFullYear();
 initProfileModal();
 $('#refreshBtn').addEventListener('click',loadData);
+setInterval(()=>{if(!document.hidden)loadData();},DATA_REFRESH_INTERVAL_MS);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)loadData();});
 const dateRangeFilter=$('#dateRangeFilter'),customDateRange=$('#customDateRange'),dateRangeStart=$('#dateRangeStart'),dateRangeEnd=$('#dateRangeEnd');
 const applyDateRange=$('#applyDateRange'),closeCustomDate=$('#closeCustomDate');
 function renderDateFiltered(){if(dashboard){renderOverview();historyPage=1;renderHistory();}}
