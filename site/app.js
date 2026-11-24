@@ -198,8 +198,9 @@ function renderOverview(){
 function sortedStreamers(){
   const query=$('#searchStreamers').value.trim().toLowerCase();
   const field=$('#streamerSort').value;
+  const memberFilter=$('#streamerMemberFilter').value;
   const liveFilter=$('#streamerLiveFilter').value;
-  const items=[...(dashboard.streamers||[])].filter(s=>s.active!==false&&s.login.toLowerCase().includes(query)&& (liveFilter==='all'||liveFilter==='live'&&s.live===true||liveFilter==='offline'&&s.live!==true));
+  const items=[...(dashboard.streamers||[])].filter(s=>(memberFilter==='all'||memberFilter==='active'&&s.active!==false||memberFilter==='archived'&&s.active===false)&&s.login.toLowerCase().includes(query)&& (liveFilter==='all'||liveFilter==='live'&&s.live===true||liveFilter==='offline'&&s.live!==true));
   items.sort((a,b)=>field==='name'?a.login.localeCompare(b.login,'pt-BR'):field==='live'?Number(Boolean(b.live))-Number(Boolean(a.live))||(b.lives||0)-(a.lives||0)||a.login.localeCompare(b.login,'pt-BR'):(b[field]||0)-(a[field]||0)||a.login.localeCompare(b.login,'pt-BR'));
   return items;
 }
@@ -302,6 +303,7 @@ applyDateRange?.addEventListener('click',()=>{if(applyDateRange.disabled)return;
 closeCustomDate?.addEventListener('click',()=>{dateRangeFilter.value='all';dateFilter.preset='all';customDateRange?.classList.add('hidden');renderDateFiltered();});
 $('#searchStreamers').addEventListener('input',renderStreamers);
 $('#streamerSort').addEventListener('change',renderStreamers);
+$('#streamerMemberFilter').addEventListener('change',renderStreamers);
 $('#streamerLiveFilter').addEventListener('change',renderStreamers);
 $('#historyStatus').addEventListener('change',()=>{shown=10;renderHistory()});
 ['historyStreamer','historyPeriod','historyRaid','historyCoverage'].forEach(id=>$('#'+id).addEventListener('change',()=>{shown=10;renderHistory()}));
