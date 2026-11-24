@@ -204,7 +204,7 @@ function sortedStreamers(){
   items.sort((a,b)=>field==='name'?a.login.localeCompare(b.login,'pt-BR'):field==='live'?Number(Boolean(b.live))-Number(Boolean(a.live))||(b.lives||0)-(a.lives||0)||a.login.localeCompare(b.login,'pt-BR'):(b[field]||0)-(a[field]||0)||a.login.localeCompare(b.login,'pt-BR'));
   return items;
 }
-function markArchivedStreamerCards(){document.querySelectorAll('#streamerGrid [data-profile]').forEach(card=>{const profile=(dashboard?.streamers||[]).find(s=>s.login===card.dataset.profile);card.classList.toggle('streamer-card-archived',profile?.active===false);});}
+function markArchivedStreamerCards(){document.querySelectorAll('#streamerGrid [data-profile]').forEach(card=>{const profile=(dashboard?.streamers||[]).find(s=>s.login===card.dataset.profile),archived=profile?.active===false;card.classList.toggle('streamer-card-archived',archived);const badge=card.querySelector('.member-badge');if(badge)badge.textContent=archived?'MEMBRO ANTIGO':'NEXO MEMBER';});}
 const streamerGridObserver=new MutationObserver(markArchivedStreamerCards);
 streamerGridObserver.observe($('#streamerGrid'),{childList:true});
 function renderStreamersLegacy(){
@@ -331,7 +331,7 @@ function showProfile(login){
   if(!profile||!content)return;
   const avatar=content.querySelector('.profile-header .avatar');
   if(avatar)avatar.outerHTML=avatarMarkup(login,profile.profileImageUrl);
-  if(profile.active===false){const tag=document.createElement('span');tag.className='archived-member-tag';tag.textContent='NÃO PERTENCE MAIS À COMUNIDADE';content.querySelector('.profile-header > div')?.appendChild(tag);}
+  if(profile.active===false){const tag=document.createElement('span');tag.className='archived-member-tag';tag.textContent='MEMBRO ANTIGO';content.querySelector('.profile-header > div')?.appendChild(tag);}
   const watched=(profile.watchedLives||[]).filter((r,i,a)=>a.findIndex(x=>x.id===r.id)===i);
   if(!watched.length)return;
   const section=document.createElement('section');
