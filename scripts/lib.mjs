@@ -6,8 +6,8 @@ const overlaps=(a,b,c,d)=>Number.isFinite(a)&&Number.isFinite(b)&&a<=d&&b>=c;
 
 // The result and the quality of the observation are deliberately separate.
 // A partial observation is not automatically an inconclusive result.
-export function buildDashboard(events,names,health,now=new Date().toISOString(),profiles={},manualReviews=[]){
-  const members=new Set(names.map(login)),sessions=[],nowMs=iso(now),seenMessages=new Set(),seenRaids=new Set();
+export function buildDashboard(events,names,health,now=new Date().toISOString(),profiles={},manualReviews=[],activeNames=names){
+  const members=new Set(names.map(login)),activeMembers=new Set(activeNames.map(login)),sessions=[],nowMs=iso(now),seenMessages=new Set(),seenRaids=new Set();
   const sorted=[...events].filter(x=>x&&x.event&&x.subscriptionType).filter(x=>{
     if(x.messageId){if(seenMessages.has(x.messageId))return false;seenMessages.add(x.messageId)}
     if(x.subscriptionType==='channel.raid'){
@@ -85,7 +85,7 @@ export function buildDashboard(events,names,health,now=new Date().toISOString(),
   const confirmedAudience=[...confirmedRaids,...confirmedNoRaids];
   const viewsTotais=confirmedAudience.length&&viewsAproveitadas!=null&&viewsDesperdicadas!=null?viewsAproveitadas+viewsDesperdicadas:null;
   const overview={lives:sessions.length,raids:sessions.filter(s=>s.raid).length,nexo:sessions.filter(s=>s.status==='raid_nexo').length,externas:sessions.filter(s=>s.status==='raid_externa').length,semRaid:sessions.filter(s=>s.status==='sem_raid').length,inconclusivas:sessions.filter(s=>s.status==='inconclusiva').length,liveAgora:sessions.filter(s=>s.status==='live').length,coverageComplete:sessions.filter(s=>s.coverageStatus==='complete').length,coveragePartial:sessions.filter(s=>s.coverageStatus==='partial').length,coverageFailure:sessions.filter(s=>s.coverageStatus==='failure').length,viewsTotais,viewsAproveitadas,viewsDesperdicadas};
-  const streamers=names.map(n=>{const l=login(n),a=sessions.filter(s=>s.login===l),watchedLives=sessions.filter(s=>s.appearedViewers?.includes(l)).map(s=>({id:s.id,login:s.login,startedAt:s.startedAt,endedAt:s.endedAt,status:s.status}));return {login:l,profileImageUrl:profiles[l]?.profileImageUrl||null,live:a.some(s=>s.status==='live'),lives:a.length,raids:a.filter(s=>s.raid).length,nexo:a.filter(s=>s.status==='raid_nexo').length,externas:a.filter(s=>s.status==='raid_externa').length,semRaid:a.filter(s=>s.status==='sem_raid').length,inconclusivas:a.filter(s=>s.status==='inconclusiva').length,watchedLives}});
+  const streamers=names.map(n=>{const l=login(n),a=sessions.filter(s=>s.login===l),watchedLives=sessions.filter(s=>s.appearedViewers?.includes(l)).map(s=>({id:s.id,login:s.login,startedAt:s.startedAt,endedAt:s.endedAt,status:s.status}));return {login:l,active:activeMembers.has(l),profileImageUrl:profiles[l]?.profileImageUrl||null,live:a.some(s=>s.status==='live'),lives:a.length,raids:a.filter(s=>s.raid).length,nexo:a.filter(s=>s.status==='raid_nexo').length,externas:a.filter(s=>s.status==='raid_externa').length,semRaid:a.filter(s=>s.status==='sem_raid').length,inconclusivas:a.filter(s=>s.status==='inconclusiva').length,watchedLives}});
   const daily=new Map();for(const s of sessions){const d=(s.startedAt||s.endedAt||now).slice(0,10);if(!daily.has(d))daily.set(d,{date:d,lives:0,raids:0});daily.get(d).lives++;if(s.raid)daily.get(d).raids++}
   const recent=sessions.map(({userId,sourceStart,sourceEnd,streamId,...s})=>s).sort((a,b)=>iso(b.endedAt||b.startedAt||now)-iso(a.endedAt||a.startedAt||now));
   return {updatedAt:now,monitor:{status:health?.status||'unconfigured',connection:health?.connection||'unknown',lastCheckedAt:health?.lastCheckedAt||null,lastSuccessfulAt:health?.lastSuccessfulAt||null,issues:health?.issues||[],failures:health?.failures||[],gaps:health?.gaps||[],subscriptionHealth:health?.subscriptionHealth||null},overview,streamers,recent,daily:[...daily.values()].sort((a,b)=>a.date.localeCompare(b.date))};

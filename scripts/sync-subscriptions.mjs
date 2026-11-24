@@ -2,12 +2,19 @@ import {readFile,writeFile} from 'node:fs/promises';
 import {twitchClient,getUsers,getSubscriptions} from './twitch-api.mjs';
 
 const names=JSON.parse(await readFile('data/streamers.json','utf8'));
+let archivedNames=[];try{archivedNames=JSON.parse(await readFile('data/streamers-archived.json','utf8'))}catch(e){if(e.code!=='ENOENT')throw e}
 const url=process.env.TWITCH_WEBHOOK_URL,secret=process.env.TWITCH_EVENTSUB_SECRET;
 if(!url?.startsWith('https://')||!(secret?.length>=10&&secret?.length<=100))throw new Error('Configure TWITCH_WEBHOOK_URL (https) e TWITCH_EVENTSUB_SECRET (10 a 100 caracteres).');
 const api=await twitchClient();
 const users=await getUsers(api,names);const byLogin=new Map(users.map(u=>[u.login.toLowerCase(),u]));
 const existing=await getSubscriptions(api);let created=0,deleted=0,skipped=0;
 const types=['stream.online','stream.offline','channel.raid'];
+const archivedUsers=await getUsers(api,archivedNames);
+for(const user of archivedUsers)for(const type of types){
+  const condition=type==='channel.raid'?{from_broadcaster_user_id:user.id}:{broadcaster_user_id:user.id};
+  const matches=existing.filter(s=>s.type===type&&s.transport?.callback===url&&Object.entries(condition).every(([k,v])=>s.condition?.[k]===v));
+  for(const subscription of matches){await api.request(`eventsub/subscriptions?id=${encodeURIComponent(subscription.id)}`,{method:'DELETE'});deleted++}
+}
 for(const user of users)for(const type of types){
   const condition=type==='channel.raid'?{from_broadcaster_user_id:user.id}:{broadcaster_user_id:user.id};
   const matches=existing.filter(s=>s.type===type&&s.transport?.callback===url&&Object.entries(condition).every(([k,v])=>s.condition?.[k]===v));
