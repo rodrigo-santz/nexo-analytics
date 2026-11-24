@@ -2,7 +2,10 @@ import { supabase } from './supabase.js';
 const { data: { session } } = await supabase.auth.getSession();
 if (!session) { window.location.replace('./'); throw new Error('Sessão não autenticada'); }
 document.documentElement.classList.remove('auth-pending');
+supabase.auth.onAuthStateChange(event => { if (event === 'SIGNED_OUT') window.location.replace('./'); });
+setInterval(async () => { const { data: { session: activeSession } } = await supabase.auth.getSession(); if (!activeSession) window.location.replace('./'); }, 60000);
 const $ = (s) => document.querySelector(s);
+$('#accountEmail')?.append(document.createTextNode(session.user.email || ''));
 const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fmt = (v) => new Intl.NumberFormat('pt-BR').format(Number(v)||0);
 const metricFmt = (v) => v == null ? 'Indisponível' : fmt(v);
@@ -195,6 +198,7 @@ $('#streamerGrid').addEventListener('click',e=>{const b=e.target.closest('[data-
 $('#closeDrawer').addEventListener('click',closeProfile);
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeProfile()});
 $('#menuToggle').addEventListener('click',()=>{const n=$('.top-nav');n.classList.toggle('open');$('#menuToggle').setAttribute('aria-expanded',String(n.classList.contains('open')))});
+$('#logoutButton')?.addEventListener('click',async()=>{const button=$('#logoutButton');button.disabled=true;button.textContent='SAINDO...';await supabase.auth.signOut();window.location.replace('./')});
 document.querySelectorAll('.top-nav a').forEach(a=>a.addEventListener('click',()=>$('.top-nav').classList.remove('open')));
 function showProfile(login){
   showProfileLegacy(login);

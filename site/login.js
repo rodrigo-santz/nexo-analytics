@@ -5,6 +5,7 @@ const userInput = document.querySelector('#loginUser');
 const passwordInput = document.querySelector('#loginPassword');
 const feedback = document.querySelector('#loginFeedback');
 const submit = form?.querySelector('button[type="submit"]');
+const forgotPassword = document.querySelector('#forgotPassword');
 const inviteFlow = /(?:type=(?:invite|recovery)|access_token=)/.test(window.location.hash);
 const showFeedback = (message, type = 'is-error') => { feedback.textContent = message; feedback.className = `login-feedback ${type}`; };
 
@@ -29,5 +30,14 @@ if (inviteFlow && session) {
     }
     showFeedback('Acesso confirmado. Abrindo o Analytics...', 'is-success'); submit.textContent = 'ACESSO CONFIRMADO';
     window.setTimeout(() => { window.location.href = './analytics.html'; }, 450);
+  });
+  forgotPassword?.addEventListener('click', async () => {
+    const email = userInput.value.trim().toLowerCase();
+    if (!email) return showFeedback('Digite seu email para receber o link de recuperação.');
+    forgotPassword.disabled = true;
+    const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo: `${window.location.origin}${window.location.pathname}set-password.html` });
+    if (error) showFeedback('Não foi possível solicitar a recuperação agora.');
+    else showFeedback('Enviamos um link de recuperação para seu email.', 'is-success');
+    forgotPassword.disabled = false;
   });
 }
