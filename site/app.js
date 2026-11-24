@@ -1,6 +1,7 @@
 import { supabase } from './supabase.js';
 const { data: { session } } = await supabase.auth.getSession();
 if (!session) { window.location.replace('./'); throw new Error('Sessão não autenticada'); }
+document.documentElement.classList.remove('auth-pending');
 const $ = (s) => document.querySelector(s);
 const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fmt = (v) => new Intl.NumberFormat('pt-BR').format(Number(v)||0);
