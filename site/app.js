@@ -342,6 +342,14 @@ function showProfile(login){
   section.innerHTML=`<h3 class="profile-subhead">Lives assistidas</h3>${watched.map(r=>`<div class="profile-session"><div><time>${esc(dateBR(r.startedAt||r.endedAt))}</time><p>${esc(r.login)}</p></div>${badge(r.status)}</div>`).join('')}`;
   content.appendChild(section);
 }
+const historyRowBase=historyRow;
+historyRow=function historyRowWithRaidFallback(r){
+  if(r.endedAt||!r.raid?.at)return historyRowBase(r);
+  const end=r.raid.at;
+  return historyRowBase(r)
+    .replace(`<small>fim: ${esc(dateBR(r.endedAt))}</small>`,`<small>fim: ${esc(dateBR(end))} · inferido pela raid</small>`)
+    .replace(`<td data-label="Duração">${duration(r.startedAt,r.endedAt)}</td>`,`<td data-label="Duração">${duration(r.startedAt,end)}</td>`);
+};
 loadData();
 
 function splitViewDestination(){document.querySelectorAll('#historyBody td[data-label="Views"]').forEach(cell=>{const match=cell.textContent.trim().match(/^(.+?) enviados para (.+)$/);if(!match)return;cell.innerHTML=`<span class="views-stack"><span>${esc(match[1])} enviados</span><small class="views-destination">${esc(match[2])}</small></span>`})}
