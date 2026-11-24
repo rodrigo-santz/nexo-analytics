@@ -1,0 +1,15 @@
+{
+  "messageId": "WLIv0l88sXhq9yI_3Svx_KG5aBZdWcgGSWlvT0M9_tE=",
+  "messageType": "notification",
+  "subscriptionType": "stream.offline",
+  "subscriptionStatus": "enabled",
+  "receivedAt": "2026-11-24T21:21:07.243180753Z",
+  "source": "eventsub",
+  "event": {
+    "id": "319566951414",
+    "broadcaster_user_id": "1314842283",
+    "broadcaster_user_login": "quindinhaa",
+    "broadcaster_user_name": "quindinhaa"
+  },
+  "subscriptionId": "3956461c-0b9c-4f35-b29a-9ba6e6964258"
+}
