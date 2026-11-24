@@ -4,6 +4,10 @@ const AUTH_KEY = 'nexo.analytics.auth';
 // um backend antes de proteger dados sensíveis em produção.
 const USERS = Object.freeze({ nexo: 'nexo2026' });
 
+if (sessionStorage.getItem(AUTH_KEY) === 'ok') {
+  window.location.replace('./analytics.html');
+}
+
 const form = document.querySelector('#loginForm');
 const userInput = document.querySelector('#loginUser');
 const passwordInput = document.querySelector('#loginPassword');
