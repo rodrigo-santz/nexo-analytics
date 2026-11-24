@@ -106,6 +106,7 @@ html.coverage-modal-open,body.coverage-modal-open{overflow:hidden}
 .top-nav>.account-tools{margin-left:4px}
 @media(max-width:780px){.top-nav>.account-tools{width:100%;margin:10px 0 0;padding-top:14px;border-top:1px solid rgba(160,113,236,.18);justify-content:space-between}.top-nav>.account-tools .account-email{max-width:calc(100% - 58px);font-size:11px}.top-nav>.account-tools .logout-button{padding:9px 12px}.brand-logo-horizontal{width:clamp(145px,48vw,220px)}}
 @media(max-width:360px){.brand-logo-horizontal{width:145px}}
+@media(min-width:781px){.site-header{position:sticky}.top-nav{position:absolute;inset:0;justify-content:center;gap:34px;pointer-events:none}.top-nav>.nav-link{pointer-events:auto}.top-nav>.account-tools{position:absolute;right:clamp(22px,6vw,110px);margin:0;pointer-events:auto}}
 .coverage-modal{opacity:1;visibility:visible;transition:opacity .22s ease,visibility 0s linear 0s}
 .coverage-modal.hidden{transition:opacity .22s ease,visibility 0s linear .22s}
 .coverage-modal-shade{opacity:1;transition:opacity .22s ease}
