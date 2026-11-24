@@ -132,8 +132,8 @@ function animateDonut(element,percentage){
   const circumference=2*Math.PI*72;
   const purpleLength=circumference*Math.max(0,Math.min(100,percentage))/100;
   const blueLength=circumference-purpleLength;
-  const purpleDuration=Math.max(280,Math.round(900*purpleLength/circumference));
-  const blueDuration=Math.max(280,Math.round(900*blueLength/circumference));
+  const purpleDuration=Math.max(420,Math.round(1400*purpleLength/circumference));
+  const blueDuration=Math.max(420,Math.round(1400*blueLength/circumference));
   element.dataset.targetPct=String(percentage);
   purple.style.transition='none';
   blue.style.transition='none';
@@ -147,8 +147,8 @@ function animateDonut(element,percentage){
     blue.style.strokeDasharray=`${blueLength} ${circumference}`;
     return;
   }
-  purple.style.transition=`stroke-dasharray ${purpleDuration}ms cubic-bezier(.2,.8,.25,1)`;
-  blue.style.transition=`stroke-dasharray ${blueDuration}ms cubic-bezier(.2,.8,.25,1) ${purpleDuration}ms`;
+  purple.style.transition=`stroke-dasharray ${purpleDuration}ms cubic-bezier(.25,.1,.25,1)`;
+  blue.style.transition=`stroke-dasharray ${blueDuration}ms cubic-bezier(.25,.1,.25,1) ${purpleDuration}ms`;
   requestAnimationFrame(()=>{
     purple.style.strokeDasharray=`${purpleLength} ${circumference-purpleLength}`;
     blue.style.strokeDasharray=`${blueLength} ${circumference}`;
