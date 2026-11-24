@@ -1,27 +1,25 @@
-name: Atualizar dados e publicar painel
+name: Atualizar dados da NEXO
+
 on:
   schedule:
     - cron: '*/5 * * * *'
   push:
     branches: [main]
     paths:
-      - 'site/**'
       - 'data/streamers.json'
       - 'scripts/**'
       - '.github/workflows/publish.yml'
   workflow_dispatch:
+
 permissions:
   contents: write
-  pages: write
-  id-token: write
+
 concurrency:
   group: nexo-analytics-publish
   cancel-in-progress: false
+
 jobs:
-  publish:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  collect:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -39,7 +37,7 @@ jobs:
           TWITCH_WEBHOOK_URL: ${{ secrets.TWITCH_WEBHOOK_URL }}
           TWITCH_EVENTSUB_SECRET: ${{ secrets.TWITCH_EVENTSUB_SECRET }}
         run: node scripts/sync-subscriptions.mjs
-      - name: Verificar saúde e recuperar estados observáveis
+      - name: Verificar saude e recuperar estados observaveis
         env:
           TWITCH_CLIENT_ID: ${{ secrets.TWITCH_CLIENT_ID }}
           TWITCH_CLIENT_SECRET: ${{ secrets.TWITCH_CLIENT_SECRET }}
@@ -59,14 +57,14 @@ jobs:
         run: |
           node scripts/sync-profiles.mjs
           node scripts/aggregate.mjs
-      - name: Persistir painéis e monitoramento no repositório
+      - name: Persistir paineis e monitoramento no repositorio
         shell: bash
         run: |
           git config user.name "nexo-analytics[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/dashboard.json data/streamer-profiles.json data/health/status.json data/health/subscriptions.json data/events/
           if ! git diff --cached --quiet; then
-            git commit -m "chore: atualizar estatísticas da NEXO [skip ci]"
+            git commit -m "chore: atualizar estatisticas da NEXO"
             for attempt in 1 2 3 4; do
               git pull --rebase origin main
               if git push origin HEAD:main; then break; fi
@@ -74,17 +72,3 @@ jobs:
               sleep 2
             done
           fi
-      - name: Preparar site estático
-        run: |
-          mkdir -p _site/data
-          cp -r site/. _site/
-          cp data/dashboard.json _site/data/dashboard.json
-          cp data/streamer-profiles.json _site/data/streamer-profiles.json
-          touch _site/.nojekyll
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v4
-        with:
-          path: _site
-      - name: Publicar GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
