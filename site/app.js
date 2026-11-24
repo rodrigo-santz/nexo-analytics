@@ -22,6 +22,7 @@ const statusNames = {raid_nexo:'RAID NEXO',raid_externa:'RAID EXTERNA',sem_raid:
 const badge = (status) => `<span class="status-chip status-${esc(status)}">${statusNames[status] || esc(status)}</span>`;
 const validLogin = (s) => /^[a-z0-9_]{3,25}$/.test(String(s||''));
 let dashboard = null, shown = 10;
+const dateFilter = { preset: 'all', start: '', end: '' };
 const drawerElement = $('#drawerLayer');
 let drawerModal = null;
 let revealObserver = null;
@@ -81,15 +82,48 @@ function avatarMarkup(login, profileImageUrl, className='avatar'){
 function liveStatusMarkup(isLive){return `<span class="live-status ${isLive?'is-live':'is-offline'}" title="${isLive?'AO VIVO':'OFFLINE'}" aria-label="${isLive?'Ao vivo':'Offline'}"><i class="live-dot" aria-hidden="true"></i><span>${isLive?'AO VIVO':'OFFLINE'}</span></span>`;}
 function historyStreamerAvatar(login){const profile=(dashboard.streamers||[]).find(s=>s.login===login);return avatarMarkup(login,profile?.profileImageUrl,'mini-avatar');}
 function metric(label,value,symbol,note,variant='') {return `<article class="metric-card ${variant}"><div class="metric-top"><span class="metric-label">${label}</span><span class="metric-icon">${icon(symbol)}</span></div><div class="metric-value">${metricFmt(value)}</div><div class="metric-note">${note}</div></article>`;}
-function audienceMetrics(){
-  const records=dashboard.recent||[],confirmedRaids=records.filter(r=>r.status==='raid_nexo'||r.status==='raid_externa'),confirmedNoRaids=records.filter(r=>r.status==='sem_raid');
+function dateRange(){
+  if(dateFilter.preset==='all')return null;
+  const now=new Date(),startOfToday=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+  if(dateFilter.preset==='custom'){
+    if(!dateFilter.start||!dateFilter.end)return null;
+    const start=new Date(`${dateFilter.start}T00:00:00`),end=new Date(`${dateFilter.end}T00:00:00`);
+    if(Number.isNaN(start.getTime())||Number.isNaN(end.getTime())||end<start)return null;
+    end.setDate(end.getDate()+1);return {start:start.getTime(),end:end.getTime()};
+  }
+  const days={today:1,'7d':7,'14d':14,'30d':30}[dateFilter.preset]||1;
+  const start=new Date(startOfToday);start.setDate(start.getDate()-days+1);
+  return {start:start.getTime(),end:now.getTime()};
+}
+function filteredRecords(){
+  const range=dateRange();
+  return (dashboard?.recent||[]).filter(record=>{
+    if(!range)return true;
+    const start=new Date(record.startedAt||record.endedAt||0).getTime(),end=new Date(record.endedAt||record.startedAt||0).getTime();
+    return Number.isFinite(start)&&Number.isFinite(end)&&end>=range.start&&start<range.end;
+  });
+}
+function periodLabel(){
+  if(dateFilter.preset==='all')return 'Todo o período';
+  if(dateFilter.preset==='today')return 'Hoje';
+  if(dateFilter.preset==='custom')return dateFilter.start&&dateFilter.end?`${dateFilter.start} até ${dateFilter.end}`:'Data personalizada';
+  return `Últimos ${dateFilter.preset.replace('d','')} dias`;
+}
+function audienceMetrics(records=filteredRecords()){
+  const confirmedRaids=records.filter(r=>r.status==='raid_nexo'||r.status==='raid_externa'),confirmedNoRaids=records.filter(r=>r.status==='sem_raid');
   const audienceValue=(value)=>value==null||value===''||!Number.isFinite(Number(value))||Number(value)<0?null:Number(value);
   const sum=(items,read)=>items.every(r=>audienceValue(read(r))!=null)?items.reduce((total,r)=>total+audienceValue(read(r)),0):null;
   const used=sum(confirmedRaids,r=>r.raid?.viewers),wasted=sum(confirmedNoRaids,r=>r.viewersAtEnd),total=confirmedRaids.length+confirmedNoRaids.length&&used!=null&&wasted!=null?used+wasted:null;
   return {total,used,wasted};
 }
+function overviewForFilter(){
+  if(dateFilter.preset==='all')return dashboard.overview||{};
+  const records=filteredRecords(),audience=audienceMetrics(records);
+  const raids=records.filter(r=>r.status==='raid_nexo'||r.status==='raid_externa');
+  return {lives:records.length,raids:raids.length,nexo:records.filter(r=>r.status==='raid_nexo').length,externas:records.filter(r=>r.status==='raid_externa').length,semRaid:records.filter(r=>r.status==='sem_raid').length,inconclusivas:records.filter(r=>r.status==='inconclusiva').length,viewsTotais:audience.total,viewsAproveitadas:audience.used,viewsDesperdicadas:audience.wasted};
+}
 function renderOverview(){
-  const o=dashboard.overview||{};
+  const o=overviewForFilter();
   const audience=audienceMetrics();
   $('#metrics').innerHTML = [
     metric('Lives monitoradas',o.lives,'◉','Transmissões com registro'),
@@ -104,12 +138,15 @@ function renderOverview(){
     metric('Views totais',o.viewsTotais??audience.total,'◉','Público em resultados confirmados'),
     metric('Views efetivas',o.viewsAproveitadas??audience.used,'↗','Espectadores enviados em raids','accent'),
     metric('Views perdidas',o.viewsDesperdicadas??audience.wasted,'⊘','Público em lives sem raid confirmada','warning')].join('');
-  const daily = dashboard.daily || [];
-  const days = Array.from({length:14},(_,i)=>{const dt = new Date();dt.setUTCDate(dt.getUTCDate()-13+i);return dt.toISOString().slice(0,10)});
-  const byDay = new Map(daily.map(d=>[d.date,d]));
+  const range=dateRange(),records=filteredRecords();
+  let days;
+  if(!range){days=Array.from({length:14},(_,i)=>{const dt = new Date();dt.setUTCDate(dt.getUTCDate()-13+i);return dt.toISOString().slice(0,10)});}else{const first=new Date(range.start),last=new Date(range.end);last.setDate(last.getDate()-1);const allDays=[];for(const dt=new Date(first);dt<=last;dt.setDate(dt.getDate()+1))allDays.push(dt.toISOString().slice(0,10));days=allDays.slice(-30);}
+  const byDay = !range?new Map((dashboard.daily||[]).map(d=>[d.date,d])):new Map();
+  if(range)records.forEach(record=>{const date=new Date(record.endedAt||record.startedAt).toISOString().slice(0,10),current=byDay.get(date)||{date,lives:0,raids:0};current.lives+=1;if(record.status==='raid_nexo'||record.status==='raid_externa')current.raids+=1;byDay.set(date,current);});
   const points = days.map(d=>({date:d,...(byDay.get(d)||{lives:0,raids:0})}));
   const peak=Math.max(1,...points.flatMap(p=>[p.lives,p.raids]));
   $('#activityChart').innerHTML=points.map(p=>`<div class="activity-day" title="${p.date}: ${p.lives} lives, ${p.raids} raids"><div class="activity-bars"><span class="bar-live" style="height:${Math.max(2,p.lives/peak*100)}%"></span><span class="bar-raid" style="height:${Math.max(2,p.raids/peak*100)}%"></span></div><small>${p.date.slice(8)}</small></div>`).join('');
+  const activityRangeLabel=$('#activityRangeLabel')||document.querySelector('.panel-tag');if(activityRangeLabel)activityRangeLabel.textContent=periodLabel();
   const raids = (o.nexo||0)+(o.externas||0);
   const pct = raids>0 ? Math.round((o.nexo||0)/raids*100) : 0;
   $('#raidDonut').style.setProperty('--pct',`${pct}%`);
@@ -142,7 +179,7 @@ function renderStreamers(){
   const s=sortedStreamers();$('#streamerCount').textContent=`${s.length} streamers`;
   $('#streamerGrid').innerHTML=s.length?s.map(p=>`<button class="streamer-card" data-profile="${esc(p.login)}"><span class="streamer-top">${avatarMarkup(p.login,p.profileImageUrl)}<span class="streamer-meta">${liveStatusMarkup(p.live)}<span class="member-badge">NEXO MEMBER</span></span></span><div class="streamer-name">${esc(p.login)}</div><div class="streamer-link">twitch.tv/${esc(p.login)}</div><div class="streamer-div"></div><div class="streamer-stats"><div class="streamer-stat"><strong>${fmt(p.lives)}</strong><small>LIVES</small></div><div class="streamer-stat"><strong>${fmt(p.raids)}</strong><small>RAIDS</small></div><div class="streamer-stat"><strong style="color:#bd8efb">${fmt(p.nexo)}</strong><small>PARA NEXO</small></div></div><span class="streamer-footer">VER HISTORICO <span aria-hidden="true">↗</span></span></button>`).join(''):'<div class="empty-state">Nenhum streamer encontrado.</div>';
 }
-function historySorted(){const streamer=$('#historyStreamer').value,period=$('#historyPeriod').value,raidFilter=$('#historyRaid').value,coverage=$('#historyCoverage').value,status=$('#historyStatus').value;const cutoff=period==='all'?0:Date.now()-({24:86400000,7:604800000,30:2592000000}[period]||0);return [...(dashboard.recent||[])].filter(r=>(streamer==='all'||r.login===streamer)&&(status==='all'||r.status===status)&&(coverage==='all'||r.coverageStatus===coverage)&&(raidFilter==='all'||raidFilter==='confirmed'&&!!r.raid&&r.raid.destinationKnown||raidFilter==='none'&&!r.raid||raidFilter==='unknown'&&r.raid&&!r.raid.destinationKnown)&&new Date(r.endedAt||r.startedAt||0).getTime()>=cutoff).sort((a,b)=>new Date(b.endedAt||b.startedAt||0)-new Date(a.endedAt||a.startedAt||0));}
+function historySorted(){const streamer=$('#historyStreamer').value,period=$('#historyPeriod').value,raidFilter=$('#historyRaid').value,coverage=$('#historyCoverage').value,status=$('#historyStatus').value;const cutoff=period==='all'?0:Date.now()-({24:86400000,7:604800000,30:2592000000}[period]||0);return [...filteredRecords()].filter(r=>(streamer==='all'||r.login===streamer)&&(status==='all'||r.status===status)&&(coverage==='all'||r.coverageStatus===coverage)&&(raidFilter==='all'||raidFilter==='confirmed'&&!!r.raid&&r.raid.destinationKnown||raidFilter==='none'&&!r.raid||raidFilter==='unknown'&&r.raid&&!r.raid.destinationKnown)&&new Date(r.endedAt||r.startedAt||0).getTime()>=cutoff).sort((a,b)=>new Date(b.endedAt||b.startedAt||0)-new Date(a.endedAt||a.startedAt||0));}
 function duration(start,end){const a=new Date(start||0).getTime(),b=new Date(end||0).getTime();if(!start||!end||!Number.isFinite(a)||!Number.isFinite(b))return '<span class="history-empty">—</span>';const min=Math.max(0,Math.round((b-a)/60000));return min>=60?`${Math.floor(min/60)}h ${min%60}min`:`${min}min`;}
 function historyRow(r){const monitored=r.monitoredDurationMs!=null?`${Math.round(r.monitoredDurationMs/60000)} min monitorados`:'';const coverage=r.coverageStatus==='failure'?`<span title="${esc((r.coverageIssues||[]).join('; '))}" style="color:#ff8d8d">✕ Falha</span>`:r.coverageStatus==='partial'?`<span title="${esc([...(r.coverageIssues||[]),...(r.coverageGaps||[]).map(g=>`${g.start} → ${g.end}`)].join('; '))}" style="color:#ffc17a">⚠ Parcial${monitored?` · ${monitored}`:''}</span>`:`<span style="color:#91d8b8">✓ Completa${monitored?` · ${monitored}`:''}</span>`;const raid=badge(r.status),views=r.raid?.viewers!=null?`${fmt(r.raid.viewers)} enviados${r.raid.toLogin?` para ${esc(r.raid.toLogin)}`:''}`:!r.raid&&r.viewersAtEnd!=null?`${fmt(r.viewersAtEnd)} no encerramento`:'<span class="history-empty">—</span>';return `<tr><td data-label="Streamer"><div class="td-user">${historyStreamerAvatar(r.login)}${esc(r.login)}</div></td><td data-label="Início / fim"><span class="date-stack">${esc(dateBR(r.startedAt))}<small>fim: ${esc(dateBR(r.endedAt))}</small></span></td><td data-label="Duração">${duration(r.startedAt,r.endedAt)}</td><td data-label="Raid">${raid}</td><td data-label="Views">${views}</td><td data-label="Cobertura">${coverage}${r.coverageGaps?.length?`<button class="gap-details" type="button" data-gaps="${esc(JSON.stringify(r.coverageGaps))}">ver intervalos</button>`:''}</td><td data-label="Atualizado">${esc(dateBR(r.manualReview?.changedAt||r.updatedAt||dashboard.updatedAt))}</td></tr>`;}
 function renderHistory(){const rows=historySorted();$('#historyBody').innerHTML=rows.length?rows.slice(0,shown).map(historyRow).join(''):'<tr><td class="table-empty" colspan="7">Nenhum histórico registrado para este filtro.</td></tr>';$('#historyCount').textContent=`Exibindo ${Math.min(shown,rows.length)} de ${fmt(rows.length)} registros`;$('#loadMore').classList.toggle('hidden',shown>=rows.length);}
@@ -192,6 +229,11 @@ initConstellation();
 $('#year').textContent=new Date().getFullYear();
 initProfileModal();
 $('#refreshBtn').addEventListener('click',loadData);
+const dateRangeFilter=$('#dateRangeFilter'),customDateRange=$('#customDateRange'),dateRangeStart=$('#dateRangeStart'),dateRangeEnd=$('#dateRangeEnd');
+function refreshDateFilter(){customDateRange?.classList.toggle('hidden',dateFilter.preset!=='custom');if(dashboard){renderOverview();shown=10;renderHistory();}}
+dateRangeFilter?.addEventListener('change',()=>{dateFilter.preset=dateRangeFilter.value;refreshDateFilter();});
+dateRangeStart?.addEventListener('change',()=>{dateFilter.start=dateRangeStart.value;refreshDateFilter();});
+dateRangeEnd?.addEventListener('change',()=>{dateFilter.end=dateRangeEnd.value;refreshDateFilter();});
 $('#searchStreamers').addEventListener('input',renderStreamers);
 $('#streamerSort').addEventListener('change',renderStreamers);
 $('#streamerLiveFilter').addEventListener('change',renderStreamers);

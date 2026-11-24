@@ -107,6 +107,8 @@ html.coverage-modal-open,body.coverage-modal-open{overflow:hidden}
 @media(max-width:780px){.top-nav>.account-tools{width:100%;margin:10px 0 0;padding-top:14px;border-top:1px solid rgba(160,113,236,.18);justify-content:space-between}.top-nav>.account-tools .account-email{max-width:calc(100% - 58px);font-size:11px}.top-nav>.account-tools .logout-button{padding:9px 12px}.brand-logo-horizontal{width:clamp(145px,48vw,220px)}}
 @media(max-width:360px){.brand-logo-horizontal{width:145px}}
 @media(min-width:781px){.site-header{position:sticky}.top-nav{position:absolute;inset:0;justify-content:center;gap:34px;pointer-events:none}.top-nav>.nav-link{pointer-events:auto}.top-nav>.account-tools{position:absolute;right:clamp(22px,6vw,110px);margin:0;pointer-events:auto}}
+.date-range-filter,.custom-date-range input{border:1px solid var(--line2);border-radius:9px;color:#d9c8f5;background:#150d24;padding:9px 10px;font-size:10px}.date-range-filter{max-width:145px}.custom-date-range{display:flex;align-items:center;gap:5px;color:var(--muted2);font-size:10px}.custom-date-range input{width:125px}.custom-date-range.hidden{display:none}
+@media(max-width:750px){.head-overview .head-actions{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;width:100%}.head-overview .date-range-filter{max-width:none}.head-overview .last-sync{grid-column:1/-1}.custom-date-range{grid-column:1/-1}.custom-date-range input{width:100%;min-width:0}.head-overview .icon-btn{grid-column:2;grid-row:1}}
 .coverage-modal{opacity:1;visibility:visible;transition:opacity .22s ease,visibility 0s linear 0s}
 .coverage-modal.hidden{transition:opacity .22s ease,visibility 0s linear .22s}
 .coverage-modal-shade{opacity:1;transition:opacity .22s ease}
