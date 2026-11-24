@@ -84,3 +84,9 @@ jobs:
       - name: Repetir publicacao do painel
         if: steps.deployment.outcome == 'failure'
         uses: actions/deploy-pages@v4
+        id: deployment_retry
+        continue-on-error: true
+      - name: Ultima tentativa de publicacao do painel
+        if: steps.deployment_retry.outcome == 'failure'
+        uses: actions/deploy-pages@v4
+        continue-on-error: true
