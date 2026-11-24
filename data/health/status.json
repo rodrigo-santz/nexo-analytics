@@ -1,6 +1,6 @@
 {
   "status": "healthy",
-  "lastCheckedAt": "2026-11-24T03:00:28.309Z",
+  "lastCheckedAt": "2026-11-24T03:10:20.343Z",
   "issues": [],
   "gaps": [
     {
@@ -14,26 +14,26 @@
       "streamId": "319713566068",
       "startedAt": "2026-11-23T22:24:08Z",
       "login": "behttah",
-      "viewerCount": 13
+      "viewerCount": 18
     },
     "488741363": {
       "streamId": "319565005174",
       "startedAt": "2026-11-24T02:57:05Z",
       "login": "coldx68",
-      "viewerCount": 2
+      "viewerCount": 14
     },
     "526315840": {
       "streamId": "319561979382",
       "startedAt": "2026-11-23T23:35:30Z",
       "login": "dree_sp",
-      "viewerCount": 8
+      "viewerCount": 7
     }
   },
-  "lastSuccessfulAt": "2026-11-24T03:00:28.309Z",
+  "lastSuccessfulAt": "2026-11-24T03:10:20.343Z",
   "connection": "online",
   "failures": [],
   "subscriptionHealth": {
-    "checkedAt": "2026-11-24T03:00:28.309Z",
+    "checkedAt": "2026-11-24T03:10:20.343Z",
     "expected": 51,
     "active": 51,
     "missing": []
