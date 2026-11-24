@@ -38,5 +38,11 @@ jobs:
       - uses: actions/upload-pages-artifact@v4
         with:
           path: _site
-      - uses: actions/deploy-pages@v4
+      - name: Publicar no GitHub Pages
+        uses: actions/deploy-pages@v4
         id: deployment
+        continue-on-error: true
+      - name: Repetir publicação no GitHub Pages
+        if: steps.deployment.outcome == 'failure'
+        uses: actions/deploy-pages@v4
+        id: deployment_retry
