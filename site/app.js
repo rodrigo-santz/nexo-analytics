@@ -331,6 +331,7 @@ function showProfile(login){
   if(!profile||!content)return;
   const avatar=content.querySelector('.profile-header .avatar');
   if(avatar)avatar.outerHTML=avatarMarkup(login,profile.profileImageUrl);
+  if(profile.active===false){const tag=document.createElement('span');tag.className='archived-member-tag';tag.textContent='NÃO PERTENCE MAIS À COMUNIDADE';content.querySelector('.profile-header > div')?.appendChild(tag);}
   const watched=(profile.watchedLives||[]).filter((r,i,a)=>a.findIndex(x=>x.id===r.id)===i);
   if(!watched.length)return;
   const section=document.createElement('section');
