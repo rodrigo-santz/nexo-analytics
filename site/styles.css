@@ -126,3 +126,4 @@ html.reveal-ready .analytics-grid>.reveal-item.is-visible .activity-bars .bar-li
 .coverage-modal.hidden .coverage-modal-shade{opacity:0}
 .coverage-modal-dialog{transform:translateY(0) scale(1);transition:transform .22s ease,opacity .22s ease}
 .coverage-modal.hidden .coverage-modal-dialog{transform:translateY(8px) scale(.98);opacity:0}
+/* Keep Pages deployment retryable after transient artifact metadata failures. */
