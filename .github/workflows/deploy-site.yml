@@ -1,0 +1,42 @@
+name: Publicar interface do painel
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'site/**'
+      - 'data/dashboard.json'
+      - 'data/streamer-profiles.json'
+      - '.github/workflows/deploy-site.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: nexo-pages-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Preparar site estatico
+        run: |
+          mkdir -p _site/data
+          cp -r site/. _site/
+          cp data/dashboard.json _site/data/dashboard.json
+          cp data/streamer-profiles.json _site/data/streamer-profiles.json
+          touch _site/.nojekyll
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+      - uses: actions/deploy-pages@v4
+        id: deployment
