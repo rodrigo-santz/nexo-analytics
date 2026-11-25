@@ -1,0 +1,15 @@
+{
+  "messageId": "c3MUcviZop5S8cwKYQ2SV5VeT2lRCawM8WTn1LWmT60=",
+  "messageType": "notification",
+  "subscriptionType": "stream.offline",
+  "subscriptionStatus": "enabled",
+  "receivedAt": "2026-11-25T00:19:57.838351365Z",
+  "source": "eventsub",
+  "event": {
+    "id": "319720883444",
+    "broadcaster_user_id": "105627045",
+    "broadcaster_user_login": "bolosdomikael",
+    "broadcaster_user_name": "bolosdomikael"
+  },
+  "subscriptionId": "06e40b71-deb1-4705-a23f-27441e7a55a5"
+}
