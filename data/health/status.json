@@ -1,6 +1,6 @@
 {
   "status": "healthy",
-  "lastCheckedAt": "2026-11-25T22:40:20.440Z",
+  "lastCheckedAt": "2026-11-25T22:50:21.341Z",
   "issues": [],
   "gaps": [
     {
@@ -20,14 +20,14 @@
       "streamId": "319735081332",
       "startedAt": "2026-11-25T21:10:13Z",
       "login": "onoox_",
-      "viewerCount": 8
+      "viewerCount": 7
     }
   },
-  "lastSuccessfulAt": "2026-11-25T22:40:20.440Z",
+  "lastSuccessfulAt": "2026-11-25T22:50:21.341Z",
   "connection": "online",
   "failures": [],
   "subscriptionHealth": {
-    "checkedAt": "2026-11-25T22:40:20.440Z",
+    "checkedAt": "2026-11-25T22:50:21.341Z",
     "expected": 51,
     "active": 51,
     "missing": []
