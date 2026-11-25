@@ -1,6 +1,6 @@
 {
   "status": "healthy",
-  "lastCheckedAt": "2026-11-25T22:30:22.182Z",
+  "lastCheckedAt": "2026-11-25T22:40:20.440Z",
   "issues": [],
   "gaps": [
     {
@@ -23,11 +23,11 @@
       "viewerCount": 8
     }
   },
-  "lastSuccessfulAt": "2026-11-25T22:30:22.182Z",
+  "lastSuccessfulAt": "2026-11-25T22:40:20.440Z",
   "connection": "online",
   "failures": [],
   "subscriptionHealth": {
-    "checkedAt": "2026-11-25T22:30:22.182Z",
+    "checkedAt": "2026-11-25T22:40:20.440Z",
     "expected": 51,
     "active": 51,
     "missing": []
