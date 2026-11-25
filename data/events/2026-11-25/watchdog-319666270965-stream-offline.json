@@ -1,0 +1,12 @@
+{
+  "messageId": "watchdog-319666270965-stream.offline",
+  "messageType": "notification",
+  "subscriptionType": "stream.offline",
+  "receivedAt": "2026-11-25T21:10:20.880Z",
+  "source": "watchdog",
+  "event": {
+    "id": "319666270965",
+    "broadcaster_user_id": "1314842283",
+    "broadcaster_user_login": "quindinhaa"
+  }
+}
