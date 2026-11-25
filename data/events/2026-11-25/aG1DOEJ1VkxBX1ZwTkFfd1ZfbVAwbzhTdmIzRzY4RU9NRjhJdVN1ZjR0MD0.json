@@ -1,0 +1,18 @@
+{
+  "messageId": "hmC8BuVLA_VpNA_wV_mP0o8Svb3G68EOMF8IuSuf4t0=",
+  "messageType": "notification",
+  "subscriptionType": "channel.raid",
+  "subscriptionStatus": "enabled",
+  "receivedAt": "2026-11-25T19:02:49.690292053Z",
+  "source": "eventsub",
+  "event": {
+    "from_broadcaster_user_id": "526315840",
+    "from_broadcaster_user_login": "dree_sp",
+    "from_broadcaster_user_name": "dree_sp",
+    "to_broadcaster_user_id": "105627045",
+    "to_broadcaster_user_login": "bolosdomikael",
+    "to_broadcaster_user_name": "bolosdomikael",
+    "viewers": 10
+  },
+  "subscriptionId": "490d0b81-3689-4b06-9b26-d3c611ac4b25"
+}
