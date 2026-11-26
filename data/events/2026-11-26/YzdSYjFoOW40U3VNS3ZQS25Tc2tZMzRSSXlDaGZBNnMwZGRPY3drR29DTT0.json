@@ -1,0 +1,15 @@
+{
+  "messageId": "c7Rb1h9n4SuMKvPKnSskY34RIyChfA6s0ddOcwkGoCM=",
+  "messageType": "notification",
+  "subscriptionType": "stream.offline",
+  "subscriptionStatus": "enabled",
+  "receivedAt": "2026-11-26T00:23:37.37268852Z",
+  "source": "eventsub",
+  "event": {
+    "id": "319735081332",
+    "broadcaster_user_id": "480299732",
+    "broadcaster_user_login": "onoox_",
+    "broadcaster_user_name": "onoox_"
+  },
+  "subscriptionId": "64a980fd-2514-4154-b185-4f468e068a91"
+}
