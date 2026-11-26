@@ -1,0 +1,17 @@
+{
+  "messageId": "DGnMkams6Osv_zaQ-WVr7_LRi0JEga5_MnOPuw6I1zg=",
+  "messageType": "notification",
+  "subscriptionType": "stream.online",
+  "subscriptionStatus": "enabled",
+  "receivedAt": "2026-11-26T09:53:12.863453292Z",
+  "source": "eventsub",
+  "event": {
+    "id": "319677536885",
+    "broadcaster_user_id": "1314842283",
+    "broadcaster_user_login": "quindinhaa",
+    "broadcaster_user_name": "quindinhaa",
+    "type": "live",
+    "started_at": "2026-11-26T09:53:00Z"
+  },
+  "subscriptionId": "7c67f374-fdaa-479b-bfe2-c448f871aa3e"
+}
