@@ -1,0 +1,17 @@
+{
+  "messageId": "FZomLxIVW15ynCg0rZdE4oWg8zenhmf6hjZtvGzOnPw=",
+  "messageType": "notification",
+  "subscriptionType": "stream.online",
+  "subscriptionStatus": "enabled",
+  "receivedAt": "2026-11-26T21:43:00.346328967Z",
+  "source": "eventsub",
+  "event": {
+    "id": "319745961844",
+    "broadcaster_user_id": "480299732",
+    "broadcaster_user_login": "onoox_",
+    "broadcaster_user_name": "onoox_",
+    "type": "live",
+    "started_at": "2026-11-26T21:42:43Z"
+  },
+  "subscriptionId": "55af6a26-31ab-4c6d-bc5b-c4b18b7a523e"
+}
