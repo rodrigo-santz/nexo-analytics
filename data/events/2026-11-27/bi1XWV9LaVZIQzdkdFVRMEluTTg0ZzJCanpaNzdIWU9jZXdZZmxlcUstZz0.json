@@ -1,0 +1,15 @@
+{
+  "messageId": "n-WY_KiVHC7dtUQ0InM84g2BjzZ77HYOcewYfleqK-g=",
+  "messageType": "notification",
+  "subscriptionType": "stream.offline",
+  "subscriptionStatus": "enabled",
+  "receivedAt": "2026-11-27T02:40:50.743499028Z",
+  "source": "eventsub",
+  "event": {
+    "id": "319750265204",
+    "broadcaster_user_id": "526194121",
+    "broadcaster_user_login": "galiodejordan",
+    "broadcaster_user_name": "GaliodeJordan"
+  },
+  "subscriptionId": "815687bf-7557-46ea-be6d-aaef54bad9a9"
+}
