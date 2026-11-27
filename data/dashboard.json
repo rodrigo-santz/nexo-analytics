@@ -97,7 +97,7 @@
     },
     {
       "login": "chboga",
-      "active": true,
+      "active": false,
       "profileImageUrl": "https://static-cdn.jtvnw.net/jtv_user_pictures/75fa3df0-3440-4846-89b0-d8a26f01edc1-profile_image-300x300.png",
       "live": false,
       "lives": 0,
