@@ -1,0 +1,17 @@
+{
+  "messageId": "0aZTEzyCDlhqCBotsZf_ZD5kQe4CSi642F4x0aedglI=",
+  "messageType": "notification",
+  "subscriptionType": "stream.online",
+  "subscriptionStatus": "enabled",
+  "receivedAt": "2026-11-27T23:27:02.770243805Z",
+  "source": "eventsub",
+  "event": {
+    "id": "319693670517",
+    "broadcaster_user_id": "502555870",
+    "broadcaster_user_login": "nanbola",
+    "broadcaster_user_name": "nanbola",
+    "type": "live",
+    "started_at": "2026-11-27T23:26:46Z"
+  },
+  "subscriptionId": "244392d6-5166-496f-bdd0-5bf1e67a3e04"
+}
