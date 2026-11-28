@@ -1,0 +1,18 @@
+{
+  "messageId": "GiP-rv6pk9aR4xTupfXpCcWCsroV2tFY6fZs6gjO_AI=",
+  "messageType": "notification",
+  "subscriptionType": "channel.raid",
+  "subscriptionStatus": "enabled",
+  "receivedAt": "2026-11-28T00:23:42.132079171Z",
+  "source": "eventsub",
+  "event": {
+    "from_broadcaster_user_id": "480299732",
+    "from_broadcaster_user_login": "onoox_",
+    "from_broadcaster_user_name": "onoox_",
+    "to_broadcaster_user_id": "187860127",
+    "to_broadcaster_user_login": "erick99z",
+    "to_broadcaster_user_name": "Erick99Z",
+    "viewers": 5
+  },
+  "subscriptionId": "65baf748-5f86-477a-bd1b-6f3b0d21e8e9"
+}
