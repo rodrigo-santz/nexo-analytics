@@ -1,0 +1,15 @@
+{
+  "messageId": "SDR8VSFrReZx5e3rCuHkBM7xtFl535Y_p5VnbVFBRIc=",
+  "messageType": "notification",
+  "subscriptionType": "stream.offline",
+  "subscriptionStatus": "enabled",
+  "receivedAt": "2026-11-28T06:45:40.6715105Z",
+  "source": "eventsub",
+  "event": {
+    "id": "319693670517",
+    "broadcaster_user_id": "502555870",
+    "broadcaster_user_login": "nanbola",
+    "broadcaster_user_name": "nanbola"
+  },
+  "subscriptionId": "52bd0af7-2edd-40ce-a64c-e5183a91b22a"
+}
