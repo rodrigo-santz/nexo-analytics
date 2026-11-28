@@ -1,0 +1,17 @@
+{
+  "messageId": "2p7A4OL2sIOXnvc4vkkOqrcfT9nloMPK0lB-CTTBru0=",
+  "messageType": "notification",
+  "subscriptionType": "stream.online",
+  "subscriptionStatus": "enabled",
+  "receivedAt": "2026-11-28T13:32:25.549099364Z",
+  "source": "eventsub",
+  "event": {
+    "id": "319764096884",
+    "broadcaster_user_id": "485677113",
+    "broadcaster_user_login": "1skilo",
+    "broadcaster_user_name": "1SkiLO",
+    "type": "live",
+    "started_at": "2026-11-28T13:32:09Z"
+  },
+  "subscriptionId": "3ce918cc-9fe6-4575-8b48-837785bf48f2"
+}
