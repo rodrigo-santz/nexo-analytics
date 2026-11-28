@@ -1,0 +1,15 @@
+{
+  "messageId": "62TCmgwn_pRTsUplnR18RSGXMG2taUOt7flzzjNgBp8=",
+  "messageType": "notification",
+  "subscriptionType": "stream.offline",
+  "subscriptionStatus": "enabled",
+  "receivedAt": "2026-11-28T05:01:20.202236202Z",
+  "source": "eventsub",
+  "event": {
+    "id": "319694952821",
+    "broadcaster_user_id": "412389695",
+    "broadcaster_user_login": "behttah",
+    "broadcaster_user_name": "behttah"
+  },
+  "subscriptionId": "c0323940-9737-43a5-818d-a466dc3bdd46"
+}
