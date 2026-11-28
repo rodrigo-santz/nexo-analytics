@@ -1,0 +1,17 @@
+{
+  "messageId": "sU4jIOEebfD6jPnv4btv4aEvoBDyS3RK2eD_gkpywJA=",
+  "messageType": "notification",
+  "subscriptionType": "stream.online",
+  "subscriptionStatus": "enabled",
+  "receivedAt": "2026-11-28T02:28:22.302817107Z",
+  "source": "eventsub",
+  "event": {
+    "id": "319760549236",
+    "broadcaster_user_id": "526194121",
+    "broadcaster_user_login": "galiodejordan",
+    "broadcaster_user_name": "GaliodeJordan",
+    "type": "live",
+    "started_at": "2026-11-28T02:28:06Z"
+  },
+  "subscriptionId": "5da4556d-83be-4416-bb52-f702fea6917e"
+}
