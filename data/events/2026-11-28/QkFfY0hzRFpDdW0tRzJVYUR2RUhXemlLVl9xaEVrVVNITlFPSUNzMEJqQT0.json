@@ -1,0 +1,15 @@
+{
+  "messageId": "BA_cHsDZCum-G2UaDvEHWziKV_qhEkUSHNQOICs0BjA=",
+  "messageType": "notification",
+  "subscriptionType": "stream.offline",
+  "subscriptionStatus": "enabled",
+  "receivedAt": "2026-11-28T04:25:23.64388918Z",
+  "source": "eventsub",
+  "event": {
+    "id": "319693831797",
+    "broadcaster_user_id": "594448048",
+    "broadcaster_user_login": "zells001",
+    "broadcaster_user_name": "zells001"
+  },
+  "subscriptionId": "9c4f2ad5-febf-4ad5-bf14-8ea71bd77487"
+}
