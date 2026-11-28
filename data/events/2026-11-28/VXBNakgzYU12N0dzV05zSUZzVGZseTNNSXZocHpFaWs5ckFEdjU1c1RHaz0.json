@@ -1,0 +1,15 @@
+{
+  "messageId": "UpMjH3aMv7GsWNsIFsTfly3MIvhpzEik9rADv55sTGk=",
+  "messageType": "notification",
+  "subscriptionType": "stream.offline",
+  "subscriptionStatus": "enabled",
+  "receivedAt": "2026-11-28T01:22:50.696021156Z",
+  "source": "eventsub",
+  "event": {
+    "id": "319608599158",
+    "broadcaster_user_id": "570132958",
+    "broadcaster_user_login": "hecazinha",
+    "broadcaster_user_name": "hecazinha"
+  },
+  "subscriptionId": "0fc12c01-a0d8-47a3-8884-d1e48ac46be0"
+}
