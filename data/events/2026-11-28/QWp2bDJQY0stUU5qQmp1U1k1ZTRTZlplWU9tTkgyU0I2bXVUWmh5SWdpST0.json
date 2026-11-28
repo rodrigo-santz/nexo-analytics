@@ -1,0 +1,18 @@
+{
+  "messageId": "Ajvl2PcK-QNjBjuSY5e4SfZeYOmNH2SB6muTZhyIgiI=",
+  "messageType": "notification",
+  "subscriptionType": "channel.raid",
+  "subscriptionStatus": "enabled",
+  "receivedAt": "2026-11-28T07:47:27.596512565Z",
+  "source": "eventsub",
+  "event": {
+    "from_broadcaster_user_id": "570132958",
+    "from_broadcaster_user_login": "hecazinha",
+    "from_broadcaster_user_name": "hecazinha",
+    "to_broadcaster_user_id": "526194121",
+    "to_broadcaster_user_login": "galiodejordan",
+    "to_broadcaster_user_name": "GaliodeJordan",
+    "viewers": 11
+  },
+  "subscriptionId": "e8e3e410-7c71-48c5-bc9e-a51a245ab8a3"
+}
