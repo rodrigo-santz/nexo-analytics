@@ -1,0 +1,17 @@
+{
+  "messageId": "Y-4LaUmLm_lB53ltyotzCOSNILVCygL89rb6j1IbL-s=",
+  "messageType": "notification",
+  "subscriptionType": "stream.online",
+  "subscriptionStatus": "enabled",
+  "receivedAt": "2026-11-28T00:48:36.553282452Z",
+  "source": "eventsub",
+  "event": {
+    "id": "319694952821",
+    "broadcaster_user_id": "412389695",
+    "broadcaster_user_login": "behttah",
+    "broadcaster_user_name": "behttah",
+    "type": "live",
+    "started_at": "2026-11-28T00:48:23Z"
+  },
+  "subscriptionId": "114f5bdd-af2c-44d4-b37e-4bf0aa9ac12e"
+}
