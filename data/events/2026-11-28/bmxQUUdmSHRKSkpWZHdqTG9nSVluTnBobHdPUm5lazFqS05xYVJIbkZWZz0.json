@@ -1,0 +1,18 @@
+{
+  "messageId": "nlPQGfHtJJJVdwjLogIYnNphlwORnek1jKNqaRHnFVg=",
+  "messageType": "notification",
+  "subscriptionType": "channel.raid",
+  "subscriptionStatus": "enabled",
+  "receivedAt": "2026-11-28T00:23:42.132000796Z",
+  "source": "eventsub",
+  "event": {
+    "from_broadcaster_user_id": "480299732",
+    "from_broadcaster_user_login": "onoox_",
+    "from_broadcaster_user_name": "onoox_",
+    "to_broadcaster_user_id": "187860127",
+    "to_broadcaster_user_login": "erick99z",
+    "to_broadcaster_user_name": "Erick99Z",
+    "viewers": 5
+  },
+  "subscriptionId": "30850fc0-fe05-4ef0-9c73-cfe162596798"
+}
