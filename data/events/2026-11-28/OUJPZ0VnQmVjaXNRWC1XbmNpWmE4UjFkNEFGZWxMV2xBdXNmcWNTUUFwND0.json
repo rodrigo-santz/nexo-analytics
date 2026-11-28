@@ -1,0 +1,17 @@
+{
+  "messageId": "9BOgEgBecisQX-WnciZa8R1d4AFelLWlAusfqcSQAp4=",
+  "messageType": "notification",
+  "subscriptionType": "stream.online",
+  "subscriptionStatus": "enabled",
+  "receivedAt": "2026-11-28T04:25:28.446696603Z",
+  "source": "eventsub",
+  "event": {
+    "id": "319697761397",
+    "broadcaster_user_id": "594448048",
+    "broadcaster_user_login": "zells001",
+    "broadcaster_user_name": "zells001",
+    "type": "live",
+    "started_at": "2026-11-28T04:25:11Z"
+  },
+  "subscriptionId": "1ae39b53-01ed-46ee-8463-11576afef6c3"
+}
