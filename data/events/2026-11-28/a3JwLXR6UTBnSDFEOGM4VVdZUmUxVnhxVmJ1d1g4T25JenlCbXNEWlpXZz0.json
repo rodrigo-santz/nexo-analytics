@@ -1,0 +1,17 @@
+{
+  "messageId": "krp-tzQ0gH1D8c8UWYRe1VxqVbuwX8OnIzyBmsDZZWg=",
+  "messageType": "notification",
+  "subscriptionType": "stream.online",
+  "subscriptionStatus": "enabled",
+  "receivedAt": "2026-11-28T13:31:22.857648763Z",
+  "source": "eventsub",
+  "event": {
+    "id": "319699675893",
+    "broadcaster_user_id": "570132958",
+    "broadcaster_user_login": "hecazinha",
+    "broadcaster_user_name": "hecazinha",
+    "type": "live",
+    "started_at": "2026-11-28T13:31:09Z"
+  },
+  "subscriptionId": "c0d8d7a9-8380-4d8c-9ef6-7aa7fba62271"
+}
